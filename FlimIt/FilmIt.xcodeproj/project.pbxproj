@@ -23,7 +23,7 @@
 /* Begin PBXFileReference section */
 		55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusManager.swift; sourceTree = "<group>"; };
 		55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		55EA5BA72D43BF0000DF7DF0 /* FlimIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlimIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		55EA5BA82D43BF0000DF7DF0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5BA72D43BF0000DF7DF0 /* FlimIt.app */,
+				55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,9 +149,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		55EA5BA62D43BF0000DF7DF0 /* FlimIt */ = {
+		55EA5BA62D43BF0000DF7DF0 /* FilmIt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 55EA5BBA2D43BF0300DF7DF0 /* Build configuration list for PBXNativeTarget "FlimIt" */;
+			buildConfigurationList = 55EA5BBA2D43BF0300DF7DF0 /* Build configuration list for PBXNativeTarget "FilmIt" */;
 			buildPhases = (
 				55EA5BA32D43BF0000DF7DF0 /* Sources */,
 				55EA5BA42D43BF0000DF7DF0 /* Frameworks */,
@@ -161,11 +161,11 @@
 			);
 			dependencies = (
 			);
-			name = FlimIt;
+			name = FilmIt;
 			packageProductDependencies = (
 			);
 			productName = FlimIt;
-			productReference = 55EA5BA72D43BF0000DF7DF0 /* FlimIt.app */;
+			productReference = 55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -183,7 +183,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 55EA5BA22D43BF0000DF7DF0 /* Build configuration list for PBXProject "FlimIt" */;
+			buildConfigurationList = 55EA5BA22D43BF0000DF7DF0 /* Build configuration list for PBXProject "FilmIt" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -197,7 +197,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				55EA5BA62D43BF0000DF7DF0 /* FlimIt */,
+				55EA5BA62D43BF0000DF7DF0 /* FilmIt */,
 			);
 		};
 /* End PBXProject section */
@@ -438,7 +438,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		55EA5BA22D43BF0000DF7DF0 /* Build configuration list for PBXProject "FlimIt" */ = {
+		55EA5BA22D43BF0000DF7DF0 /* Build configuration list for PBXProject "FilmIt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55EA5BBD2D43BF0300DF7DF0 /* Debug */,
@@ -447,7 +447,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		55EA5BBA2D43BF0300DF7DF0 /* Build configuration list for PBXNativeTarget "FlimIt" */ = {
+		55EA5BBA2D43BF0300DF7DF0 /* Build configuration list for PBXNativeTarget "FilmIt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				55EA5BBB2D43BF0300DF7DF0 /* Debug */,
