@@ -61,13 +61,11 @@
 		55EA5BCC2D43C2A900DF7DF0 /* FlimIt */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */,
-				55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */,
-				55EA5BC52D43C2A900DF7DF0 /* Info.plist */,
-				55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */,
-				55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */,
-				55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */,
+				55EA5BD92D43C6B000DF7DF0 /* Application */,
 				55EA5BD62D43C3B900DF7DF0 /* Config */,
+				55EA5BDA2D43C6D200DF7DF0 /* Resource */,
+				55EA5BDB2D43C71300DF7DF0 /* View */,
+				55EA5BDD2D43C72B00DF7DF0 /* ViewController */,
 			);
 			path = FlimIt;
 			sourceTree = "<group>";
@@ -79,6 +77,48 @@
 				55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		55EA5BD92D43C6B000DF7DF0 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */,
+				55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */,
+				55EA5BC52D43C2A900DF7DF0 /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		55EA5BDA2D43C6D200DF7DF0 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		55EA5BDB2D43C71300DF7DF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BDC2D43C71C00DF7DF0 /* Storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		55EA5BDC2D43C71C00DF7DF0 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		55EA5BDD2D43C72B00DF7DF0 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,13 +226,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DR659QKCU6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlimIt/Info.plist;
+				INFOPLIST_FILE = FlimIt/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "필름잇(한수빈)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -220,13 +261,14 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = DR659QKCU6;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = FlimIt/Info.plist;
+				INFOPLIST_FILE = FlimIt/Application/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "필름잇(한수빈)";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
