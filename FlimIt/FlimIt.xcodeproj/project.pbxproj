@@ -15,6 +15,7 @@
 		55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */; };
 		55EA5BD52D43C2ED00DF7DF0 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BD42D43C2ED00DF7DF0 /* Secret.xcconfig */; };
 		55EA5BD82D43C3D200DF7DF0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */; };
+		55EA5BDF2D43C89700DF7DF0 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BDE2D43C89700DF7DF0 /* BaseView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		55EA5BD42D43C2ED00DF7DF0 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
 		55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
+		55EA5BDE2D43C89700DF7DF0 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				55EA5BDC2D43C71C00DF7DF0 /* Storyboard */,
+				55EA5BDE2D43C89700DF7DF0 /* BaseView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 			files = (
 				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
 				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
+				55EA5BDF2D43C89700DF7DF0 /* BaseView.swift in Sources */,
 				55EA5BD82D43C3D200DF7DF0 /* APIKey.swift in Sources */,
 				55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */,
 			);
