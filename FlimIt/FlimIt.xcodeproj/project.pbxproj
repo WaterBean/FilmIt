@@ -8,33 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
+		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
+		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
+		55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */; };
+		55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */; };
+		55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */; };
+		55EA5BD52D43C2ED00DF7DF0 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BD42D43C2ED00DF7DF0 /* Secret.xcconfig */; };
+		55EA5BD82D43C3D200DF7DF0 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		55EA5BA72D43BF0000DF7DF0 /* FlimIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlimIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55EA5BC52D43C2A900DF7DF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55EA5BC62D43C2A900DF7DF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		55EA5BD42D43C2ED00DF7DF0 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secret.xcconfig; sourceTree = "<group>"; };
+		55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		55EA5BB92D43BF0300DF7DF0 /* Exceptions for "FlimIt" folder in "FlimIt" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 55EA5BA62D43BF0000DF7DF0 /* FlimIt */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		55EA5BA92D43BF0000DF7DF0 /* FlimIt */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				55EA5BB92D43BF0300DF7DF0 /* Exceptions for "FlimIt" folder in "FlimIt" target */,
-			);
-			path = FlimIt;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		55EA5BA42D43BF0000DF7DF0 /* Frameworks */ = {
@@ -51,7 +45,7 @@
 			isa = PBXGroup;
 			children = (
 				55EA5BBF2D43BF3500DF7DF0 /* .gitignore */,
-				55EA5BA92D43BF0000DF7DF0 /* FlimIt */,
+				55EA5BCC2D43C2A900DF7DF0 /* FlimIt */,
 				55EA5BA82D43BF0000DF7DF0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -62,6 +56,29 @@
 				55EA5BA72D43BF0000DF7DF0 /* FlimIt.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		55EA5BCC2D43C2A900DF7DF0 /* FlimIt */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */,
+				55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */,
+				55EA5BC52D43C2A900DF7DF0 /* Info.plist */,
+				55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */,
+				55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */,
+				55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */,
+				55EA5BD62D43C3B900DF7DF0 /* Config */,
+			);
+			path = FlimIt;
+			sourceTree = "<group>";
+		};
+		55EA5BD62D43C3B900DF7DF0 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				55EA5BD42D43C2ED00DF7DF0 /* Secret.xcconfig */,
+				55EA5BD72D43C3D200DF7DF0 /* APIKey.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,9 +95,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				55EA5BA92D43BF0000DF7DF0 /* FlimIt */,
 			);
 			name = FlimIt;
 			packageProductDependencies = (
@@ -128,6 +142,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */,
+				55EA5BD52D43C2ED00DF7DF0 /* Secret.xcconfig in Resources */,
+				55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */,
 				55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,10 +156,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
+				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
+				55EA5BD82D43C3D200DF7DF0 /* APIKey.swift in Sources */,
+				55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				55EA5BC62D43C2A900DF7DF0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		55EA5BBB2D43BF0300DF7DF0 /* Debug */ = {
@@ -159,7 +191,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -194,7 +225,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
