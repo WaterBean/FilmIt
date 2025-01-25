@@ -15,7 +15,7 @@ final class CapsuleBorderButton: UIButton {
         config.background.backgroundColor = .black
         config.background.strokeColor = .point
         config.baseForegroundColor = .point
-        config.attributedTitle = AttributedString(NSAttributedString(string: "시작하기", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
+        config.attributedTitle = AttributedString(NSAttributedString(string: title, attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
         self.init(frame: .zero)
         self.configuration = config
     }
