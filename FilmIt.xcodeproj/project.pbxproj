@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		554101172D43E82000DCA584 /* Secret.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 554101162D43E82000DCA584 /* Secret.xcconfig */; };
+		5541011B2D44797400DCA584 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5541011A2D44797400DCA584 /* SnapKit */; };
+		5541011E2D44798800DCA584 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5541011D2D44798800DCA584 /* Alamofire */; };
+		554101212D4479A200DCA584 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 554101202D4479A200DCA584 /* Kingfisher */; };
 		55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */; };
 		55462ECF2D43DA7100F6E079 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
@@ -41,6 +44,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				554101212D4479A200DCA584 /* Kingfisher in Frameworks */,
+				5541011B2D44797400DCA584 /* SnapKit in Frameworks */,
+				5541011E2D44798800DCA584 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,6 +169,9 @@
 			);
 			name = FilmIt;
 			packageProductDependencies = (
+				5541011A2D44797400DCA584 /* SnapKit */,
+				5541011D2D44798800DCA584 /* Alamofire */,
+				554101202D4479A200DCA584 /* Kingfisher */,
 			);
 			productName = FlimIt;
 			productReference = 55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */;
@@ -192,6 +201,11 @@
 			);
 			mainGroup = 55EA5B9E2D43BF0000DF7DF0;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				554101192D44797400DCA584 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				5541011C2D44798800DCA584 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				5541011F2D4479A200DCA584 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 55EA5BA82D43BF0000DF7DF0 /* Products */;
 			projectDirPath = "";
@@ -457,6 +471,51 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		554101192D44797400DCA584 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		5541011C2D44798800DCA584 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
+		5541011F2D4479A200DCA584 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.1.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5541011A2D44797400DCA584 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 554101192D44797400DCA584 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		5541011D2D44798800DCA584 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5541011C2D44798800DCA584 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		554101202D4479A200DCA584 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5541011F2D4479A200DCA584 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 55EA5B9F2D43BF0000DF7DF0 /* Project object */;
 }
