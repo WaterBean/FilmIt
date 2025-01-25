@@ -28,8 +28,8 @@ final class TabBarViewController: UITabBarController {
     private let settingViewController = {
         let vc = SettingViewController()
         vc.tabBarItem.image = UIImage(systemName: "person.crop.circle")
-        let nav = UINavigationController(rootViewController: vc)
         vc.tabBarItem.title = "PROFILE"
+        let nav = UINavigationController(rootViewController: vc)
         return nav
     }()
     
