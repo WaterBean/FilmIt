@@ -13,6 +13,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        UINavigationBar.appearance().tintColor = .point
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,
+                                                            .font: UIFont.systemFont(ofSize: 18, weight: .black)
+        ]
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         window?.rootViewController = ViewController()
