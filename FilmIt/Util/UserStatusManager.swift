@@ -21,7 +21,7 @@ final class UserStatusManager {
                   let window = windowScene.windows.first else { return }
             let rootVC = switch self {
             case .login: ViewController()
-            case .logout: OnboardingViewController()
+            case .logout: UINavigationController(rootViewController: OnboardingViewController())
             }
             window.rootViewController = rootVC
             window.makeKeyAndVisible()
