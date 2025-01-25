@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProfileSettingView: BaseView {
     // TODO: - 리터럴 상수화, 미세 스타일 조정
-    private let profileButton = {
+    let profileButton = {
         let button = UIButton()
         button.contentMode = .scaleAspectFill
         let randomNumber = Int.random(in: 0...11)
@@ -55,7 +55,7 @@ final class ProfileSettingView: BaseView {
         return label
     }()
     
-    private let completeButton = CapsuleBorderButton(title: "완료")
+    let completeButton = CapsuleBorderButton(title: "완료")
     
     override func configureHierarchy() {
         [profileButton, containerView, nicknameTextField, nicknameStatusLabel, completeButton].forEach {

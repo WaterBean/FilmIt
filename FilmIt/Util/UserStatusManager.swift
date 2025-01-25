@@ -20,7 +20,7 @@ final class UserStatusManager {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
                   let window = windowScene.windows.first else { return }
             let rootVC = switch self {
-            case .login: ViewController()
+            case .login: TabBarViewController()
             case .logout: UINavigationController(rootViewController: OnboardingViewController())
             }
             window.rootViewController = rootVC
@@ -40,4 +40,26 @@ final class UserStatusManager {
             }
         }
     }
+    
+    static var profile: UIImage {
+        get {
+            guard let imageData = UserDefaults.standard.data(forKey: "profile"),
+                  let image = UIImage(data: imageData) else { return UIImage() }
+            return image
+        }
+        set {
+            let imageData = newValue.jpegData(compressionQuality: 1.0)
+            UserDefaults.standard.set(imageData, forKey: "profile")
+        }
+    }
+    
+    static var nickname: String {
+        get {
+            UserDefaults.standard.string(forKey: "nickname") ?? ""
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "nickname")
+        }
+    }
+    
 }

@@ -22,6 +22,7 @@ final class ProfileSettingViewController: UIViewController {
         navigationItem.title = "프로필 설정"
         mainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(whenEndEditing)))
         mainView.isUserInteractionEnabled = true
+        mainView.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,6 +55,18 @@ final class ProfileSettingViewController: UIViewController {
     
     @objc func whenEndEditing(_ gesture: UITapGestureRecognizer) {
         view.endEditing(true)
+    }
+    
+    @objc func completeButtonTapped() {
+        if isValid {
+            guard let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                  let profile = mainView.profileButton.imageView?.image
+            else { return }
+            UserStatusManager.nickname = nickname
+            UserStatusManager.profile = profile
+            UserStatusManager.status = .login
+            UserStatusManager.status.replaceScene()
+        }
     }
     
     

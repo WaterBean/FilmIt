@@ -15,6 +15,10 @@
 		554101272D44875400DCA584 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101262D44875400DCA584 /* ProfileSettingViewController.swift */; };
 		554101292D44876300DCA584 /* ProfileSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101282D44876300DCA584 /* ProfileSettingView.swift */; };
 		554101512D44AD7C00DCA584 /* CapsuleBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */; };
+		554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101522D451AE800DCA584 /* TabBarViewController.swift */; };
+		554101552D451BB800DCA584 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101542D451BB800DCA584 /* MainViewController.swift */; };
+		554101572D451BDB00DCA584 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101562D451BDB00DCA584 /* UpcomingViewController.swift */; };
+		554101592D451BEC00DCA584 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101582D451BEC00DCA584 /* SettingViewController.swift */; };
 		55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */; };
 		55462ECF2D43DA7100F6E079 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
@@ -22,7 +26,6 @@
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
 		55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */; };
 		55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */; };
-		55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */; };
 		55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BD72D43C3D200DF7DF0 /* SecretManager.swift */; };
 		55EA5BDF2D43C89700DF7DF0 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EA5BDE2D43C89700DF7DF0 /* BaseView.swift */; };
 /* End PBXBuildFile section */
@@ -33,6 +36,10 @@
 		554101262D44875400DCA584 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		554101282D44876300DCA584 /* ProfileSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingView.swift; sourceTree = "<group>"; };
 		554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleBorderButton.swift; sourceTree = "<group>"; };
+		554101522D451AE800DCA584 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		554101542D451BB800DCA584 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		554101562D451BDB00DCA584 /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
+		554101582D451BEC00DCA584 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusManager.swift; sourceTree = "<group>"; };
 		55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,7 +49,6 @@
 		55EA5BC52D43C2A900DF7DF0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		55EA5BC62D43C2A900DF7DF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55EA5BCA2D43C2A900DF7DF0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		55EA5BD72D43C3D200DF7DF0 /* SecretManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretManager.swift; sourceTree = "<group>"; };
 		55EA5BDE2D43C89700DF7DF0 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,8 +163,11 @@
 		55EA5BDD2D43C72B00DF7DF0 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5BCB2D43C2A900DF7DF0 /* ViewController.swift */,
+				554101522D451AE800DCA584 /* TabBarViewController.swift */,
 				55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */,
+				554101542D451BB800DCA584 /* MainViewController.swift */,
+				554101562D451BDB00DCA584 /* UpcomingViewController.swift */,
+				554101582D451BEC00DCA584 /* SettingViewController.swift */,
 				554101262D44875400DCA584 /* ProfileSettingViewController.swift */,
 			);
 			path = ViewController;
@@ -248,15 +257,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */,
+				554101552D451BB800DCA584 /* MainViewController.swift in Sources */,
 				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
 				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
 				55EA5BDF2D43C89700DF7DF0 /* BaseView.swift in Sources */,
+				554101592D451BEC00DCA584 /* SettingViewController.swift in Sources */,
+				554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */,
 				554101512D44AD7C00DCA584 /* CapsuleBorderButton.swift in Sources */,
 				55462ECF2D43DA7100F6E079 /* OnboardingViewController.swift in Sources */,
 				554101232D447A3400DCA584 /* OnboardingView.swift in Sources */,
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
-				55EA5BD32D43C2A900DF7DF0 /* ViewController.swift in Sources */,
 				554101272D44875400DCA584 /* ProfileSettingViewController.swift in Sources */,
+				554101572D451BDB00DCA584 /* UpcomingViewController.swift in Sources */,
 				554101292D44876300DCA584 /* ProfileSettingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
