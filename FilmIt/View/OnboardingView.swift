@@ -36,18 +36,7 @@ final class OnboardingView: BaseView {
         return label
     }()
     
-    let startButton = {
-        var config = UIButton.Configuration.borderedProminent()
-        config.cornerStyle = .capsule
-        config.title = "시작하기"
-        config.background.backgroundColor = .black
-        config.background.strokeColor = .point
-        config.baseForegroundColor = .point
-        config.attributedTitle = AttributedString(NSAttributedString(string: "시작하기", attributes: [.font: UIFont.systemFont(ofSize: 16, weight: .semibold)]))
-        let button = UIButton()
-        button.configuration = config
-        return button
-    }()
+    let startButton = CapsuleBorderButton(title: "시작하기")
     
     override func configureHierarchy() {
         [introImageView, titleLabel, introLabel, startButton].forEach {
