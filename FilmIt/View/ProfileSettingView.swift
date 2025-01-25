@@ -9,11 +9,12 @@ import UIKit
 import SnapKit
 
 final class ProfileSettingView: BaseView {
-    
+    // TODO: - 리터럴 상수화, 미세 스타일 조정
     private let profileButton = {
         let button = UIButton()
         button.contentMode = .scaleAspectFill
-        button.setImage(.profile7, for: .normal)
+        let randomNumber = Int.random(in: 0...11)
+        button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
         button.layer.cornerRadius = 50
         button.layer.borderColor = UIColor.point.cgColor
         button.layer.borderWidth = 3
@@ -37,7 +38,7 @@ final class ProfileSettingView: BaseView {
         return view
     }()
     
-    private let nicknameTextField = {
+    let nicknameTextField = {
         let textField = UITextField()
         textField.borderStyle = .none
         textField.textColor = .white
@@ -46,7 +47,7 @@ final class ProfileSettingView: BaseView {
         return textField
     }()
     
-    private let nicknameStatusLabel = {
+    let nicknameStatusLabel = {
         let label = UILabel()
         label.text = "2글자 이상 10글자 미만으로 설정해주세요"
         label.textColor = .point
