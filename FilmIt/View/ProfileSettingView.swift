@@ -10,17 +10,7 @@ import SnapKit
 
 final class ProfileSettingView: BaseView {
     // TODO: - 리터럴 상수화, 미세 스타일 조정
-    let profileButton = {
-        let button = UIButton()
-        button.contentMode = .scaleAspectFill
-        let randomNumber = Int.random(in: 0...11)
-        button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
-        button.layer.cornerRadius = 50
-        button.layer.borderColor = UIColor.point.cgColor
-        button.layer.borderWidth = 3
-        button.clipsToBounds = true
-        return button
-    }()
+    let profileButton = ProfileButton()
     
     private let containerView = {
         let view = UIView()
@@ -106,7 +96,14 @@ final class ProfileSettingView: BaseView {
             bottomLine.backgroundColor = UIColor.white.cgColor
             nicknameTextField.borderStyle = .none
             nicknameTextField.layer.addSublayer(bottomLine)
+            profileButton.configurePointBorder()
         }
+        setRandomImage(profileButton)
+    }
+    
+    private func setRandomImage(_ button: UIButton) {
+        let randomNumber = Int.random(in: 0...11)
+        button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
     }
     
     

@@ -6,15 +6,27 @@
 //
 
 import UIKit
+import SnapKit
 
-class MainView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+final class MainView: BaseView {
+    
+    let profileContainerView = ProfileContainerView()
+    
+    override func configureHierarchy() {
+        [profileContainerView].forEach {
+            addSubview($0)
+        }
     }
-    */
-
+    
+    override func configureLayout() {
+        profileContainerView.snp.makeConstraints {
+            $0.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+        }
+    }
+    
+    override func configureView() {
+        
+    }
+    
+    
 }
