@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         UINavigationBar.appearance().tintColor = .point
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,
-                                                            .font: UIFont.systemFont(ofSize: 18, weight: .black)
+                                                            .font: UIFont.largeTitle
         ]
         
         guard let scene = (scene as? UIWindowScene) else { return }
