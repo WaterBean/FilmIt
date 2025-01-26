@@ -62,4 +62,14 @@ final class UserStatusManager {
         }
     }
     
+    static var searchTerms: [String] {
+        get {
+            guard let terms = (UserDefaults.standard.array(forKey: "searchTerms") ?? []) as? [String] else { return [""] }
+            return terms
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "searchTerms")
+        }
+    }
+    
 }

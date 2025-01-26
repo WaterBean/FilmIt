@@ -31,6 +31,15 @@ final class RecentSearchTermsView: BaseView {
         label.textColor = .white
         return label
     }()
+
+    private let noRecentsLabel = {
+        let label = UILabel()
+        label.text = "최근 검색어 내역이 없습니다."
+        label.font = .systemFont(ofSize: 12, weight: .medium)
+        label.textColor = .gray1
+        label.isHidden = true
+        return label
+    }()
     
     private let deleteRecentsButton = {
         var config = UIButton.Configuration.plain()
@@ -41,21 +50,22 @@ final class RecentSearchTermsView: BaseView {
         return button
     }()
     
-    private let button1 = RecentSearchTermsButton(title: "ㄴㅏㄴㅇ엉덩이커요야호")
-    private let button2 = RecentSearchTermsButton(title: "ㄴㅏㄴㅇ엉덩이커요야호")
-    private let button3 = RecentSearchTermsButton(title: "ㄴㅏㄴㅇ엉덩이커요야호")
-    private let button4 = RecentSearchTermsButton(title: "ㄴㅏㄴㅇ엉덩이커요야호")
-    private let button5 = RecentSearchTermsButton(title: "ㄴㅏㄴㅇ엉덩이커요야호")
-    
     override func configureHierarchy() {
         [recentsLabel, deleteRecentsButton, scrollView].forEach {
             addSubview($0)
         }
         
-        scrollView.addSubview(stackView)
+        [stackView, noRecentsLabel].forEach {
+            addSubview($0)
+        }
         
-        [button1, button2, button3, button4, button5].forEach {
-            stackView.addArrangedSubview($0)
+        if UserStatusManager.searchTerms.count == 0 {
+            noRecentsLabel.isHidden = false
+        } else {
+            for (_, item) in UserStatusManager.searchTerms.enumerated() {
+                let button = RecentSearchTermsButton(title: item)
+                stackView.addArrangedSubview(button)
+            }
         }
     }
     
@@ -80,12 +90,15 @@ final class RecentSearchTermsView: BaseView {
             $0.horizontalEdges.equalTo(scrollView).inset(16)
             $0.centerY.equalTo(scrollView.snp.centerY)
         }
+        
+        noRecentsLabel.snp.makeConstraints {
+            $0.center.equalTo(scrollView.snp.center)
+        }
     }
     
     override func configureView() {
         scrollView.backgroundColor = .black
         stackView.backgroundColor = .black
-        button1.addTarget(self, action: #selector(func1), for: .touchUpInside)
     }
     
     @objc func func1() {
