@@ -20,6 +20,7 @@ final class RecentSearchTermsView: BaseView {
     private let stackView = {
         let view = UIStackView()
         view.axis = .horizontal
+        view.distribution = .fillProportionally
         view.spacing = 16
         return view
     }()
@@ -41,7 +42,7 @@ final class RecentSearchTermsView: BaseView {
         return label
     }()
     
-    private let deleteRecentsButton = {
+    let deleteRecentsButton = {
         var config = UIButton.Configuration.plain()
         config.baseForegroundColor = .point
         config.attributedTitle = AttributedString(NSAttributedString(string: "전체 삭제", attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .bold)]))
@@ -51,22 +52,14 @@ final class RecentSearchTermsView: BaseView {
     }()
     
     override func configureHierarchy() {
-        [recentsLabel, deleteRecentsButton, scrollView].forEach {
+        [recentsLabel, deleteRecentsButton, scrollView, noRecentsLabel].forEach {
             addSubview($0)
         }
         
-        [stackView, noRecentsLabel].forEach {
-            addSubview($0)
+        [stackView].forEach {
+            scrollView.addSubview($0)
         }
         
-        if UserStatusManager.searchTerms.count == 0 {
-            noRecentsLabel.isHidden = false
-        } else {
-            for (_, item) in UserStatusManager.searchTerms.enumerated() {
-                let button = RecentSearchTermsButton(title: item)
-                stackView.addArrangedSubview(button)
-            }
-        }
     }
     
     override func configureLayout() {
@@ -101,12 +94,21 @@ final class RecentSearchTermsView: BaseView {
         stackView.backgroundColor = .black
     }
     
-    @objc func func1() {
-        print(#function)
-    }
-       
-    @objc func func2() {
-        print(#function)
+    func updateSearchTerms() {
+        stackView.arrangedSubviews.forEach {
+            stackView.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
+        if UserStatusManager.searchTerms.count == 0 {
+            noRecentsLabel.isHidden = false
+        } else {
+            noRecentsLabel.isHidden = true
+            let sortedByDate = UserStatusManager.searchTerms.sorted { $0.value > $1.value }
+            for terms in sortedByDate {
+                let button = RecentSearchTermsButton(title: terms.key)
+                stackView.addArrangedSubview(button)
+            }
+        }
     }
     
     

@@ -74,4 +74,6 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = "기생충"
         descriptionLabel.text = "이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여"
     }
+    
+    
 }

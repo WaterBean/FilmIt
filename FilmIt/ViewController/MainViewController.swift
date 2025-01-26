@@ -18,10 +18,29 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "오늘의 영화"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonTapped))
         
         mainView.collectionView.register(TodayMoviesCollectionViewCell.self, forCellWithReuseIdentifier: "TodayMoviesCollectionViewCell")
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+        mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        mainView.recentSearchTermsView.updateSearchTerms()
+    }
+    
+    @objc func searchButtonTapped() {
+        let vc = SearchViewController()
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func deleteButtonTapped() {
+        UserStatusManager.removeAllSearchTerms()
+        mainView.recentSearchTermsView.updateSearchTerms()
     }
     
     

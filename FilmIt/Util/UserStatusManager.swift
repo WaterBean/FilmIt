@@ -62,14 +62,30 @@ final class UserStatusManager {
         }
     }
     
-    static var searchTerms: [String] {
+    private(set) static var searchTerms: [String: Date] {
         get {
-            guard let terms = (UserDefaults.standard.array(forKey: "searchTerms") ?? []) as? [String] else { return [""] }
+            guard let terms = (UserDefaults.standard.dictionary(forKey: "searchTerms") ?? [:]) as? [String: Date] else { return [:] }
             return terms
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "searchTerms")
         }
+    }
+    
+    static func addSearchTerms(keyword: String) {
+        var terms = Self.searchTerms
+        terms.updateValue(Date.now, forKey: keyword)
+        Self.searchTerms = terms
+    }
+    
+    static func removeSearchTerms(keyword: String) {
+        var terms = Self.searchTerms
+        terms.removeValue(forKey: keyword)
+        Self.searchTerms = terms
+    }
+ 
+    static func removeAllSearchTerms() {
+        Self.searchTerms = [:]
     }
     
 }
