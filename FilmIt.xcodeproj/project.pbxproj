@@ -24,6 +24,8 @@
 		554101602D4539BE00DCA584 /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5541015F2D4539BE00DCA584 /* UIFont+Extension.swift */; };
 		554101622D45406300DCA584 /* ProfileButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101612D45406300DCA584 /* ProfileButton.swift */; };
 		554101642D45409D00DCA584 /* BaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101632D45409D00DCA584 /* BaseButton.swift */; };
+		554101662D46095400DCA584 /* RecentSearchTermsButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101652D46095400DCA584 /* RecentSearchTermsButton.swift */; };
+		554101682D460F3700DCA584 /* RecentSearchTermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101672D460F3700DCA584 /* RecentSearchTermsView.swift */; };
 		55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */; };
 		55462ECF2D43DA7100F6E079 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
@@ -50,6 +52,8 @@
 		5541015F2D4539BE00DCA584 /* UIFont+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
 		554101612D45406300DCA584 /* ProfileButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileButton.swift; sourceTree = "<group>"; };
 		554101632D45409D00DCA584 /* BaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseButton.swift; sourceTree = "<group>"; };
+		554101652D46095400DCA584 /* RecentSearchTermsButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTermsButton.swift; sourceTree = "<group>"; };
+		554101672D460F3700DCA584 /* RecentSearchTermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTermsView.swift; sourceTree = "<group>"; };
 		55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusManager.swift; sourceTree = "<group>"; };
 		55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,10 +171,12 @@
 				5541015A2D4528CE00DCA584 /* Base */,
 				554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */,
 				554101612D45406300DCA584 /* ProfileButton.swift */,
+				554101652D46095400DCA584 /* RecentSearchTermsButton.swift */,
 				5541015D2D452BC500DCA584 /* ProfileContainerView.swift */,
 				554101222D447A3400DCA584 /* OnboardingView.swift */,
 				554101282D44876300DCA584 /* ProfileSettingView.swift */,
 				5541015B2D45291900DCA584 /* MainView.swift */,
+				554101672D460F3700DCA584 /* RecentSearchTermsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -281,12 +287,14 @@
 			files = (
 				55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */,
 				554101552D451BB800DCA584 /* MainViewController.swift in Sources */,
+				554101662D46095400DCA584 /* RecentSearchTermsButton.swift in Sources */,
 				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
 				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
 				5541015E2D452BC500DCA584 /* ProfileContainerView.swift in Sources */,
 				55EA5BDF2D43C89700DF7DF0 /* BaseView.swift in Sources */,
 				554101592D451BEC00DCA584 /* SettingViewController.swift in Sources */,
 				554101622D45406300DCA584 /* ProfileButton.swift in Sources */,
+				554101682D460F3700DCA584 /* RecentSearchTermsView.swift in Sources */,
 				554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */,
 				554101642D45409D00DCA584 /* BaseButton.swift in Sources */,
 				554101512D44AD7C00DCA584 /* CapsuleBorderButton.swift in Sources */,

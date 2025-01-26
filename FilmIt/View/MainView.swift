@@ -10,10 +10,19 @@ import SnapKit
 
 final class MainView: BaseView {
     
-    let profileContainerView = ProfileContainerView()
+    private let profileContainerView = ProfileContainerView()
+    private let recentSearchTermsView = RecentSearchTermsView()
+
+    private let todayMoviesLabel = {
+        let label = UILabel()
+        label.text = "오늘의 영화"
+        label.font = .largeTitle
+        label.textColor = .white
+        return label
+    }()
     
     override func configureHierarchy() {
-        [profileContainerView].forEach {
+        [profileContainerView, recentSearchTermsView, todayMoviesLabel].forEach {
             addSubview($0)
         }
     }
@@ -21,6 +30,12 @@ final class MainView: BaseView {
     override func configureLayout() {
         profileContainerView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+        }
+        
+        recentSearchTermsView.snp.makeConstraints {
+            $0.top.equalTo(profileContainerView.snp.bottom)
+            $0.horizontalEdges.equalTo(safeAreaLayoutGuide)
+            $0.height.equalTo(100)
         }
     }
     
