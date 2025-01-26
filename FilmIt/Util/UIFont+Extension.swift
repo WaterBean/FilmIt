@@ -9,7 +9,7 @@ import UIKit
 
 extension UIFont {
     static var largeTitle: UIFont {
-        return UIFont.systemFont(ofSize: 18, weight: .bold)
+        return UIFont.systemFont(ofSize: 16, weight: .bold)
     }
     
 }
