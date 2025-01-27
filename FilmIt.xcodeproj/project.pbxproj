@@ -34,6 +34,9 @@
 		554101742D466DC500DCA584 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101732D466DC500DCA584 /* BaseTableViewCell.swift */; };
 		55462EB02D43D9BE00F6E079 /* UserStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */; };
 		55462ECF2D43DA7100F6E079 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */; };
+		556201A82D47991200BD9134 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556201A72D47991200BD9134 /* MovieDetailViewController.swift */; };
+		55C878BC2D47A9AB00CD4927 /* BackDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C878BB2D47A9AB00CD4927 /* BackDropTableViewCell.swift */; };
+		55C878BE2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C878BD2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
 		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
@@ -68,6 +71,9 @@
 		554101732D466DC500DCA584 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
 		55462EAF2D43D9BE00F6E079 /* UserStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStatusManager.swift; sourceTree = "<group>"; };
 		55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		556201A72D47991200BD9134 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		55C878BB2D47A9AB00CD4927 /* BackDropTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackDropTableViewCell.swift; sourceTree = "<group>"; };
+		55C878BD2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackDropImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -119,6 +125,15 @@
 				5541015F2D4539BE00DCA584 /* UIFont+Extension.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		55C878BF2D47B5DA00CD4927 /* MovieDetail */ = {
+			isa = PBXGroup;
+			children = (
+				55C878BB2D47A9AB00CD4927 /* BackDropTableViewCell.swift */,
+				55C878BD2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift */,
+			);
+			path = MovieDetail;
 			sourceTree = "<group>";
 		};
 		55EA5B9E2D43BF0000DF7DF0 = {
@@ -194,6 +209,7 @@
 				554101692D46191900DCA584 /* TodayMoviesCollectionViewCell.swift */,
 				554101712D466D8900DCA584 /* SearchTableViewCell.swift */,
 				554101672D460F3700DCA584 /* RecentSearchTermsView.swift */,
+				55C878BF2D47B5DA00CD4927 /* MovieDetail */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -210,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				55462ECE2D43DA7100F6E079 /* OnboardingViewController.swift */,
+				556201A72D47991200BD9134 /* MovieDetailViewController.swift */,
 				554101522D451AE800DCA584 /* TabBarViewController.swift */,
 				554101542D451BB800DCA584 /* MainViewController.swift */,
 				5541016F2D466B6500DCA584 /* SearchViewController.swift */,
@@ -308,6 +325,7 @@
 				554101662D46095400DCA584 /* RecentSearchTermsButton.swift in Sources */,
 				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
 				554101742D466DC500DCA584 /* BaseTableViewCell.swift in Sources */,
+				55C878BC2D47A9AB00CD4927 /* BackDropTableViewCell.swift in Sources */,
 				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
 				5541015E2D452BC500DCA584 /* ProfileContainerView.swift in Sources */,
 				5541016C2D46192D00DCA584 /* BaseCollectionViewCell.swift in Sources */,
@@ -326,10 +344,12 @@
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
 				554101272D44875400DCA584 /* ProfileSettingViewController.swift in Sources */,
 				554101722D466D8900DCA584 /* SearchTableViewCell.swift in Sources */,
+				55C878BE2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift in Sources */,
 				5541016E2D461B7400DCA584 /* HeartButton.swift in Sources */,
 				554101572D451BDB00DCA584 /* UpcomingViewController.swift in Sources */,
 				5541015C2D45291900DCA584 /* MainView.swift in Sources */,
 				554101292D44876300DCA584 /* ProfileSettingView.swift in Sources */,
+				556201A82D47991200BD9134 /* MovieDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

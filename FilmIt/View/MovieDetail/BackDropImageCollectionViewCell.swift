@@ -24,6 +24,8 @@ final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
-        backDropImageView.backgroundColor = .red
+        backDropImageView.image = .profile0
     }
+    
+    
 }
