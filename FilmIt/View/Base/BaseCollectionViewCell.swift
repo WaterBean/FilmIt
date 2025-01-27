@@ -9,6 +9,10 @@ import UIKit
 
 class BaseCollectionViewCell: UICollectionViewCell {
     
+    class var identifier: String {
+        String(describing: self)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureHierarchy()

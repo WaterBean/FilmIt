@@ -9,6 +9,10 @@ import UIKit
 
 class BaseTableViewCell: UITableViewCell {
     
+    class var identifier: String {
+        String(describing: self)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "BaseTableViewCell")
         configureHierarchy()
