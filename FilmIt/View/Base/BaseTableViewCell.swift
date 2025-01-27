@@ -15,6 +15,7 @@ class BaseTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: "BaseTableViewCell")
+        backgroundColor = .black
         configureHierarchy()
         configureLayout()
         configureView()
