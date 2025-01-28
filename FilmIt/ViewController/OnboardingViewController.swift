@@ -25,7 +25,7 @@ final class OnboardingViewController: UIViewController {
     }
 
     @objc func startButtonTapped() {
-        pushNavigationWithBarButtonItem(vc: ProfileSettingViewController(), rightBarButtonItem: nil)
+        pushNavigationWithBarButtonItem(vc: ProfileNicknameSettingViewController(), rightBarButtonItem: nil)
     }
     
     

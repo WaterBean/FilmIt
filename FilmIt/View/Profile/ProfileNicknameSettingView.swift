@@ -1,5 +1,5 @@
 //
-//  ProfileSettingView.swift
+//  ProfileNicknameSettingView.swift
 //  FilmIt
 //
 //  Created by 한수빈 on 1/25/25.
@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-final class ProfileSettingView: BaseView {
+final class ProfileNicknameSettingView: BaseView {
     // TODO: - 리터럴 상수화, 미세 스타일 조정
-    let profileButton = ProfileButton()
+    let profileButton = ProfileButton(image: nil, isPoint: true)
     
     private let containerView = {
         let view = UIView()

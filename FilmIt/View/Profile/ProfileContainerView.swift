@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProfileContainerView: BaseView {
     
-    private let profileButton = ProfileButton(image: UserStatusManager.profile)
+    private let profileButton = ProfileButton(image: UserStatusManager.profile, isPoint: true)
     
     private let nicknameLabel = {
         let label = UILabel()

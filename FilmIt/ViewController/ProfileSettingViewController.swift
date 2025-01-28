@@ -1,5 +1,5 @@
 //
-//  ProfileSettingViewController.swift
+//  ProfileNicknameSettingViewController.swift
 //  FilmIt
 //
 //  Created by 한수빈 on 1/25/25.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-final class ProfileSettingViewController: UIViewController {
+final class ProfileNicknameSettingViewController: UIViewController {
 
-    private let mainView = ProfileSettingView()
+    private let mainView = ProfileNicknameSettingView()
     private var isValid = false
     
     override func loadView() {
@@ -23,6 +23,7 @@ final class ProfileSettingViewController: UIViewController {
         mainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(whenEndEditing)))
         mainView.isUserInteractionEnabled = true
         mainView.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
+        mainView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -68,12 +69,15 @@ final class ProfileSettingViewController: UIViewController {
             UserStatusManager.status.replaceScene()
         }
     }
+    @objc func profileButtonTapped() {
+        pushNavigationWithBarButtonItem(vc: ProfileImageSettingViewController(), rightBarButtonItem: nil)
+    }
     
     
 }
 
 
-extension ProfileSettingViewController: UITextFieldDelegate {
+extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         guard let text = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
