@@ -157,6 +157,44 @@
 			path = MovieDetail;
 			sourceTree = "<group>";
 		};
+		55C879092D48E5CF00CD4927 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				554101222D447A3400DCA584 /* OnboardingView.swift */,
+				554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		55C8790A2D48E61300CD4927 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				554101712D466D8900DCA584 /* SearchTableViewCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		55C8790B2D48E61E00CD4927 /* MainView */ = {
+			isa = PBXGroup;
+			children = (
+				5541015B2D45291900DCA584 /* MainView.swift */,
+				554101672D460F3700DCA584 /* RecentSearchTermsView.swift */,
+				554101652D46095400DCA584 /* RecentSearchTermsButton.swift */,
+				554101692D46191900DCA584 /* TodayMoviesCollectionViewCell.swift */,
+			);
+			path = MainView;
+			sourceTree = "<group>";
+		};
+		55C8790C2D48E64700CD4927 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				554101612D45406300DCA584 /* ProfileButton.swift */,
+				5541015D2D452BC500DCA584 /* ProfileContainerView.swift */,
+				554101282D44876300DCA584 /* ProfileSettingView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
 		55EA5B9E2D43BF0000DF7DF0 = {
 			isa = PBXGroup;
 			children = (
@@ -219,17 +257,11 @@
 			children = (
 				55EA5BDC2D43C71C00DF7DF0 /* Storyboard */,
 				5541015A2D4528CE00DCA584 /* Base */,
-				554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */,
-				554101612D45406300DCA584 /* ProfileButton.swift */,
+				55C8790C2D48E64700CD4927 /* Profile */,
 				5541016D2D461B7400DCA584 /* HeartButton.swift */,
-				554101652D46095400DCA584 /* RecentSearchTermsButton.swift */,
-				5541015D2D452BC500DCA584 /* ProfileContainerView.swift */,
-				554101222D447A3400DCA584 /* OnboardingView.swift */,
-				554101282D44876300DCA584 /* ProfileSettingView.swift */,
-				5541015B2D45291900DCA584 /* MainView.swift */,
-				554101692D46191900DCA584 /* TodayMoviesCollectionViewCell.swift */,
-				554101712D466D8900DCA584 /* SearchTableViewCell.swift */,
-				554101672D460F3700DCA584 /* RecentSearchTermsView.swift */,
+				55C879092D48E5CF00CD4927 /* Onboarding */,
+				55C8790B2D48E61E00CD4927 /* MainView */,
+				55C8790A2D48E61300CD4927 /* Search */,
 				55C878BF2D47B5DA00CD4927 /* MovieDetail */,
 			);
 			path = View;
