@@ -25,11 +25,7 @@ final class OnboardingViewController: UIViewController {
     }
 
     @objc func startButtonTapped() {
-        let vc = ProfileSettingViewController()
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
-        vc.navigationItem.title = "프로필 설정"
-        navigationController?.pushViewController(vc, animated: true)
+        pushNavigationWithBarButtonItem(vc: ProfileSettingViewController(), rightBarButtonItem: nil)
     }
     
     

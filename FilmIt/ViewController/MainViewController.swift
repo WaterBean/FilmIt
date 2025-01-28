@@ -32,10 +32,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc func searchButtonTapped() {
-        let vc = SearchViewController()
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
-        navigationController?.pushViewController(vc, animated: true)
+        pushNavigationWithBarButtonItem(vc: SearchViewController(), rightBarButtonItem: nil)
     }
     
     @objc func deleteButtonTapped() {
@@ -68,11 +65,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = MovieDetailViewController()
-        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
-        navigationItem.backBarButtonItem = backBarButtonItem
-        vc.navigationItem.title = "대충영화이름"
-        navigationController?.pushViewController(vc, animated: true)
+        pushNavigationWithBarButtonItem(vc: MovieDetailViewController(), rightBarButtonItem: nil)
     }
 
     
