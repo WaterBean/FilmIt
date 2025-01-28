@@ -33,6 +33,7 @@ final class SynopsisView: BaseView {
         view.backgroundColor = .black
         view.isEditable = false
         view.isScrollEnabled = false
+        view.isSelectable = false
         return view
     }()
     
@@ -45,22 +46,21 @@ final class SynopsisView: BaseView {
     override func configureLayout() {
         headerLabel.snp.makeConstraints {
             $0.top.leading.equalTo(safeAreaLayoutGuide).offset(16)
+            $0.height.equalTo(20)
         }
         
         foldingButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(12)
         }
         
         // TODO: - 가변 길이 적용
         textView.snp.makeConstraints {
-            $0.top.equalTo(headerLabel.snp.bottom).offset(16)
+            $0.top.equalTo(headerLabel.snp.bottom).offset(8)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.bottom.equalTo(safeAreaInsets)
-            $0.height.equalTo(100)
+            $0.bottom.equalTo(safeAreaLayoutGuide)
+            $0.height.equalTo(60)
         }
-        
     }
-    
     
     
 }

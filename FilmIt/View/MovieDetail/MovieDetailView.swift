@@ -16,17 +16,17 @@ final class MovieDetailView: BaseView {
         view.backgroundColor = .black
         return view
     }()
-
-    private let contentView = UIView()
-
+    private let contentView = BaseView()
+    
     let backDropView = BackDropView()
     let synopsisView = SynopsisView()
+    let castView = CastView()
+    let posterView = PosterView()
     
     override func configureHierarchy() {
         addSubview(scrollView)
         scrollView.addSubview(contentView)
-        
-        [backDropView, synopsisView].forEach {
+        [backDropView, synopsisView, castView,posterView].forEach {
             contentView.addSubview($0)
         }
     }
@@ -34,7 +34,6 @@ final class MovieDetailView: BaseView {
     override func configureLayout() {
         scrollView.snp.makeConstraints {
             $0.edges.equalTo(safeAreaLayoutGuide)
-
         }
         
         contentView.snp.makeConstraints {
@@ -48,13 +47,26 @@ final class MovieDetailView: BaseView {
         
         synopsisView.snp.makeConstraints {
             $0.top.equalTo(backDropView.snp.bottom)
-            $0.bottom.horizontalEdges.equalTo(contentView)
+            $0.horizontalEdges.equalTo(contentView)
+        }
+        
+        castView.snp.makeConstraints {
+            $0.top.equalTo(synopsisView.snp.bottom)
+            $0.horizontalEdges.equalTo(contentView)
+        }
+
+        posterView.snp.makeConstraints {
+            $0.top.equalTo(castView.snp.bottom)
+            $0.bottom.equalTo(contentView)
+            $0.horizontalEdges.equalTo(contentView)
         }
     }
     
     override func configureView() {
         
     }
+    
+    
 }
 
 

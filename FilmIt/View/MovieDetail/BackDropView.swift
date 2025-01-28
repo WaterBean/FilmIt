@@ -67,6 +67,7 @@ final class BackDropView: BaseView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
+        collectionView.backgroundColor = .black
     }
     
     
