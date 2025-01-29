@@ -8,7 +8,7 @@
 import UIKit
 
 final class ProfileNicknameSettingViewController: UIViewController {
-
+    
     private let mainView = ProfileNicknameSettingView()
     private var isValid = false
     private var profileImageName = ""
@@ -61,13 +61,12 @@ final class ProfileNicknameSettingViewController: UIViewController {
     }
     
     @objc private func completeButtonTapped() {
-        if isValid {
-            guard let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                  let profile = mainView.profileButton.imageView?.image
-            else { return }
+        if isValid,
+           let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+           let profile = mainView.profileButton.imageView?.image {
+            UserStatusManager.status = .login
             UserStatusManager.nickname = nickname
             UserStatusManager.profile = profile
-            UserStatusManager.status = .login
             UserStatusManager.status.replaceScene()
         }
     }
@@ -106,11 +105,15 @@ extension ProfileNicknameSettingViewController: ProfileImageDelegate {
         mainView.profileButton.setImage(UIImage(named: string), for: .normal)
     }
     
+    
 }
 
 
 protocol ProfileImageDelegate: AnyObject {
+    
     func setImage(string: String)
+    
+    
 }
 
 

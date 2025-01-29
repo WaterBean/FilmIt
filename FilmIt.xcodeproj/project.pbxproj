@@ -47,6 +47,7 @@
 		55C8790E2D48E7A600CD4927 /* ProfileImageSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8790D2D48E7A600CD4927 /* ProfileImageSettingView.swift */; };
 		55C879102D48E93C00CD4927 /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8790F2D48E93C00CD4927 /* ProfileImageSettingViewController.swift */; };
 		55C879122D49098900CD4927 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C879112D49098900CD4927 /* ProfileImageCollectionViewCell.swift */; };
+		55C879142D4A169500CD4927 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C879132D4A169500CD4927 /* SettingView.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
 		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
@@ -94,6 +95,7 @@
 		55C8790D2D48E7A600CD4927 /* ProfileImageSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingView.swift; sourceTree = "<group>"; };
 		55C8790F2D48E93C00CD4927 /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
 		55C879112D49098900CD4927 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		55C879132D4A169500CD4927 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 				55C8790B2D48E61E00CD4927 /* MainView */,
 				55C8790A2D48E61300CD4927 /* Search */,
 				55C878BF2D47B5DA00CD4927 /* MovieDetail */,
+				55C879132D4A169500CD4927 /* SettingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -389,6 +392,7 @@
 				55EA5BD12D43C2A900DF7DF0 /* AppDelegate.swift in Sources */,
 				55C879042D48D5C000CD4927 /* PosterView.swift in Sources */,
 				554101742D466DC500DCA584 /* BaseTableViewCell.swift in Sources */,
+				55C879142D4A169500CD4927 /* SettingView.swift in Sources */,
 				55C878BC2D47A9AB00CD4927 /* BackDropView.swift in Sources */,
 				55EA5BD22D43C2A900DF7DF0 /* SceneDelegate.swift in Sources */,
 				55C879062D48D61100CD4927 /* PosterCollectionViewCell.swift in Sources */,

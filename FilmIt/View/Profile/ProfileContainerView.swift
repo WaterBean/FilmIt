@@ -51,7 +51,6 @@ final class ProfileContainerView: BaseView {
         backgroundColor = UIColor(white: 0.15, alpha: 1)
         clipsToBounds = true
         layer.cornerRadius = 12
-        
     }
     
     override func configureHierarchy() {

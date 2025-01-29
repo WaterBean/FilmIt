@@ -38,6 +38,11 @@ final class UserStatusManager {
             if let data = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(data, forKey: "userStatus")
             }
+            if newValue == .logout {
+                profile = UIImage()
+                nickname = ""
+                removeAllSearchTerms()
+            }
         }
     }
     
