@@ -12,7 +12,7 @@
 		5541011E2D44798800DCA584 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5541011D2D44798800DCA584 /* Alamofire */; };
 		554101212D4479A200DCA584 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 554101202D4479A200DCA584 /* Kingfisher */; };
 		554101232D447A3400DCA584 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101222D447A3400DCA584 /* OnboardingView.swift */; };
-		554101272D44875400DCA584 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101262D44875400DCA584 /* ProfileSettingViewController.swift */; };
+		554101272D44875400DCA584 /* ProfileNicknameSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101262D44875400DCA584 /* ProfileNicknameSettingViewController.swift */; };
 		554101292D44876300DCA584 /* ProfileNicknameSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101282D44876300DCA584 /* ProfileNicknameSettingView.swift */; };
 		554101512D44AD7C00DCA584 /* CapsuleBorderButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */; };
 		554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554101522D451AE800DCA584 /* TabBarViewController.swift */; };
@@ -46,6 +46,7 @@
 		55C879082D48E45200CD4927 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C879072D48E45200CD4927 /* UIViewController+Extension.swift */; };
 		55C8790E2D48E7A600CD4927 /* ProfileImageSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8790D2D48E7A600CD4927 /* ProfileImageSettingView.swift */; };
 		55C879102D48E93C00CD4927 /* ProfileImageSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C8790F2D48E93C00CD4927 /* ProfileImageSettingViewController.swift */; };
+		55C879122D49098900CD4927 /* ProfileImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C879112D49098900CD4927 /* ProfileImageCollectionViewCell.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
 		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
@@ -58,7 +59,7 @@
 /* Begin PBXFileReference section */
 		554101162D43E82000DCA584 /* Secret.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Secret.xcconfig; path = FilmIt/Config/Debug/Secret.xcconfig; sourceTree = SOURCE_ROOT; };
 		554101222D447A3400DCA584 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
-		554101262D44875400DCA584 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
+		554101262D44875400DCA584 /* ProfileNicknameSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingViewController.swift; sourceTree = "<group>"; };
 		554101282D44876300DCA584 /* ProfileNicknameSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingView.swift; sourceTree = "<group>"; };
 		554101502D44AD7C00DCA584 /* CapsuleBorderButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleBorderButton.swift; sourceTree = "<group>"; };
 		554101522D451AE800DCA584 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +93,7 @@
 		55C879072D48E45200CD4927 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		55C8790D2D48E7A600CD4927 /* ProfileImageSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingView.swift; sourceTree = "<group>"; };
 		55C8790F2D48E93C00CD4927 /* ProfileImageSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewController.swift; sourceTree = "<group>"; };
+		55C879112D49098900CD4927 /* ProfileImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				5541015D2D452BC500DCA584 /* ProfileContainerView.swift */,
 				554101282D44876300DCA584 /* ProfileNicknameSettingView.swift */,
 				55C8790D2D48E7A600CD4927 /* ProfileImageSettingView.swift */,
+				55C879112D49098900CD4927 /* ProfileImageCollectionViewCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -290,7 +293,7 @@
 				5541016F2D466B6500DCA584 /* SearchViewController.swift */,
 				554101562D451BDB00DCA584 /* UpcomingViewController.swift */,
 				554101582D451BEC00DCA584 /* SettingViewController.swift */,
-				554101262D44875400DCA584 /* ProfileSettingViewController.swift */,
+				554101262D44875400DCA584 /* ProfileNicknameSettingViewController.swift */,
 				55C8790F2D48E93C00CD4927 /* ProfileImageSettingViewController.swift */,
 			);
 			path = ViewController;
@@ -407,8 +410,9 @@
 				554101602D4539BE00DCA584 /* UIFont+Extension.swift in Sources */,
 				554101232D447A3400DCA584 /* OnboardingView.swift in Sources */,
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
-				554101272D44875400DCA584 /* ProfileSettingViewController.swift in Sources */,
+				554101272D44875400DCA584 /* ProfileNicknameSettingViewController.swift in Sources */,
 				554101722D466D8900DCA584 /* SearchTableViewCell.swift in Sources */,
+				55C879122D49098900CD4927 /* ProfileImageCollectionViewCell.swift in Sources */,
 				55C878BE2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift in Sources */,
 				5541016E2D461B7400DCA584 /* HeartButton.swift in Sources */,
 				55C879002D47DCD100CD4927 /* CastView.swift in Sources */,

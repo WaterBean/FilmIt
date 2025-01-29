@@ -96,14 +96,7 @@ final class ProfileNicknameSettingView: BaseView {
             bottomLine.backgroundColor = UIColor.white.cgColor
             nicknameTextField.borderStyle = .none
             nicknameTextField.layer.addSublayer(bottomLine)
-            profileButton.configurePointBorder()
         }
-        setRandomImage(profileButton)
-    }
-    
-    private func setRandomImage(_ button: UIButton) {
-        let randomNumber = Int.random(in: 0...11)
-        button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
     }
     
     

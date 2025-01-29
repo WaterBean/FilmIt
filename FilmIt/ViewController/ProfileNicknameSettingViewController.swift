@@ -75,6 +75,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
     @objc private func profileButtonTapped() {
         let vc = ProfileImageSettingViewController()
         vc.profileImageName = profileImageName
+        vc.delegate = self
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
     }
     
@@ -83,6 +84,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
         button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
         profileImageName = "profile_\(randomNumber)"
     }
+    
     
 }
 
@@ -96,3 +98,19 @@ extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     
     
 }
+
+extension ProfileNicknameSettingViewController: ProfileImageDelegate {
+    
+    func setImage(string: String) {
+        profileImageName = string
+        mainView.profileButton.setImage(UIImage(named: string), for: .normal)
+    }
+    
+}
+
+
+protocol ProfileImageDelegate: AnyObject {
+    func setImage(string: String)
+}
+
+

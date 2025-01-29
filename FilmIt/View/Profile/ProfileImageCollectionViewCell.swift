@@ -1,5 +1,5 @@
 //
-//  ProfileImageCollectionCell.swift
+//  ProfileImageCollectionViewCell.swift
 //  FilmIt
 //
 //  Created by 한수빈 on 1/28/25.
@@ -25,10 +25,21 @@ final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
-        
+        profileButton.isUserInteractionEnabled = false
     }
 
-
+    func configureCell(imageName: String, isSelected: Bool = false) {
+        profileButton.setImage(UIImage(named: imageName), for: .normal)
+        if isSelected {
+            profileButton.configurePointBorder()
+            profileButton.isUserInteractionEnabled = false
+        } else {
+            profileButton.configureDisableBorder()
+            profileButton.isUserInteractionEnabled = false
+        }
+    }
+    
+    
 }
 
 

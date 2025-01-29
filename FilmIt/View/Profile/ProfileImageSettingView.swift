@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProfileImageSettingView: BaseView {
     
-    let profileButton = ProfileButton(image: nil, isPoint: true)
+    let profileButton = ProfileButton(isPoint: true)
     
     private let containerView = {
         let view = UIView()
@@ -28,8 +28,18 @@ final class ProfileImageSettingView: BaseView {
         return view
     }()
     
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: {
+        let layout = UICollectionViewFlowLayout()
+        let inset = 16.0
+        layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        layout.scrollDirection = .vertical
+        let width = (UIScreen.main.bounds.width - 32.0 - 48.0) / 4
+        layout.itemSize = CGSize(width: width, height: width)
+        return layout
+    }())
+    
     override func configureHierarchy() {
-        [profileButton, containerView].forEach {
+        [profileButton, containerView, collectionView].forEach {
             addSubview($0)
         }
         containerView.addSubview(imageView)
@@ -52,10 +62,19 @@ final class ProfileImageSettingView: BaseView {
             $0.size.equalTo(20)
         }
         
+        collectionView.snp.makeConstraints {
+            $0.top.equalTo(containerView.snp.bottom).offset(40)
+            $0.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
+        }
     }
     
     override func configureView() {
+        collectionView.showsVerticalScrollIndicator = false
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.isMultipleTouchEnabled = false
+        collectionView.backgroundColor = .black
         profileButton.configurePointBorder()
     }
+    
     
 }
