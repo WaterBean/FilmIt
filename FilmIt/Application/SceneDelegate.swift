@@ -17,6 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,
                                                             .font: UIFont.largeTitle
         ]
+        // TODO: - textColor apperance 적용 취소
         UILabel.appearance().textColor = .white
         
         guard let scene = (scene as? UIWindowScene) else { return }
