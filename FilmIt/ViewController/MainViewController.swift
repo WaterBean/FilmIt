@@ -24,22 +24,35 @@ final class MainViewController: UIViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+        mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.recentSearchTermsView.updateSearchTerms()
+        
     }
     
-    @objc func searchButtonTapped() {
+    @objc private func searchButtonTapped() {
         pushNavigationWithBarButtonItem(vc: SearchViewController(), rightBarButtonItem: nil)
     }
     
-    @objc func deleteButtonTapped() {
+    @objc private func deleteButtonTapped() {
         UserStatusManager.removeAllSearchTerms()
         mainView.recentSearchTermsView.updateSearchTerms()
     }
     
+    @objc private func profileViewTapped() {
+        let vc = ProfileNicknameSettingViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        let saveButton = UIBarButtonItem(title: "저장", image: nil, target: vc, action: #selector(vc.saveButtonTapped))
+        saveButton.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold)], for: .normal)
+        let dismissButton = UIBarButtonItem(title: " ", image: UIImage(systemName: "xmark"), target: vc, action: #selector(vc.dismissButtonTapped))
+        nav.navigationBar.topItem?.rightBarButtonItem = saveButton
+        nav.navigationBar.topItem?.leftBarButtonItem = dismissButton
+        nav.sheetPresentationController?.prefersGrabberVisible = true
+        present(nav, animated: true)
+    }
     
 }
 

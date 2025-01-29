@@ -10,7 +10,7 @@ import SnapKit
 
 final class SettingView: BaseView {
     
-    private let profileContainerView = ProfileContainerView()
+    let profileContainerView = ProfileContainerView()
 
     let tableView = UITableView()
     

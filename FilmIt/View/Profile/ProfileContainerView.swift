@@ -10,7 +10,7 @@ import SnapKit
 
 final class ProfileContainerView: BaseView {
     
-    private let profileButton = ProfileButton(image: UserStatusManager.profile, isPoint: true)
+    private let profileButton = ProfileButton(image: UIImage(named: UserStatusManager.profile), isPoint: true)
     
     private let nicknameLabel = {
         let label = UILabel()
@@ -42,7 +42,6 @@ final class ProfileContainerView: BaseView {
         config.attributedTitle = AttributedString(NSAttributedString(string: "0개의 무비박스 보관중", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14, weight: .bold)]))
         let button = UIButton()
         button.configuration = config
-        button.isEnabled = false
         return button
     }()
     
@@ -51,6 +50,7 @@ final class ProfileContainerView: BaseView {
         backgroundColor = UIColor(white: 0.15, alpha: 1)
         clipsToBounds = true
         layer.cornerRadius = 12
+        isUserInteractionEnabled = true
     }
     
     override func configureHierarchy() {
@@ -90,6 +90,18 @@ final class ProfileContainerView: BaseView {
     
     override func configureView() {
         profileButton.configurePointBorder()
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: NSNotification.Name("userStatus") , object: nil)
+    }
+    
+    @objc func receiveNotification(value: NSNotification) {
+        print("신호 수신")
+        if let profile = value.userInfo?["profile"] as? String,
+           let nickname = value.userInfo?["nickname"] as? String{
+            profileButton.setImage(UIImage(named: profile), for: .normal)
+            nicknameLabel.text = nickname
+        } else {
+            print("제대로 값을 받지 못함")
+        }
     }
     
     

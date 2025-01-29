@@ -10,7 +10,7 @@ import SnapKit
 
 final class MainView: BaseView {
     
-    private let profileContainerView = ProfileContainerView()
+    let profileContainerView = ProfileContainerView()
     let recentSearchTermsView = RecentSearchTermsView()
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: {

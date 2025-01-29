@@ -40,8 +40,21 @@ final class SettingViewController: UIViewController {
         mainView.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
         mainView.tableView.delegate = self
         mainView.tableView.dataSource = self
+        mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
+
     }
 
+    @objc private func profileViewTapped() {
+        let vc = ProfileNicknameSettingViewController()
+        let nav = UINavigationController(rootViewController: vc)
+        let saveButton = UIBarButtonItem(title: "저장", image: nil, target: vc, action: #selector(vc.saveButtonTapped))
+        saveButton.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold)], for: .normal)
+        let dismissButton = UIBarButtonItem(title: " ", image: UIImage(systemName: "xmark"), target: vc, action: #selector(vc.dismissButtonTapped))
+        nav.navigationBar.topItem?.rightBarButtonItem = saveButton
+        nav.navigationBar.topItem?.leftBarButtonItem = dismissButton
+        nav.sheetPresentationController?.prefersGrabberVisible = true
+        present(nav, animated: true)
+    }
 
 }
 

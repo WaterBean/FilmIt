@@ -47,9 +47,19 @@ final class ProfileNicknameSettingView: BaseView {
     
     let completeButton = CapsuleBorderButton(title: "완료")
     
+    let isLogin: Bool
+    
+    init(isLogin: Bool) {
+        self.isLogin = isLogin
+        super.init(frame: .zero)
+    }
+    
     override func configureHierarchy() {
-        [profileButton, containerView, nicknameTextField, nicknameStatusLabel, completeButton].forEach {
+        [profileButton, containerView, nicknameTextField, nicknameStatusLabel].forEach {
             addSubview($0)
+        }
+        if !isLogin {
+            addSubview(completeButton)
         }
         containerView.addSubview(imageView)
     }
@@ -81,11 +91,12 @@ final class ProfileNicknameSettingView: BaseView {
             $0.top.equalTo(nicknameTextField.snp.bottom).offset(16)
             $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(24)
         }
-        
-        completeButton.snp.makeConstraints {
-            $0.top.equalTo(nicknameStatusLabel.snp.bottom).offset(32)
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.height.equalTo(44)
+        if !isLogin {
+            completeButton.snp.makeConstraints {
+                $0.top.equalTo(nicknameStatusLabel.snp.bottom).offset(32)
+                $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+                $0.height.equalTo(44)
+            }
         }
     }
     
