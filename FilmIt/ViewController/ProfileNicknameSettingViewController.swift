@@ -11,6 +11,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
 
     private let mainView = ProfileNicknameSettingView()
     private var isValid = false
+    private var profileImageName = ""
     
     override func loadView() {
         view = mainView
@@ -18,12 +19,13 @@ final class ProfileNicknameSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mainView.nicknameTextField.delegate = self
         navigationItem.title = "프로필 설정"
+        mainView.nicknameTextField.delegate = self
         mainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(whenEndEditing)))
         mainView.isUserInteractionEnabled = true
         mainView.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         mainView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        setRandomImage(mainView.profileButton)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -54,11 +56,11 @@ final class ProfileNicknameSettingViewController: UIViewController {
         return false
     }
     
-    @objc func whenEndEditing(_ gesture: UITapGestureRecognizer) {
+    @objc private func whenEndEditing(_ gesture: UITapGestureRecognizer) {
         view.endEditing(true)
     }
     
-    @objc func completeButtonTapped() {
+    @objc private func completeButtonTapped() {
         if isValid {
             guard let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                   let profile = mainView.profileButton.imageView?.image
@@ -69,10 +71,18 @@ final class ProfileNicknameSettingViewController: UIViewController {
             UserStatusManager.status.replaceScene()
         }
     }
-    @objc func profileButtonTapped() {
-        pushNavigationWithBarButtonItem(vc: ProfileImageSettingViewController(), rightBarButtonItem: nil)
+    
+    @objc private func profileButtonTapped() {
+        let vc = ProfileImageSettingViewController()
+        vc.profileImageName = profileImageName
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
     }
     
+    private func setRandomImage(_ button: UIButton) {
+        let randomNumber = Int.random(in: 0...11)
+        button.setImage(UIImage(named: "profile_\(randomNumber)"), for: .normal)
+        profileImageName = "profile_\(randomNumber)"
+    }
     
 }
 
