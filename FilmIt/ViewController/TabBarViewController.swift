@@ -36,6 +36,7 @@ final class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.tintColor = .point
+        view.backgroundColor = .black
         setViewControllers([mainViewController, upcomingViewController, settingViewController], animated: true)
     }
     
