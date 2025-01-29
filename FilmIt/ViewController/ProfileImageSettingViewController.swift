@@ -25,6 +25,11 @@ final class ProfileImageSettingViewController: UIViewController {
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
     }
+
+    // FIXME: - 들어오자마자 프로필 이미지가 선택되어있도록 구현해야함
+    override func viewWillAppear(_ animated: Bool) {
+        mainView.collectionView.selectItem(at: IndexPath(item: 3, section: 0), animated: true, scrollPosition: .top)
+    }
     
     private func setButtonImage(_ button: UIButton) {
         guard let profileImageName else {

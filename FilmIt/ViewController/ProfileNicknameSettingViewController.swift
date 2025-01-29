@@ -9,9 +9,9 @@ import UIKit
 
 final class ProfileNicknameSettingViewController: UIViewController {
     
-    private let mainView = ProfileNicknameSettingView()
+    private let mainView = ProfileNicknameSettingView(isLogin: UserStatusManager.status == .login)
     private var isValid = false
-    private var profileImageName = ""
+    private var profileImageName = UserStatusManager.profile
     
     override func loadView() {
         view = mainView
@@ -25,7 +25,14 @@ final class ProfileNicknameSettingViewController: UIViewController {
         mainView.isUserInteractionEnabled = true
         mainView.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         mainView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
-        setRandomImage(mainView.profileButton)
+        switch UserStatusManager.status {
+        case .login:
+            mainView.profileButton.setImage(UIImage(named: UserStatusManager.profile), for: .normal)
+            mainView.nicknameTextField.text = UserStatusManager.nickname
+            validateUserInput(text: UserStatusManager.nickname)
+        case .logout:
+            setRandomImage(mainView.profileButton)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,6 +40,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
         mainView.nicknameTextField.becomeFirstResponder()
     }
     
+    @discardableResult
     private func validateUserInput(text: String) -> Bool {
         let isContainsNumber = !(text.allSatisfy{ !$0.isNumber })
         var isContainsSymbol: Bool
@@ -60,15 +68,15 @@ final class ProfileNicknameSettingViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @objc private func completeButtonTapped() {
-        if isValid,
-           let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-           let profile = mainView.profileButton.imageView?.image {
-            UserStatusManager.status = .login
-            UserStatusManager.nickname = nickname
-            UserStatusManager.profile = profile
-            UserStatusManager.status.replaceScene()
-        }
+    @objc func completeButtonTapped() {
+        saveUserData()
+        UserStatusManager.status.replaceScene()
+    }
+    
+    
+    @objc func saveButtonTapped() {
+        saveUserData()
+        dismissButtonTapped()
     }
     
     @objc private func profileButtonTapped() {
@@ -76,6 +84,17 @@ final class ProfileNicknameSettingViewController: UIViewController {
         vc.profileImageName = profileImageName
         vc.delegate = self
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+    }
+    
+    @objc func dismissButtonTapped() {
+        dismiss(animated: true)
+    }
+
+    private func saveUserData() {
+        guard isValid, let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
+        UserStatusManager.status = .login
+        UserStatusManager.nickname = nickname
+        UserStatusManager.profile = profileImageName
     }
     
     private func setRandomImage(_ button: UIButton) {

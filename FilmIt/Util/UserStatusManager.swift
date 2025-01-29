@@ -39,22 +39,20 @@ final class UserStatusManager {
                 UserDefaults.standard.set(data, forKey: "userStatus")
             }
             if newValue == .logout {
-                profile = UIImage()
+                profile = ""
                 nickname = ""
                 removeAllSearchTerms()
             }
         }
     }
     
-    static var profile: UIImage {
+    static var profile: String {
         get {
-            guard let imageData = UserDefaults.standard.data(forKey: "profile"),
-                  let image = UIImage(data: imageData) else { return UIImage() }
-            return image
+            UserDefaults.standard.string(forKey: "profile") ?? ""
         }
         set {
-            let imageData = newValue.jpegData(compressionQuality: 1.0)
-            UserDefaults.standard.set(imageData, forKey: "profile")
+            UserDefaults.standard.set(newValue, forKey: "profile")
+            NotificationCenter.default.post(name: NSNotification.Name("userStatus"), object: nil, userInfo: ["profile": newValue, "nickname": nickname])
         }
     }
     
@@ -64,6 +62,7 @@ final class UserStatusManager {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: "nickname")
+            NotificationCenter.default.post(name: NSNotification.Name("userStatus"), object: nil, userInfo: ["profile": profile, "nickname": newValue])
         }
     }
     
@@ -92,5 +91,6 @@ final class UserStatusManager {
     static func removeAllSearchTerms() {
         Self.searchTerms = [:]
     }
+    
     
 }
