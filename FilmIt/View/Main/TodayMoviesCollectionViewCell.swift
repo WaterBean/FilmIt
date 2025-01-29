@@ -32,10 +32,10 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let heartButton = HeartButton(isFilled: false)
+    private let likeButton = LikeButton(isFilled: false)
     
     override func configureHierarchy() {
-        [posterImageView, titleLabel, descriptionLabel, heartButton].forEach {
+        [posterImageView, titleLabel, descriptionLabel, likeButton].forEach {
             contentView.addSubview($0)
         }
     }
@@ -49,12 +49,12 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(posterImageView.snp.bottom)
             $0.leading.equalTo(safeAreaLayoutGuide)
-            $0.trailing.lessThanOrEqualTo(heartButton.snp.leading)
+            $0.trailing.lessThanOrEqualTo(likeButton.snp.leading)
             $0.bottom.equalTo(descriptionLabel.snp.top)
             $0.height.equalTo(22)
         }
         
-        heartButton.snp.makeConstraints {
+        likeButton.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.top)
             $0.trailing.equalTo(safeAreaLayoutGuide)
             $0.bottom.equalTo(descriptionLabel.snp.top)

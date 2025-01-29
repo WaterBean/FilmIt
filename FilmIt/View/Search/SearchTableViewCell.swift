@@ -48,10 +48,10 @@ final class SearchTableViewCell: BaseTableViewCell {
         return view
     }()
     
-    private let heartButton = HeartButton(isFilled: false)
+    private let likeButton = LikeButton(isFilled: false)
     
     override func configureHierarchy() {
-        [posterImageView, titleLabel, dateLabel, stackView, heartButton].forEach {
+        [posterImageView, titleLabel, dateLabel, stackView, likeButton].forEach {
             contentView.addSubview($0)
         }
         
@@ -82,7 +82,7 @@ final class SearchTableViewCell: BaseTableViewCell {
             $0.bottom.equalTo(posterImageView.snp.bottom)
         }
         
-        heartButton.snp.makeConstraints {
+        likeButton.snp.makeConstraints {
             $0.trailing.equalTo(safeAreaLayoutGuide)
             $0.bottom.equalTo(safeAreaLayoutGuide)
             $0.size.equalTo(44)
