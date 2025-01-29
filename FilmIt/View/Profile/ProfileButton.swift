@@ -17,9 +17,6 @@ final class ProfileButton: BaseButton {
         layer.borderColor = UIColor.point.cgColor
         layer.borderWidth = isPoint ? 3 : 1
         alpha = isPoint ? 1 : 0.5
-        DispatchQueue.main.async {
-            self.layer.cornerRadius = self.frame.width / 2
-        }
     }
     
     func configurePointBorder() {
@@ -32,5 +29,9 @@ final class ProfileButton: BaseButton {
         alpha = 0.5
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layer.cornerRadius = frame.width / 2
+    }
     
 }
