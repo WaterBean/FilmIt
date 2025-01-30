@@ -8,10 +8,18 @@
 import Foundation
 
 enum SecretManager {
+    
     static var accessToken: String {
-        guard let token = Bundle.main.object(forInfoDictionaryKey: "ACCESS_TOKEN") as? String else {
-            return ""
-        }
-        return token
+        Bundle.main.object(forInfoDictionaryKey: "ACCESS_TOKEN") as? String ?? ""
     }
+    
+    static var baseURL: String {
+        Bundle.main.object(forInfoDictionaryKey: "BASE_URL") as? String ?? ""
+    }
+
+    static var imageURL: String {
+        Bundle.main.object(forInfoDictionaryKey: "IMAGE_URL") as? String ?? ""
+    }
+    
+    
 }
