@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
     
@@ -74,6 +75,11 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         titleLabel.text = "기생충"
         descriptionLabel.text = "이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여"
     }
-    
+  
+    func configureCell(image: String, title: String, overView: String) {
+        posterImageView.kf.setImage(with: URL(string: SecretManager.imageURL + image))
+        titleLabel.text = title
+        descriptionLabel.text = overView
+    }
     
 }
