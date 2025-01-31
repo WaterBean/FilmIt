@@ -10,7 +10,7 @@ import UIKit
 final class MainViewController: UIViewController {
     
     let mainView = MainView()
-    var trendingMovieList = [Trending]() {
+    var trendingMovieList = [Movie]() {
         didSet {
             mainView.collectionView.reloadData()
         }
@@ -30,12 +30,11 @@ final class MainViewController: UIViewController {
         mainView.collectionView.dataSource = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
-        MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
-            self.trendingMovieList = $0.results
-        } failure: { error in
-            print(error)
-        }
-
+//        MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
+//            self.trendingMovieList = $0.results
+//        } failure: { error in
+//            print(error)
+//        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,11 +74,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let row = trendingMovieList[indexPath.row]
+        let item = trendingMovieList[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayMoviesCollectionViewCell.identifier, for: indexPath) as? TodayMoviesCollectionViewCell else {
             return TodayMoviesCollectionViewCell()
         }
-        cell.configureCell(image: row.posterPath, title: row.title, overView: row.overview)
+        cell.configureCell(image: item.posterPath, title: item.title, overView: item.overview)
         return cell
     }
     

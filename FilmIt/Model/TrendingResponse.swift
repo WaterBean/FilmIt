@@ -8,15 +8,15 @@
 import Foundation
 
 struct TrendingResponse: Codable {
-    let results: [Trending]
+    let results: [Movie]
 }
 
-struct Trending: Codable {
+struct Movie: Codable {
     let id: Int
-    let backdropPath: String
+    let backdropPath: String?
     let title: String
     let overview: String
-    let posterPath: String
+    let posterPath: String?
     let genreIds: [Int]
     let releaseDate: String
     let voteAverage: Double
