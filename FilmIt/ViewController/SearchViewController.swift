@@ -10,7 +10,19 @@ import SnapKit
 
 final class SearchViewController: UIViewController {
     
-    var movieList = [String]()
+    var movieList = [Movie]() {
+        didSet {
+            if movieList.count > 1 {
+                tableView.reloadData()
+                noResultLabel.isHidden = true
+            } else {
+                noResultLabel.isHidden = false
+            }
+        }
+    }
+    var page = 1
+    var totalPages = 1
+    var lastUserInput = ""
     
     private let searchBar = {
         let bar = UISearchBar()
@@ -26,6 +38,8 @@ final class SearchViewController: UIViewController {
         view.rowHeight = 120
         view.backgroundColor = .black
         view.separatorStyle = .singleLine
+        view.showsVerticalScrollIndicator = true
+        view.scrollsToTop = true
         view.separatorColor = .gray2
         return view
     }()
@@ -74,16 +88,28 @@ final class SearchViewController: UIViewController {
         searchBar.becomeFirstResponder()
     }
     
-    private func searchMovies() {
-        // TODO: - fetch search result
-        guard let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        UserStatusManager.addSearchTerms(keyword: text)
-        if movieList.count <= 0 {
-            noResultLabel.isHidden = false
-        } else {
-            noResultLabel.isHidden = true
+    private func searchMoviesBySearchButton(text: String) {
+        MovieNetworkClient.request(SearchResponse.self, router: .search(query: text, page: 1)) {
+            self.movieList = $0.results
+            self.page = $0.page
+            self.totalPages = $0.totalPages
+            if !self.movieList.isEmpty {
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+            }
+        } failure: { error in
+            print(error)
         }
+        UserStatusManager.addSearchTerms(keyword: text)
         view.endEditing(true)
+    }
+    
+    private func searchMoreMovies() {
+        page += 1
+        MovieNetworkClient.request(SearchResponse.self, router: .search(query: lastUserInput, page: page)) {
+            self.movieList.append(contentsOf: $0.results)
+        } failure: { error in
+            print(error)
+        }
     }
     
     
@@ -97,9 +123,19 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = movieList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
-        cell.configureView()
+        cell.configureCell(image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y >= (CGFloat(movieList.count) * 90.0) * (3.0 / 5.0) {
+            if 1...totalPages ~= page{
+                print(scrollView.contentOffset.y, (CGFloat(movieList.count) * 90.0) * (3.0 / 5.0))
+                searchMoreMovies()
+            }
+        }
     }
     
     
@@ -109,7 +145,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchMovies()
+        guard let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+              lastUserInput != text else { return }
+        lastUserInput = text
+        searchMoviesBySearchButton(text: text)
     }
     
     

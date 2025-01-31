@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
 final class SearchTableViewCell: BaseTableViewCell {
@@ -95,6 +96,14 @@ final class SearchTableViewCell: BaseTableViewCell {
         titleLabel.text = "기생충기생충기생충기생충기생충기생충기생충기생충기생충"
         dateLabel.text = "8888. 88. 88"
         tagLabel.text = " 애니메이션 "
+    }
+    
+    func configureCell(image: String?, title: String, date: String, tag: [Int]) {
+        titleLabel.text = title
+        dateLabel.text = date
+        tagLabel.text = "\(tag)"
+        guard let image else { return }
+        posterImageView.kf.setImage(with: URL(string: SecretManager.imageURL + image))
     }
 
     
