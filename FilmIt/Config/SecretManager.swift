@@ -21,5 +21,8 @@ enum SecretManager {
         Bundle.main.object(forInfoDictionaryKey: "IMAGE_URL") as? String ?? ""
     }
     
+    static var bigImageURL: String {
+        Bundle.main.object(forInfoDictionaryKey: "BIG_IMAGE_URL") as? String ?? ""
+    }
     
 }

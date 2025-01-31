@@ -54,7 +54,7 @@ final class MovieDetailView: BaseView {
             $0.top.equalTo(synopsisView.snp.bottom)
             $0.horizontalEdges.equalTo(contentView)
         }
-
+        
         posterView.snp.makeConstraints {
             $0.top.equalTo(castView.snp.bottom)
             $0.bottom.equalTo(contentView)
@@ -62,11 +62,5 @@ final class MovieDetailView: BaseView {
         }
     }
     
-    override func configureView() {
-        
-    }
-    
     
 }
-
-

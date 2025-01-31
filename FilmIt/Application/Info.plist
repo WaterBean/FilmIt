@@ -8,6 +8,8 @@
 	<string>$(BASE_URL)</string>
 	<key>IMAGE_URL</key>
 	<string>$(IMAGE_URL)</string>
+	<key>BIG_IMAGE_URL</key>
+	<string>$(BIG_IMAGE_URL)</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -21,7 +21,8 @@ final class CastView: BaseView {
         let layout = UICollectionViewFlowLayout()
         let inset = 16.0
         layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 16
         layout.scrollDirection = .horizontal
         return layout
     }())

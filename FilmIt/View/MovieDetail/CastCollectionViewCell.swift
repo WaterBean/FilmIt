@@ -21,12 +21,15 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     private let actorNameLabel = {
         let label = UILabel()
         label.text = "현빈"
+        label.font = .largeTitle
         return label
     }()
     
     private let characterNameLabel = {
         let label = UILabel()
         label.text = "Ahn Jung-geun"
+        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .gray2
         return label
     }()
     
@@ -43,20 +46,22 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
         }
         
         actorNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(castImageView.snp.trailing).offset(4)
+            $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
-            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(12)
         }
         characterNameLabel.snp.makeConstraints {
-            $0.leading.equalTo(castImageView.snp.trailing).offset(4)
+            $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
-            $0.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-8)
+            $0.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-12)
         }
     }
     
     override func configureView() {
-        castImageView.image = .profile0
-        castImageView.layer.cornerRadius = 36
+        castImageView.image = UIImage(systemName: "profile.circle")?.withTintColor(.white)
+        DispatchQueue.main.async {
+            self.castImageView.layer.cornerRadius = self.castImageView.frame.width / 2
+        }
     }
     
     

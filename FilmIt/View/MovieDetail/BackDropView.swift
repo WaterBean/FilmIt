@@ -9,13 +9,16 @@ import UIKit
 import SnapKit
 
 final class BackDropView: BaseView {
+    typealias SFConfig = UIImage.SymbolConfiguration
     
     let pageControl = {
         let control = UIPageControl()
-        control.numberOfPages = 5
-        control.currentPage = 1
+        control.currentPage = 0
+        control.hidesForSinglePage = true
         control.pageIndicatorTintColor = .gray2
-        control.currentPageIndicatorTintColor = .white
+        control.backgroundColor = .darkGray
+        control.layer.cornerRadius = 12
+        control.clipsToBounds = true
         return control
     }()
     
@@ -27,19 +30,69 @@ final class BackDropView: BaseView {
         return layout
     }())
     
-    private let infoLabel = {
+    private let stackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.alignment = .center
+        view.spacing = 4
+        return view
+    }()
+    
+    private let dateImageView = {
+        let view = UIImageView()
+        view.image = UIImage(
+            systemName: "calendar",
+            withConfiguration: SFConfig.preferringMonochrome()
+                .applying(SFConfig(pointSize: 12, weight: .medium))
+        )
+        return view
+    }()
+    
+    private let voteAverageImageView = {
+        let view = UIImageView()
+        view.image = UIImage(
+            systemName: "star.fill",
+            withConfiguration: SFConfig.preferringMonochrome()
+                .applying(SFConfig(pointSize: 12, weight: .medium))
+        )
+        return view
+    }()
+    
+    private let genreIdsImageView = {
+        let view = UIImageView()
+        view.image = UIImage(
+            systemName: "film.fill",
+            withConfiguration: SFConfig.preferringMonochrome()
+                .applying(SFConfig(pointSize: 12, weight: .medium))
+        )
+        return view
+    }()
+    
+    private let dateLabel = {
         let label = UILabel()
-        label.numberOfLines = 1
-        label.textColor = .gray1
-        label.text = "2024-12-24 어쩌구 저저구 뭐시기 맞습니다 네네"
-        label.textAlignment = .center
+        label.text = "2024-12-23"
+        return label
+    }()
+    
+    private let voteAverageLabel = {
+        let label = UILabel()
+        label.text = "0.0"
+        return label
+    }()
+    
+    private let genreIdsLabel = {
+        let label = UILabel()
+        label.text = " 없음 "
         return label
     }()
     
     
     override func configureHierarchy() {
-        [collectionView, pageControl, infoLabel].forEach {
+        [collectionView, pageControl, stackView].forEach {
             addSubview($0)
+        }
+        [dateImageView, dateLabel, voteAverageImageView, voteAverageLabel, genreIdsImageView, genreIdsLabel].forEach {
+            stackView.addArrangedSubview($0)
         }
     }
     
@@ -51,14 +104,13 @@ final class BackDropView: BaseView {
         
         pageControl.snp.makeConstraints {
             $0.centerX.equalTo(safeAreaLayoutGuide)
-            $0.bottom.equalTo(collectionView.snp.bottom)
-            $0.height.equalTo(40)
+            $0.bottom.equalTo(collectionView.snp.bottom).inset(10)
         }
         
-        infoLabel.snp.makeConstraints {
-            $0.top.equalTo(collectionView.snp.bottom).offset(8)
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(16)
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(collectionView.snp.bottom).offset(16)
+            $0.centerX.equalTo(safeAreaLayoutGuide)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(8)
         }
     }
     
@@ -68,13 +120,24 @@ final class BackDropView: BaseView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isPagingEnabled = true
         collectionView.backgroundColor = .black
+        [dateLabel, voteAverageLabel, genreIdsLabel].forEach {
+            $0.numberOfLines = 1
+            $0.textColor = .gray2
+            $0.font = UIFont.systemFont(ofSize: 12, weight: .light)
+            $0.textAlignment = .center
+        }
+        [dateImageView, voteAverageImageView, genreIdsImageView].forEach {
+            $0.tintColor = .gray2
+        }
     }
     
-    func updateView(releaseDate: String?, voteAverage: Double? ,genreIds: [Int]?) {
+    func updateView(releaseDate: String?, voteAverage: Double?, genreIds: [Int]?) {
         let date = releaseDate != nil ? releaseDate! : "2024-01-01"
-        let average = voteAverage != nil ? "\(voteAverage!)" : "0.0"
-        let ids = genreIds != nil ? genreIds! : []
-        infoLabel.text = "\(date) \(average) \(ids)"
+        let average = voteAverage != nil ? "\(String(format: "%.2f", voteAverage!))" : "0.0"
+        let ids = MovieGenre.getGenreNames(genreIds ?? [])
+        dateLabel.text = "\(date)   |    "
+        voteAverageLabel.text = "\(average)   |    "
+        genreIdsLabel.text = ids.isEmpty ? "장르 정보 없음" : ids.joined(separator: ", ")
     }
     
     

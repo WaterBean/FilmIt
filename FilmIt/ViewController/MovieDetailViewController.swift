@@ -34,6 +34,8 @@ final class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barStyle = .black
+        tabBarController?.tabBar.barStyle = .black
         backdropCollectionView.register(BackDropImageCollectionViewCell.self, forCellWithReuseIdentifier: BackDropImageCollectionViewCell.identifier)
         castCollectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)
         posterCollectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
@@ -42,7 +44,8 @@ final class MovieDetailViewController: UIViewController {
             $0.dataSource = self
             $0.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
         }
-        
+        mainView.synopsisView.foldingButton.addTarget(self, action: #selector(toggleSynopsisStatus), for: .touchUpInside)
+        mainView.backDropView.pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
         guard let movie else { return }
         navigationItem.title = movie.title
         MovieNetworkClient.request(ImageResponse.self, router: .image(id: movie.id)) {
@@ -59,6 +62,16 @@ final class MovieDetailViewController: UIViewController {
         mainView.backDropView.updateView(releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, genreIds: movie.genreIds)
     }
     
+    @objc func pageControlValueChanged(_ sender: UIPageControl) {
+        self.backdropCollectionView.scrollToItem(at: IndexPath(item: sender.currentPage, section: 0),at: .centeredHorizontally, animated: true)
+
+    }
+    
+    @objc func toggleSynopsisStatus() {
+        mainView.synopsisView.foldingButton.isSelected.toggle()
+        mainView.synopsisView.updateView(string: movie?.overview)
+    }
+    
     
 }
 
@@ -67,7 +80,21 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == backdropCollectionView {
-            return image?.backdrops.count ?? 0
+            guard let count = image?.backdrops.count else {
+                mainView.backDropView.pageControl.numberOfPages = 0
+                return 0
+            }
+            mainView.backDropView.pageControl.isHidden = (count < 2)
+            if count >= 5 {
+                mainView.backDropView.pageControl.numberOfPages = 5
+                return 5
+            } else if 1...5 ~= count {
+                mainView.backDropView.pageControl.numberOfPages = count
+                return count
+            } else {
+                mainView.backDropView.pageControl.numberOfPages = 1
+                return 1
+            }
         } else if collectionView == castCollectionView {
             return credit?.cast.count ?? 0
         } else if collectionView == posterCollectionView {
@@ -111,6 +138,14 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         } else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        mainView.backDropView.pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        mainView.backDropView.pageControl.currentPage = Int(scrollView.contentOffset.x) / Int(scrollView.frame.width)
     }
     
     

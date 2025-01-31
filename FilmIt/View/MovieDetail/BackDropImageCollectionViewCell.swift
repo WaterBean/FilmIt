@@ -29,7 +29,7 @@ final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
     }
 
     func configureCell(image: String) {
-        backDropImageView.kf.setImage(with: URL(string: image.toImageURL()))
+        backDropImageView.kf.setImage(with: URL(string: image.toBigImageURL()))
     }
     
     

@@ -92,7 +92,8 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let item = trendingMovieList[indexPath.item]
         let vc = MovieDetailViewController()
         vc.movie = item
-        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: vc, action: nil)
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }
 
     

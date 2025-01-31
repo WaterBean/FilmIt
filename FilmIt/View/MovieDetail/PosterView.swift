@@ -21,6 +21,7 @@ final class PosterView: BaseView {
         let layout = UICollectionViewFlowLayout()
         let inset = 16.0
         layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        layout.minimumLineSpacing = 16
         layout.scrollDirection = .horizontal
         return layout
     }())

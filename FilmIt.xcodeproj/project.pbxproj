@@ -55,6 +55,7 @@
 		55C87A272D4C96F600CD4927 /* CreditResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C87A262D4C96F600CD4927 /* CreditResponse.swift */; };
 		55C87A292D4C97F500CD4927 /* ImageResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C87A282D4C97F500CD4927 /* ImageResponse.swift */; };
 		55C87A2B2D4C9CCE00CD4927 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C87A2A2D4C9CCE00CD4927 /* String+Extension.swift */; };
+		55C87A2F2D4D0F9500CD4927 /* MovieGenre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C87A2E2D4D0F9500CD4927 /* MovieGenre.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
 		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
@@ -111,6 +112,7 @@
 		55C87A262D4C96F600CD4927 /* CreditResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditResponse.swift; sourceTree = "<group>"; };
 		55C87A282D4C97F500CD4927 /* ImageResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResponse.swift; sourceTree = "<group>"; };
 		55C87A2A2D4C9CCE00CD4927 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Extension.swift"; path = "FilmIt/Util/String+Extension.swift"; sourceTree = SOURCE_ROOT; };
+		55C87A2E2D4D0F9500CD4927 /* MovieGenre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieGenre.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				5541015F2D4539BE00DCA584 /* UIFont+Extension.swift */,
 				55C879072D48E45200CD4927 /* UIViewController+Extension.swift */,
 				55C87A2A2D4C9CCE00CD4927 /* String+Extension.swift */,
+				55C87A2E2D4D0F9500CD4927 /* MovieGenre.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				55C87A292D4C97F500CD4927 /* ImageResponse.swift in Sources */,
 				554101602D4539BE00DCA584 /* UIFont+Extension.swift in Sources */,
 				554101232D447A3400DCA584 /* OnboardingView.swift in Sources */,
+				55C87A2F2D4D0F9500CD4927 /* MovieGenre.swift in Sources */,
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
 				554101272D44875400DCA584 /* ProfileNicknameSettingViewController.swift in Sources */,
 				554101722D466D8900DCA584 /* SearchTableViewCell.swift in Sources */,

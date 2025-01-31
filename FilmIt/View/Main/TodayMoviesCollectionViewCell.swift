@@ -48,7 +48,7 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom)
+            $0.top.equalTo(posterImageView.snp.bottom).offset(12)
             $0.leading.equalTo(safeAreaLayoutGuide)
             $0.trailing.lessThanOrEqualTo(likeButton.snp.leading)
             $0.bottom.equalTo(descriptionLabel.snp.top)
@@ -56,9 +56,8 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         }
         
         likeButton.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.top)
             $0.trailing.equalTo(safeAreaLayoutGuide)
-            $0.bottom.equalTo(descriptionLabel.snp.top)
+            $0.bottom.equalTo(descriptionLabel.snp.top).offset(10)
             $0.size.equalTo(44)
         }
         
