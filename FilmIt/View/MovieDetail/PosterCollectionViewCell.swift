@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
 final class PosterCollectionViewCell: BaseCollectionViewCell {
@@ -30,6 +31,10 @@ final class PosterCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         posterImageView.image = .profile0
+    }
+    
+    func configureCell(image: String) {
+        posterImageView.kf.setImage(with: URL(string: image.toImageURL()))
     }
 
 

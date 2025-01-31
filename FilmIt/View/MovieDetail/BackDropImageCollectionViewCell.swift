@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
 final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
@@ -25,6 +26,10 @@ final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
     
     override func configureView() {
         backDropImageView.image = .profile0
+    }
+
+    func configureCell(image: String) {
+        backDropImageView.kf.setImage(with: URL(string: image.toImageURL()))
     }
     
     

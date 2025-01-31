@@ -10,6 +10,19 @@ import SnapKit
 
 final class MovieDetailViewController: UIViewController {
     
+    var movie: Movie?
+    var image: ImageResponse? {
+        didSet {
+            backdropCollectionView.reloadData()
+            posterCollectionView.reloadData()
+        }
+    }
+    var credit: CreditResponse? {
+        didSet {
+            castCollectionView.reloadData()
+        }
+    }
+    
     let mainView = MovieDetailView()
     private lazy var backdropCollectionView = mainView.backDropView.collectionView
     private lazy var castCollectionView = mainView.castView.collectionView
@@ -21,15 +34,29 @@ final class MovieDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        backdropCollectionView.delegate = self
-        backdropCollectionView.dataSource = self
         backdropCollectionView.register(BackDropImageCollectionViewCell.self, forCellWithReuseIdentifier: BackDropImageCollectionViewCell.identifier)
-        castCollectionView.delegate = self
-        castCollectionView.dataSource = self
         castCollectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)
-        posterCollectionView.delegate = self
-        posterCollectionView.dataSource = self
         posterCollectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
+        [backdropCollectionView, castCollectionView, posterCollectionView].forEach {
+            $0.delegate = self
+            $0.dataSource = self
+            $0.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "UICollectionViewCell")
+        }
+        
+        guard let movie else { return }
+        navigationItem.title = movie.title
+        MovieNetworkClient.request(ImageResponse.self, router: .image(id: movie.id)) {
+            self.image = $0
+        } failure: { error in
+            print(error)
+        }
+        MovieNetworkClient.request(CreditResponse.self, router: .credit(id: movie.id)) {
+            self.credit = $0
+        } failure: { error in
+            print(error)
+        }
+        mainView.synopsisView.updateView(string: movie.overview)
+        mainView.backDropView.updateView(releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, genreIds: movie.genreIds)
     }
     
     
@@ -40,33 +67,36 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == backdropCollectionView {
-            return 4
+            return image?.backdrops.count ?? 0
         } else if collectionView == castCollectionView {
-            return 100
+            return credit?.cast.count ?? 0
         } else if collectionView == posterCollectionView {
-            return 6
+            return image?.posters.count ?? 0
         } else {
             return 0
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == backdropCollectionView,
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackDropImageCollectionViewCell.identifier, for: indexPath) as? BackDropImageCollectionViewCell {
-            cell.configureView()
+        if collectionView == mainView.backDropView.collectionView,
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackDropImageCollectionViewCell.identifier, for: indexPath) as? BackDropImageCollectionViewCell,
+           let item = image?.backdrops[indexPath.item].filePath {
+            cell.configureCell(image: item)
             return cell
-        } else if collectionView == castCollectionView,
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as? CastCollectionViewCell {
-            cell.configureView()
+        } else if collectionView == mainView.castView.collectionView,
+                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as? CastCollectionViewCell,
+                  let item = credit?.cast[indexPath.item] {
+            cell.configureCell(image: item.profilePath, actorName: item.name, characterName: item.character)
             return cell
-        } else if collectionView == posterCollectionView,
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as? PosterCollectionViewCell {
-            cell.configureView()
+        } else if collectionView == mainView.posterView.collectionView,
+                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as? PosterCollectionViewCell,
+                  let item = image?.posters[indexPath.item].filePath {
+            cell.configureCell(image: item)
             return cell
         } else {
-            return BaseCollectionViewCell()
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "UICollectionViewCell", for: indexPath)
+            return cell
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

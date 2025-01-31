@@ -62,5 +62,9 @@ final class SynopsisView: BaseView {
         }
     }
     
+    func updateView(string: String?) {
+        textView.text = string
+    }
+    
     
 }

@@ -30,11 +30,11 @@ final class MainViewController: UIViewController {
         mainView.collectionView.dataSource = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
-//        MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
-//            self.trendingMovieList = $0.results
-//        } failure: { error in
-//            print(error)
-//        }
+        MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
+            self.trendingMovieList = $0.results
+        } failure: { error in
+            print(error)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -89,7 +89,10 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        pushNavigationWithBarButtonItem(vc: MovieDetailViewController(), rightBarButtonItem: nil)
+        let item = trendingMovieList[indexPath.item]
+        let vc = MovieDetailViewController()
+        vc.movie = item
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
     }
 
     

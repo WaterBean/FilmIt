@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 import SnapKit
 
 final class CastCollectionViewCell: BaseCollectionViewCell {
@@ -57,6 +58,14 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
         castImageView.image = .profile0
         castImageView.layer.cornerRadius = 36
     }
-
-
+    
+    
+    func configureCell(image: String?, actorName: String, characterName: String) {
+        actorNameLabel.text = actorName
+        characterNameLabel.text = characterName
+        guard let image else { return }
+        castImageView.kf.setImage(with: URL(string: image.toImageURL()))
+    }
+    
+    
 }

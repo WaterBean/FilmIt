@@ -70,5 +70,12 @@ final class BackDropView: BaseView {
         collectionView.backgroundColor = .black
     }
     
+    func updateView(releaseDate: String?, voteAverage: Double? ,genreIds: [Int]?) {
+        let date = releaseDate != nil ? releaseDate! : "2024-01-01"
+        let average = voteAverage != nil ? "\(voteAverage!)" : "0.0"
+        let ids = genreIds != nil ? genreIds! : []
+        infoLabel.text = "\(date) \(average) \(ids)"
+    }
+    
     
 }
