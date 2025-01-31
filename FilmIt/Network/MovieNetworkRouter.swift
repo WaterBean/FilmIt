@@ -12,8 +12,8 @@ enum MovieNetworkRouter: URLRequestConvertible {
     
     case trending
     case search(query: String, page: Int)
-    case image(id: String)
-    case credit(id: String)
+    case image(id: Int)
+    case credit(id: Int)
     
     var baseURL: URL {
         URL(string: SecretManager.baseURL)!

@@ -10,13 +10,15 @@ import Foundation
 struct ImageResponse: Codable {
     
     let id: Int
-    let backdrops: FilePath
-    let posters: FilePath
+    let backdrops: [FilePath]
+    let posters: [FilePath]
+    
+    
 }
 
 struct FilePath: Codable {
     
-    let filePath: String
+    let filePath: String?
     
     enum CodingKeys: String, CodingKey {
         case filePath = "file_path"
