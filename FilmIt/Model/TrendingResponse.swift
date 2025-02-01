@@ -23,6 +23,7 @@ struct Movie: Codable {
     var isLike : Bool {
         UserStatusManager.likeMovies.contains(id)
     }
+    
     enum CodingKeys: String, CodingKey {
         case id, title, overview
         case backdropPath = "backdrop_path"
@@ -31,5 +32,6 @@ struct Movie: Codable {
         case releaseDate = "release_date"
         case voteAverage = "vote_average"
     }
+    
     
 }

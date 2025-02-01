@@ -8,15 +8,11 @@
 import Foundation
 
 struct CreditResponse: Codable {
-    
     let id: Int
     let cast: [Cast]
-    
-    
 }
 
 struct Cast: Codable {
-    
     let name: String
     let character: String
     let profilePath: String?

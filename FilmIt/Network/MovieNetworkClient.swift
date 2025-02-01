@@ -18,9 +18,6 @@ final class MovieNetworkClient {
         
         AF.request(router)
             .validate(statusCode: 200..<300)
-//            .responseString(completionHandler: {
-//                print($0)
-//            })
             .responseDecodable(of: decodable) { response in
                 switch response.result {
                 case .success(let result):

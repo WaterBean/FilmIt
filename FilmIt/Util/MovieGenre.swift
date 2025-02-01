@@ -8,6 +8,8 @@
 import Foundation
 
 enum MovieGenre: Int, CaseIterable {
+    
+    
     case action = 28
     case animation = 16
     case crime = 80

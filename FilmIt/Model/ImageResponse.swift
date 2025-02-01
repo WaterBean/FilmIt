@@ -8,16 +8,12 @@
 import Foundation
 
 struct ImageResponse: Codable {
-    
     let id: Int
     let backdrops: [FilePath]
     let posters: [FilePath]
-    
-    
 }
 
 struct FilePath: Codable {
-    
     let filePath: String?
     
     enum CodingKeys: String, CodingKey {
