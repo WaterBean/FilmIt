@@ -69,7 +69,7 @@ final class BackDropView: BaseView {
     
     private let dateLabel = {
         let label = UILabel()
-        label.text = "2024-12-23"
+        label.text = "2025-01-01"
         return label
     }()
     
@@ -129,7 +129,7 @@ final class BackDropView: BaseView {
     }
     
     func updateView(releaseDate: String?, voteAverage: Double?, genreIds: [Int]?) {
-        let date = releaseDate != nil ? releaseDate! : "2024-01-01"
+        let date = releaseDate ?? "2025-01-01"
         let average = voteAverage != nil ? "\(String(format: "%.2f", voteAverage!))" : "0.0"
         let ids = MovieGenre.getGenreNames(genreIds ?? [])
         dateLabel.text = "\(date)   |    "

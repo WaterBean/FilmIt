@@ -65,6 +65,7 @@ final class SearchTableViewCell: BaseTableViewCell {
     private let likeButton = LikeButton()
     
     override func prepareForReuse() {
+        titleLabel.textColor = .white
         posterImageView.image = UIImage(
             systemName: "photo.artframe",
             withConfiguration: SFConfig.preferringMonochrome()
@@ -123,9 +124,18 @@ final class SearchTableViewCell: BaseTableViewCell {
         selectionStyle = .none
     }
     
-    func configureCell(id: Int, image: String?, title: String, date: String, tag: [Int]) {
+    func configureCell(keyword: String, id: Int, image: String?, title: String, date: String, tag: [Int]) {
         likeButton.id = id
         titleLabel.text = title
+        var attributedString: NSMutableAttributedString = title.toAttribute(keyword)
+        attributedString = attributedString.toAttribute(keyword.uppercased())
+        attributedString = attributedString.toAttribute(keyword.lowercased())
+        keyword.forEach {
+            attributedString = attributedString.toAttribute(String($0))
+            attributedString = attributedString.toAttribute(String($0).uppercased())
+            attributedString = attributedString.toAttribute(String($0).lowercased())
+        }
+        titleLabel.attributedText = attributedString
         dateLabel.text = DateFormatterManager.shared.yyyyMMdd(date)
         let genre = MovieGenre.getGenreNames(tag)
         if let second = genre[safe: 1], let first = genre[safe: 0] {

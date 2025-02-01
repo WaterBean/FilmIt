@@ -140,7 +140,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = movieList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
-        cell.configureCell(id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
+        cell.configureCell(keyword: lastUserInput, id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
         return cell
     }
     
