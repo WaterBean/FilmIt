@@ -68,7 +68,8 @@ final class SearchViewController: UIViewController {
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(searchBar.snp.bottom)
-            $0.bottom.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.leading.equalTo(view.safeAreaLayoutGuide)
+            $0.trailing.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
         
         noResultLabel.snp.makeConstraints {

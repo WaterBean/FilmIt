@@ -42,10 +42,19 @@ final class SearchTableViewCell: BaseTableViewCell {
         return label
     }()
     
+    private let tagLabel2 = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12)
+        label.backgroundColor = .gray2
+        label.layer.cornerRadius = 4
+        label.clipsToBounds = true
+        return label
+    }()
+    
     private let stackView = {
         let view = UIStackView()
         view.axis = .horizontal
-        view.spacing = 16
+        view.spacing = 4
         return view
     }()
     
@@ -56,7 +65,9 @@ final class SearchTableViewCell: BaseTableViewCell {
             contentView.addSubview($0)
         }
         
-        stackView.addArrangedSubview(tagLabel)
+        [tagLabel, tagLabel2].forEach {
+            stackView.addArrangedSubview($0)
+        }
     }
     
     override func configureLayout() {
@@ -80,11 +91,12 @@ final class SearchTableViewCell: BaseTableViewCell {
         
         stackView.snp.makeConstraints {
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
+            $0.height.equalTo(20)
             $0.bottom.equalTo(posterImageView.snp.bottom)
         }
         
         likeButton.snp.makeConstraints {
-            $0.trailing.equalTo(safeAreaLayoutGuide)
+            $0.trailing.equalTo(safeAreaLayoutGuide).offset(10)
             $0.bottom.equalTo(safeAreaLayoutGuide)
             $0.size.equalTo(44)
         }
@@ -95,15 +107,26 @@ final class SearchTableViewCell: BaseTableViewCell {
         posterImageView.image = .profile10
         titleLabel.text = "기생충"
         dateLabel.text = "8888. 88. 88"
-        tagLabel.text = " 애니메이션 "
+        tagLabel.text = " 장르 정보 없음 "
+        tagLabel2.text = " "
         selectionStyle = .none
     }
     
     func configureCell(id: Int, image: String?, title: String, date: String, tag: [Int]) {
         likeButton.id = id
         titleLabel.text = title
-        dateLabel.text = date
-        tagLabel.text = "\(tag)"
+        dateLabel.text = DateFormatterManager.shared.yyyyMMdd(date)
+        let genre = MovieGenre.getGenreNames(tag)
+        if let second = genre[safe: 1], let first = genre[safe: 0] {
+            tagLabel.text = " \(first) "
+            tagLabel2.text = " \(second) "
+        } else if let first = genre[safe: 0] {
+            tagLabel.text = " \(first) "
+            tagLabel2.text = ""
+        } else {
+            tagLabel.text = " 장르 정보 없음 "
+            tagLabel2.text = ""
+        }
         guard let image else { return }
         posterImageView.kf.setImage(with: URL(string: SecretManager.imageURL + image))
     }

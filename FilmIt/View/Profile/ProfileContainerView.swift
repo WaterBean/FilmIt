@@ -95,7 +95,7 @@ final class ProfileContainerView: BaseView {
     override func configureView() {
         profileButton.configurePointBorder()
         if case .login(let date) = UserStatusManager.status {
-            joinDateLabel.text = DateFormatterManager.shared.yyMMDD(date) + " 가입"
+            joinDateLabel.text = DateFormatterManager.shared.yyMMdd(date) + " 가입"
         }
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: .userStatus , object: nil)
     }
