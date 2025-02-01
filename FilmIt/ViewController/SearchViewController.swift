@@ -12,12 +12,7 @@ final class SearchViewController: UIViewController {
     
     var movieList = [Movie]() {
         didSet {
-            if movieList.count > 1 {
-                tableView.reloadData()
-                noResultLabel.isHidden = true
-            } else {
-                noResultLabel.isHidden = false
-            }
+            tableView.reloadData()
         }
     }
     var page = 1
@@ -46,10 +41,9 @@ final class SearchViewController: UIViewController {
     
     private let noResultLabel = {
         let label = UILabel()
-        label.text = "원하는 검색결과를 찾지 못했습니다."
+        label.text = " "
         label.font = .systemFont(ofSize: 12, weight: .medium)
         label.textColor = .gray2
-        label.isHidden = true
         return label
     }()
     
@@ -89,17 +83,23 @@ final class SearchViewController: UIViewController {
     }
     
     private func searchMoviesBySearchButton(text: String) {
+        movieList = []
+        page = 1
         MovieNetworkClient.request(SearchResponse.self, router: .search(query: text, page: 1)) {
             self.movieList = $0.results
             self.page = $0.page
             self.totalPages = $0.totalPages
-            if !self.movieList.isEmpty {
+            if self.movieList.count > 0 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.noResultLabel.text = " "
+            } else {
+                self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
             }
+
         } failure: { error in
             print(error)
         }
-        UserStatusManager.addSearchTerms(keyword: text)
+        UserStatusManager.addSearchTerm(keyword: text)
         view.endEditing(true)
     }
     
@@ -125,8 +125,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = movieList[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
-        cell.configureCell(image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
+        cell.configureCell(id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = movieList[indexPath.row]
+        let vc = MovieDetailViewController()
+        vc.movie = row
+        let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: row.id))
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

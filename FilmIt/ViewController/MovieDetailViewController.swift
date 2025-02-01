@@ -105,10 +105,11 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == mainView.backDropView.collectionView,
-           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackDropImageCollectionViewCell.identifier, for: indexPath) as? BackDropImageCollectionViewCell,
-           let item = image?.backdrops[indexPath.item].filePath {
-            cell.configureCell(image: item)
+        if collectionView == mainView.backDropView.collectionView {
+           let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackDropImageCollectionViewCell.identifier, for: indexPath) as! BackDropImageCollectionViewCell
+            if let item = image?.backdrops[safe: indexPath.item]?.filePath {
+                cell.configureCell(image: item)
+            }
             return cell
         } else if collectionView == mainView.castView.collectionView,
                   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as? CastCollectionViewCell,

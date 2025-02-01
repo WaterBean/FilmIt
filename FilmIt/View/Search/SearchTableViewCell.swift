@@ -49,7 +49,7 @@ final class SearchTableViewCell: BaseTableViewCell {
         return view
     }()
     
-    private let likeButton = LikeButton(isFilled: false)
+    private let likeButton = LikeButton()
     
     override func configureHierarchy() {
         [posterImageView, titleLabel, dateLabel, stackView, likeButton].forEach {
@@ -93,12 +93,14 @@ final class SearchTableViewCell: BaseTableViewCell {
     override func configureView() {
         contentView.backgroundColor = .black
         posterImageView.image = .profile10
-        titleLabel.text = "기생충기생충기생충기생충기생충기생충기생충기생충기생충"
+        titleLabel.text = "기생충"
         dateLabel.text = "8888. 88. 88"
         tagLabel.text = " 애니메이션 "
+        selectionStyle = .none
     }
     
-    func configureCell(image: String?, title: String, date: String, tag: [Int]) {
+    func configureCell(id: Int, image: String?, title: String, date: String, tag: [Int]) {
+        likeButton.id = id
         titleLabel.text = title
         dateLabel.text = date
         tagLabel.text = "\(tag)"

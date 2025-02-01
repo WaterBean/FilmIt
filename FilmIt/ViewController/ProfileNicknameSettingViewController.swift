@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileNicknameSettingViewController: UIViewController {
     
-    private let mainView = ProfileNicknameSettingView(isLogin: UserStatusManager.status == .login)
+    private let mainView = ProfileNicknameSettingView(isLogin: UserStatusManager.status != .logout)
     private var isValid = false
     private var profileImageName = UserStatusManager.profile
     
@@ -92,7 +92,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
 
     private func saveUserData() {
         guard isValid, let nickname = mainView.nicknameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) else { return }
-        UserStatusManager.status = .login
+        UserStatusManager.status = .login(date: Date.now)
         UserStatusManager.nickname = nickname
         UserStatusManager.profile = profileImageName
     }

@@ -57,4 +57,5 @@ enum MovieGenre: Int, CaseIterable {
         return Array(genreArray.prefix(2))
     }
     
+
 }

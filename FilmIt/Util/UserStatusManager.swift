@@ -10,10 +10,10 @@ import UIKit
 
 final class UserStatusManager {
     
-    private init () { }
+    private init() { }
     
-    enum UserStatus: Codable {
-        case login
+    enum UserStatus: Codable, Comparable {
+        case login(date: Date)
         case logout
         
         func replaceScene() -> Void {
@@ -28,68 +28,126 @@ final class UserStatusManager {
         }
     }
     
+    private enum UserDefaultsKey {
+        static let status = "userStatus"
+        static let profile = "profile"
+        static let nickname = "nickname"
+        static let likeMovies = "likeMovies"
+        static let searchTerms = "searchTerms"
+    }
+    
     static var status: UserStatus {
         get {
-            guard let statusData = UserDefaults.standard.data(forKey: "userStatus"),
-                  let status = try? JSONDecoder().decode(UserStatus.self, from: statusData) else { return .logout }
+            guard let statusData = UserDefaults.standard.data(forKey: UserDefaultsKey.status),
+                  let status = try? JSONDecoder().decode(UserStatus.self, from: statusData) else {
+                return .logout
+            }
             return status
         }
         set {
             if let data = try? JSONEncoder().encode(newValue) {
-                UserDefaults.standard.set(data, forKey: "userStatus")
+                UserDefaults.standard.set(data, forKey: UserDefaultsKey.status)
             }
             if newValue == .logout {
-                profile = ""
-                nickname = ""
-                removeAllSearchTerms()
+                clearUserData()
             }
         }
     }
     
     static var profile: String {
         get {
-            UserDefaults.standard.string(forKey: "profile") ?? ""
+            UserDefaults.standard.string(forKey: UserDefaultsKey.profile) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "profile")
-            NotificationCenter.default.post(name: NSNotification.Name("userStatus"), object: nil, userInfo: ["profile": newValue, "nickname": nickname])
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.profile)
+            notifyStatusChange()
         }
     }
     
     static var nickname: String {
         get {
-            UserDefaults.standard.string(forKey: "nickname") ?? ""
+            UserDefaults.standard.string(forKey: UserDefaultsKey.nickname) ?? ""
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "nickname")
-            NotificationCenter.default.post(name: NSNotification.Name("userStatus"), object: nil, userInfo: ["profile": profile, "nickname": newValue])
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.nickname)
+            notifyStatusChange()
         }
+    }
+    
+    private(set) static var likeMovies: Set<Int> {
+        get {
+            guard let movies = UserDefaults.standard.array(forKey: UserDefaultsKey.likeMovies) as? [Int] else {
+                return Set<Int>()
+            }
+            return Set(movies)
+        }
+        set {
+            UserDefaults.standard.set(Array(newValue), forKey: UserDefaultsKey.likeMovies)
+            notifyStatusChange()
+        }
+    }
+    
+    static func addLike(movieId: Int) {
+        var movies = likeMovies
+        movies.insert(movieId)
+        likeMovies = movies
+        print(likeMovies)
+    }
+    
+    static func removeLike(movieId: Int) {
+        var movies = likeMovies
+        movies.remove(movieId)
+        likeMovies = movies
+        print(likeMovies)
+    }
+    
+    static func removeAllLikes() {
+        likeMovies = Set<Int>()
+    }
+    
+    static func isLiked(movieId: Int) -> Bool {
+        likeMovies.contains(movieId)
     }
     
     private(set) static var searchTerms: [String: Date] {
         get {
-            guard let terms = (UserDefaults.standard.dictionary(forKey: "searchTerms") ?? [:]) as? [String: Date] else { return [:] }
-            return terms
+            UserDefaults.standard.dictionary(forKey: UserDefaultsKey.searchTerms) as? [String: Date] ?? [:]
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "searchTerms")
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.searchTerms)
         }
     }
     
-    static func addSearchTerms(keyword: String) {
-        var terms = Self.searchTerms
-        terms.updateValue(Date.now, forKey: keyword)
-        Self.searchTerms = terms
+    static func addSearchTerm(keyword: String) {
+        var terms = searchTerms
+        terms[keyword] = Date.now
+        searchTerms = terms
     }
     
-    static func removeSearchTerms(keyword: String) {
-        var terms = Self.searchTerms
+    static func removeSearchTerm(keyword: String) {
+        var terms = searchTerms
         terms.removeValue(forKey: keyword)
-        Self.searchTerms = terms
+        searchTerms = terms
     }
- 
+
     static func removeAllSearchTerms() {
-        Self.searchTerms = [:]
+        searchTerms = [:]
+    }
+    
+    private static func notifyStatusChange() {
+        NotificationCenter.default.post(name: .userStatus, object: nil, userInfo: [
+            "profile": profile,
+            "nickname": nickname,
+            "likeCount": likeMovies.count
+        ]
+        )
+    }
+    
+    private static func clearUserData() {
+        profile = ""
+        nickname = ""
+        removeAllLikes()
+        removeAllSearchTerms()
     }
     
     

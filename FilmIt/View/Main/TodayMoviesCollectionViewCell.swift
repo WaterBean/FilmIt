@@ -33,7 +33,7 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private let likeButton = LikeButton(isFilled: false)
+    private let likeButton = LikeButton()
     
     override func configureHierarchy() {
         [posterImageView, titleLabel, descriptionLabel, likeButton].forEach {
@@ -44,11 +44,10 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
     override func configureLayout() {
         posterImageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalTo(safeAreaLayoutGuide)
-            $0.bottom.equalTo(titleLabel.snp.top)
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.bottom).offset(12)
+            $0.top.equalTo(posterImageView.snp.bottom).offset(8)
             $0.leading.equalTo(safeAreaLayoutGuide)
             $0.trailing.lessThanOrEqualTo(likeButton.snp.leading)
             $0.bottom.equalTo(descriptionLabel.snp.top)
@@ -56,7 +55,7 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         }
         
         likeButton.snp.makeConstraints {
-            $0.trailing.equalTo(safeAreaLayoutGuide)
+            $0.trailing.equalTo(safeAreaLayoutGuide).offset(10)
             $0.bottom.equalTo(descriptionLabel.snp.top).offset(10)
             $0.size.equalTo(44)
         }
@@ -75,7 +74,8 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
         descriptionLabel.text = "이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여이것은 영화설명이여"
     }
   
-    func configureCell(image: String?, title: String, overView: String) {
+    func configureCell(id: Int, image: String?, title: String, overView: String) {
+        likeButton.id = id
         titleLabel.text = title
         descriptionLabel.text = overView
         guard let image else { return }

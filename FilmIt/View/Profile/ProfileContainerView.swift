@@ -22,7 +22,7 @@ final class ProfileContainerView: BaseView {
     
     private let joinDateLabel = {
         let label = UILabel()
-        label.text = UserStatusManager.nickname
+        label.text = "25.01.23 가입"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .gray1
         return label
@@ -66,12 +66,12 @@ final class ProfileContainerView: BaseView {
         }
         
         nicknameLabel.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(16)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(20)
             $0.leading.equalTo(profileButton.snp.trailing).offset(16)
         }
         
         joinDateLabel.snp.makeConstraints {
-            $0.top.equalTo(nicknameLabel.snp.bottom).offset(4)
+            $0.top.equalTo(nicknameLabel.snp.bottom).offset(6)
             $0.leading.equalTo(nicknameLabel.snp.leading)
         }
         
@@ -90,15 +90,22 @@ final class ProfileContainerView: BaseView {
     
     override func configureView() {
         profileButton.configurePointBorder()
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: NSNotification.Name("userStatus") , object: nil)
+        if case .login(let date) = UserStatusManager.status {
+            joinDateLabel.text = DateFormatterManager.shared.yyMMDD(date) + " 가입"
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: .userStatus , object: nil)
     }
     
-    @objc func receiveNotification(value: NSNotification) {
+    @objc private func receiveNotification(value: NSNotification) {
         print("신호 수신")
         if let profile = value.userInfo?["profile"] as? String,
-           let nickname = value.userInfo?["nickname"] as? String{
+           let nickname = value.userInfo?["nickname"] as? String,
+           let likeCount = value.userInfo?["likeCount"] as? Int {
             profileButton.setImage(UIImage(named: profile), for: .normal)
             nicknameLabel.text = nickname
+            var config = movieBoxArchiveButton.configuration
+            config?.title = "\(likeCount)개의 무비박스 보관중"
+            movieBoxArchiveButton.configuration = config
         } else {
             print("제대로 값을 받지 못함")
         }

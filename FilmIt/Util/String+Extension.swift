@@ -8,10 +8,13 @@
 import UIKit
 
 extension String {
+    
     func toImageURL() -> String {
         return SecretManager.imageURL + self
     }
     func toBigImageURL() -> String {
         return SecretManager.bigImageURL + self
     }
+    
+    
 }

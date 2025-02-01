@@ -78,7 +78,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayMoviesCollectionViewCell.identifier, for: indexPath) as? TodayMoviesCollectionViewCell else {
             return TodayMoviesCollectionViewCell()
         }
-        cell.configureCell(image: item.posterPath, title: item.title, overView: item.overview)
+        cell.configureCell(id: item.id, image: item.posterPath, title: item.title, overView: item.overview)
         return cell
     }
     
@@ -92,7 +92,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let item = trendingMovieList[indexPath.item]
         let vc = MovieDetailViewController()
         vc.movie = item
-        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "heart"), style: .plain, target: vc, action: nil)
+        let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: item.id))
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }
 
