@@ -36,10 +36,14 @@ final class TabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.tintColor = .point
         view.backgroundColor = .black
+        let appearance = UITabBarAppearance()
+        appearance.shadowColor = .clear
+        appearance.backgroundColor = .black
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = tabBar.standardAppearance
+        tabBar.tintColor = .point
         setViewControllers([mainViewController, upcomingViewController, settingViewController], animated: true)
-        tabBar.barTintColor = .white
     }
     
     
