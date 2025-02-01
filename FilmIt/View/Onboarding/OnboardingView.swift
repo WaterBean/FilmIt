@@ -20,7 +20,7 @@ final class OnboardingView: BaseView {
     private let titleLabel = {
         let label = UILabel()
         label.text = "Onboarding"
-        label.font = .italicSystemFont(ofSize: 36)
+        label.font = .italicSystemFont(ofSize: 36, weight: .semibold)
         label.textColor = .white
         label.textAlignment = .center
         return label
@@ -46,17 +46,17 @@ final class OnboardingView: BaseView {
     
     override func configureLayout() {
         introImageView.snp.makeConstraints {
-            $0.top.equalTo(safeAreaLayoutGuide).offset(20)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(-6)
             $0.horizontalEdges.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(introImageView.snp.bottom).offset(12)
+            $0.top.equalTo(introImageView.snp.bottom)
             $0.horizontalEdges.equalTo(introImageView)
         }
         
         introLabel.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(12)
+            $0.top.equalTo(titleLabel.snp.bottom).offset(16)
             $0.horizontalEdges.equalTo(introImageView)
         }
         

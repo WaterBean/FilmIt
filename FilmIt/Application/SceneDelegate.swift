@@ -17,12 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor.white,
                                                             .font: UIFont.largeTitle
         ]
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = OnboardingViewController()
+        let mainVC = UserStatusManager.status == .logout ?
+        UINavigationController(rootViewController: OnboardingViewController()) : TabBarViewController()
+        window?.rootViewController = mainVC
         window?.makeKeyAndVisible()
-        
-        UserStatusManager.status.replaceScene()
+        let launchVC = LaunchScreenViewController()
+        launchVC.modalPresentationStyle = .overFullScreen
+        mainVC.present(launchVC, animated: false)
     }
 
 
