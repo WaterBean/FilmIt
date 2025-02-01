@@ -21,11 +21,13 @@ final class ProfileButton: BaseButton {
     
     func configurePointBorder() {
         layer.borderWidth = 3
+        layer.borderColor = UIColor.point.cgColor
         alpha = 1
     }
     
     func configureDisableBorder() {
         layer.borderWidth = 1
+        layer.borderColor = UIColor.gray2.cgColor
         alpha = 0.5
     }
     

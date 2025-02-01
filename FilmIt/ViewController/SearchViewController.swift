@@ -12,7 +12,6 @@ final class SearchViewController: UIViewController {
     
     private var movieList = [Movie]() {
         didSet {
-            tableView.reloadData()
         }
     }
     private var page = 1
@@ -97,13 +96,13 @@ final class SearchViewController: UIViewController {
             self.movieList = $0.results
             self.page = $0.page
             self.totalPages = $0.totalPages
+            self.tableView.reloadData()
             if self.movieList.count > 0 {
                 self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
                 self.noResultLabel.text = " "
             } else {
                 self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
             }
-            
         } failure: { error in
             print(error)
         }
@@ -116,6 +115,7 @@ final class SearchViewController: UIViewController {
         page += 1
         MovieNetworkClient.request(SearchResponse.self, router: .search(query: lastUserInput, page: page)) {
             self.movieList.append(contentsOf: $0.results)
+            self.tableView.reloadData()
         } failure: { error in
             print(error)
         }

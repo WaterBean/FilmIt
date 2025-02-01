@@ -40,7 +40,7 @@ final class SynopsisView: BaseView {
     
     private let textView = {
         let view = UITextView()
-        view.text = "이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여"
+        view.text = " "
         view.textColor = .white
         view.backgroundColor = .black
         view.isEditable = false

@@ -30,7 +30,7 @@ final class ProfileContainerView: BaseView {
     
     private let chevronSymbol = {
         let view = UIImageView()
-        view.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.gray1]))
+        view.image = UIImage(systemName: "chevron.forward", withConfiguration: UIImage.SymbolConfiguration(paletteColors: [.gray2]))
         view.contentMode = .scaleAspectFill
         return view
     }()
@@ -71,7 +71,7 @@ final class ProfileContainerView: BaseView {
         
         nicknameLabel.snp.makeConstraints {
             $0.top.equalTo(safeAreaLayoutGuide).offset(20)
-            $0.leading.equalTo(profileButton.snp.trailing).offset(16)
+            $0.leading.equalTo(profileButton.snp.trailing).offset(12)
         }
         
         joinDateLabel.snp.makeConstraints {
@@ -86,7 +86,7 @@ final class ProfileContainerView: BaseView {
         }
         
         movieBoxArchiveButton.snp.makeConstraints {
-            $0.top.equalTo(profileButton.snp.bottom).offset(16)
+            $0.top.equalTo(profileButton.snp.bottom).offset(12)
             $0.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide).inset(16)
             $0.height.equalTo(44)
         }

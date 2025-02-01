@@ -21,7 +21,7 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     
     private let actorNameLabel = {
         let label = UILabel()
-        label.text = "현빈"
+        label.text = " "
         label.textColor = .white
         label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
@@ -29,7 +29,7 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     
     private let characterNameLabel = {
         let label = UILabel()
-        label.text = "Ahn Jung-geun"
+        label.text = " "
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .gray2
         return label
@@ -50,13 +50,13 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
         actorNameLabel.snp.makeConstraints {
             $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
-            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(6)
         }
         
         characterNameLabel.snp.makeConstraints {
             $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
-            $0.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-12)
+            $0.bottom.equalTo(contentView.safeAreaLayoutGuide).offset(-8)
         }
     }
     

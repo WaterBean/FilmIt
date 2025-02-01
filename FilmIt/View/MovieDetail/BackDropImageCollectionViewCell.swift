@@ -25,7 +25,11 @@ final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
-        backDropImageView.image = .profile0
+        backDropImageView.image = UIImage(
+            systemName: "photo.artframe",
+            withConfiguration: SFConfig.preferringMonochrome()
+                .applying(SFConfig(pointSize: 12, weight: .light)))
+        backDropImageView.tintColor = .movieBoxButton
     }
 
     func configureCell(image: String) {

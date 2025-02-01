@@ -16,6 +16,7 @@ final class SearchTableViewCell: BaseTableViewCell {
         view.contentMode = .scaleToFill
         view.clipsToBounds = true
         view.layer.cornerRadius = 12
+        view.tintColor = .movieBoxButton
         return view
     }()
     
@@ -30,14 +31,14 @@ final class SearchTableViewCell: BaseTableViewCell {
     private let dateLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13, weight: .light)
-        label.textColor = .gray1
+        label.textColor = .gray2
         return label
     }()
     
     private let tagLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
-        label.backgroundColor = .gray2
+        label.backgroundColor = .gray3
         label.textColor = .white
         label.layer.cornerRadius = 4
         label.clipsToBounds = true
@@ -47,7 +48,7 @@ final class SearchTableViewCell: BaseTableViewCell {
     private let tagLabel2 = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
-        label.backgroundColor = .gray2
+        label.backgroundColor = .gray3
         label.textColor = .white
         label.layer.cornerRadius = 4
         label.clipsToBounds = true
@@ -62,6 +63,14 @@ final class SearchTableViewCell: BaseTableViewCell {
     }()
     
     private let likeButton = LikeButton()
+    
+    override func prepareForReuse() {
+        posterImageView.image = UIImage(
+            systemName: "photo.artframe",
+            withConfiguration: SFConfig.preferringMonochrome()
+                .applying(SFConfig(pointSize: 12, weight: .light)))
+
+    }
     
     override func configureHierarchy() {
         [posterImageView, titleLabel, dateLabel, stackView, likeButton].forEach {
@@ -107,11 +116,10 @@ final class SearchTableViewCell: BaseTableViewCell {
     
     override func configureView() {
         contentView.backgroundColor = .black
-        posterImageView.image = .profile10
-        titleLabel.text = "기생충"
+        titleLabel.text = "제목 없음"
         dateLabel.text = "8888. 88. 88"
         tagLabel.text = " 장르 정보 없음 "
-        tagLabel2.text = " "
+        tagLabel2.text = ""
         selectionStyle = .none
     }
     
@@ -130,7 +138,13 @@ final class SearchTableViewCell: BaseTableViewCell {
             tagLabel.text = " 장르 정보 없음 "
             tagLabel2.text = ""
         }
-        guard let image else { return }
+        guard let image else {
+            posterImageView.image = UIImage(
+              systemName: "photo.artframe",
+              withConfiguration: SFConfig.preferringMonochrome()
+                  .applying(SFConfig(pointSize: 12)))
+            return
+        }
         posterImageView.kf.setImage(with: URL(string: SecretManager.imageURL + image))
     }
 
