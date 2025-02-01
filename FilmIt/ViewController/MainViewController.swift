@@ -54,15 +54,7 @@ final class MainViewController: UIViewController {
     }
     
     @objc private func profileViewTapped() {
-        let vc = ProfileNicknameSettingViewController()
-        let nav = UINavigationController(rootViewController: vc)
-        let saveButton = UIBarButtonItem(title: "저장", image: nil, target: vc, action: #selector(vc.saveButtonTapped))
-        saveButton.setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16, weight: .bold)], for: .normal)
-        let dismissButton = UIBarButtonItem(title: " ", image: UIImage(systemName: "xmark"), target: vc, action: #selector(vc.dismissButtonTapped))
-        nav.navigationBar.topItem?.rightBarButtonItem = saveButton
-        nav.navigationBar.topItem?.leftBarButtonItem = dismissButton
-        nav.sheetPresentationController?.prefersGrabberVisible = true
-        present(nav, animated: true)
+        presentProfileSetting()
     }
     
 }
