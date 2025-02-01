@@ -9,7 +9,7 @@ import UIKit
 
 final class ProfileImageSettingViewController: UIViewController {
 
-    let mainView = ProfileImageSettingView()
+    private let mainView = ProfileImageSettingView()
     var profileImageName: String?
     weak var delegate: ProfileImageDelegate?
     

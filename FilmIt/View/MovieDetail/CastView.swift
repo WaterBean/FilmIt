@@ -42,7 +42,7 @@ final class CastView: BaseView {
         collectionView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom)
             $0.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
-            $0.height.equalTo(150)
+            $0.height.equalTo(148)
         }
     }
     

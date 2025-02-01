@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class BackDropView: BaseView {
-    typealias SFConfig = UIImage.SymbolConfiguration
     
     let pageControl = {
         let control = UIPageControl()
@@ -86,7 +85,6 @@ final class BackDropView: BaseView {
         return label
     }()
     
-    
     override func configureHierarchy() {
         [collectionView, pageControl, stackView].forEach {
             addSubview($0)
@@ -113,7 +111,6 @@ final class BackDropView: BaseView {
             $0.bottom.equalTo(safeAreaLayoutGuide).inset(8)
         }
     }
-    
     
     override func configureView() {
         collectionView.showsVerticalScrollIndicator = false

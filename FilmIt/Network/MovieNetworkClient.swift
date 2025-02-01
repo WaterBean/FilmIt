@@ -8,8 +8,8 @@
 import Foundation
 import Alamofire
 
-
 final class MovieNetworkClient {
+    
     private init () {}
     static func request<T: Decodable>(_ decodable: T.Type,
                                       router: MovieNetworkRouter,

@@ -11,7 +11,6 @@ final class RecentSearchTermsButton: BaseButton {
     
     weak var delegate: RecentSearchTermsButtonDelegate?
     let term: String
-    typealias SFConfig = UIImage.SymbolConfiguration
     
     init(frame: CGRect, term: String) {
         self.term = term

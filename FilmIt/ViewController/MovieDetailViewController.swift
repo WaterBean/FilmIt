@@ -11,19 +11,19 @@ import SnapKit
 final class MovieDetailViewController: UIViewController {
     
     var movie: Movie?
-    var image: ImageResponse? {
+    private var image: ImageResponse? {
         didSet {
             backdropCollectionView.reloadData()
             posterCollectionView.reloadData()
         }
     }
-    var credit: CreditResponse? {
+    private var credit: CreditResponse? {
         didSet {
             castCollectionView.reloadData()
         }
     }
     
-    let mainView = MovieDetailView()
+    private let mainView = MovieDetailView()
     private lazy var backdropCollectionView = mainView.backDropView.collectionView
     private lazy var castCollectionView = mainView.castView.collectionView
     private lazy var posterCollectionView = mainView.posterView.collectionView
@@ -32,10 +32,9 @@ final class MovieDetailViewController: UIViewController {
         view = mainView
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func configureUI() {
+        navigationItem.title = movie?.title
         navigationController?.navigationBar.barStyle = .black
-        tabBarController?.tabBar.barStyle = .black
         backdropCollectionView.register(BackDropImageCollectionViewCell.self, forCellWithReuseIdentifier: BackDropImageCollectionViewCell.identifier)
         castCollectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)
         posterCollectionView.register(PosterCollectionViewCell.self, forCellWithReuseIdentifier: PosterCollectionViewCell.identifier)
@@ -46,28 +45,43 @@ final class MovieDetailViewController: UIViewController {
         }
         mainView.synopsisView.foldingButton.addTarget(self, action: #selector(toggleSynopsisStatus), for: .touchUpInside)
         mainView.backDropView.pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
         guard let movie else { return }
-        navigationItem.title = movie.title
+        
+        let group = DispatchGroup()
+        group.enter()
         MovieNetworkClient.request(ImageResponse.self, router: .image(id: movie.id)) {
             self.image = $0
+            group.leave()
         } failure: { error in
             print(error)
+            group.leave()
         }
+        group.enter()
+        
         MovieNetworkClient.request(CreditResponse.self, router: .credit(id: movie.id)) {
             self.credit = $0
+            group.leave()
         } failure: { error in
             print(error)
+            group.leave()
         }
-        mainView.synopsisView.updateView(string: movie.overview)
-        mainView.backDropView.updateView(releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, genreIds: movie.genreIds)
+        
+        group.notify(queue: .main) {
+            self.mainView.synopsisView.updateView(string: movie.overview)
+            self.mainView.backDropView.updateView(releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, genreIds: movie.genreIds)
+        }
     }
     
-    @objc func pageControlValueChanged(_ sender: UIPageControl) {
+    @objc private func pageControlValueChanged(_ sender: UIPageControl) {
         self.backdropCollectionView.scrollToItem(at: IndexPath(item: sender.currentPage, section: 0),at: .centeredHorizontally, animated: true)
-
     }
     
-    @objc func toggleSynopsisStatus() {
+    @objc private func toggleSynopsisStatus() {
         mainView.synopsisView.foldingButton.isSelected.toggle()
         mainView.synopsisView.updateView(string: movie?.overview)
     }
@@ -133,9 +147,9 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
             let height = width * (2.0/3.0)
             return CGSize(width: width, height: height)
         } else if collectionView == castCollectionView {
-            return CGSize(width: (collectionView.frame.width - 48.0) / 2.16, height: (collectionView.frame.height - 40.0) / 2.0)
+            return CGSize(width: (collectionView.frame.width - 48.0) / 2.16, height: (collectionView.frame.height - 48.0) / 2.0)
         } else if collectionView == posterCollectionView {
-            return CGSize(width: (collectionView.frame.width - 72.0) / 3.3, height: collectionView.frame.height - 36.0)
+            return CGSize(width: (collectionView.frame.width - 72.0) / 3.0, height: collectionView.frame.height - 36.0)
         } else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }

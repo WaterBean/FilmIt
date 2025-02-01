@@ -11,8 +11,8 @@ import Foundation
 final class DateFormatterManager {
     
     static let shared = DateFormatterManager()
-    private init() {
-    }
+    
+    private init() { }
     
     private let formatter = DateFormatter()
     
@@ -27,5 +27,6 @@ final class DateFormatterManager {
         formatter.dateFormat = "yyyy. MM. dd"
         return formatter.string(from: string ?? Date())
     }
+    
     
 }

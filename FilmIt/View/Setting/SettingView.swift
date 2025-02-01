@@ -11,8 +11,14 @@ import SnapKit
 final class SettingView: BaseView {
     
     let profileContainerView = ProfileContainerView()
-
-    let tableView = UITableView()
+    
+    let tableView = {
+        let tableView = UITableView()
+        tableView.backgroundColor = .black
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = .gray2
+        return tableView
+    }()
     
     override func configureHierarchy() {
         [profileContainerView, tableView].forEach {
@@ -31,12 +37,5 @@ final class SettingView: BaseView {
             $0.trailing.equalTo(safeAreaLayoutGuide).inset(16)
         }
     }
-    
-    override func configureView() {
-        tableView.backgroundColor = .black
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = .gray2
-    }
-    
     
 }

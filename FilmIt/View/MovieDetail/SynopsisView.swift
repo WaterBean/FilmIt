@@ -38,7 +38,7 @@ final class SynopsisView: BaseView {
         return button
     }()
     
-    let textView = {
+    private let textView = {
         let view = UITextView()
         view.text = "이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여이것은 줄거리여"
         view.textColor = .white
@@ -63,12 +63,14 @@ final class SynopsisView: BaseView {
     
     override func configureLayout() {
         headerLabel.snp.makeConstraints {
-            $0.top.leading.equalTo(safeAreaLayoutGuide).offset(16)
+            $0.top.equalTo(safeAreaLayoutGuide).offset(16)
+            $0.leading.equalTo(safeAreaLayoutGuide).offset(16)
             $0.height.equalTo(20)
         }
         
         foldingButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(4)
+            $0.top.equalTo(safeAreaLayoutGuide).inset(8)
+            $0.trailing.equalTo(safeAreaLayoutGuide).inset(4)
         }
         
         textView.snp.makeConstraints {

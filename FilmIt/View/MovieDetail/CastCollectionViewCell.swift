@@ -15,6 +15,7 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
         let view = UIImageView()
         view.contentMode = .scaleAspectFill
         view.clipsToBounds = true
+        view.tintColor = .movieBoxButton
         return view
     }()
     
@@ -60,7 +61,6 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
-        castImageView.image = UIImage(systemName: "profile.circle")?.withTintColor(.white)
         DispatchQueue.main.async {
             self.castImageView.layer.cornerRadius = self.castImageView.frame.width / 2
         }
@@ -71,11 +71,17 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
         actorNameLabel.text = actorName
         characterNameLabel.text = characterName
         guard let image else {
-            castImageView.image = UIImage(systemName: "person.circle")?.withTintColor(.point)
+            castImageView.image = UIImage(
+                systemName: "person.circle",
+                withConfiguration: SFConfig.preferringMonochrome()
+                    .applying(SFConfig(pointSize: 12, weight: .light)))
             return
         }
         castImageView.kf.setImage(with: URL(string: image.toImageURL()),
-                                  placeholder: UIImage(systemName: "person.circle")?.withTintColor(.point))
+                                  placeholder: UIImage(
+                                    systemName: "person.circle",
+                                    withConfiguration: SFConfig.preferringMonochrome()
+                                        .applying(SFConfig(pointSize: 12, weight: .light))))
     }
     
     

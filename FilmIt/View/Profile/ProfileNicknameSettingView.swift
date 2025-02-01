@@ -103,7 +103,7 @@ final class ProfileNicknameSettingView: BaseView {
     override func configureView() {
         DispatchQueue.main.async { [self] in
             let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: -16.0, y: nicknameTextField.frame.height, width: nicknameTextField.frame.width+32, height: 0.6)
+            bottomLine.frame = CGRect(x: -16.0, y: nicknameTextField.frame.height, width: nicknameTextField.frame.width + 32, height: 0.6)
             bottomLine.backgroundColor = UIColor.white.cgColor
             nicknameTextField.borderStyle = .none
             nicknameTextField.layer.addSublayer(bottomLine)

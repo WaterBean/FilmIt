@@ -10,14 +10,14 @@ import SnapKit
 
 final class SearchViewController: UIViewController {
     
-    var movieList = [Movie]() {
+    private var movieList = [Movie]() {
         didSet {
             tableView.reloadData()
         }
     }
-    var page = 1
-    var totalPages = 1
-    var lastUserInput = ""
+    private var page = 1
+    private var totalPages = 1
+    private var lastUserInput = ""
     private var becomeResponder = true
     
     private let searchBar = {

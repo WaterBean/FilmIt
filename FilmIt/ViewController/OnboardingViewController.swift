@@ -24,7 +24,7 @@ final class OnboardingViewController: UIViewController {
         mainView.startButton.addTarget(self, action: #selector(startButtonTapped), for: .touchUpInside)
     }
 
-    @objc func startButtonTapped() {
+    @objc private func startButtonTapped() {
         pushNavigationWithBarButtonItem(vc: ProfileNicknameSettingViewController(), rightBarButtonItem: nil)
     }
     

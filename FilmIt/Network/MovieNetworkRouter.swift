@@ -67,8 +67,6 @@ enum MovieNetworkRouter: URLRequestConvertible {
         var urlRequest = URLRequest(url: url)
         
         urlRequest.method = method
-        
-//        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.headers = headers
         
         if let parameters = parameters {

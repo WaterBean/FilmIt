@@ -40,6 +40,7 @@
 		55B799072D4DAE5B00A74541 /* DateFormatterManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B799062D4DAE5B00A74541 /* DateFormatterManger.swift */; };
 		55B7990A2D4DC3DA00A74541 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B799092D4DC3DA00A74541 /* String+Extension.swift */; };
 		55B7990D2D4DF0BC00A74541 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B7990C2D4DF0BC00A74541 /* LaunchScreenViewController.swift */; };
+		55B7990F2D4E050400A74541 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B7990E2D4E050400A74541 /* UIImage+Extension.swift */; };
 		55C878BC2D47A9AB00CD4927 /* BackDropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C878BB2D47A9AB00CD4927 /* BackDropView.swift */; };
 		55C878BE2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C878BD2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift */; };
 		55C878C12D47C35E00CD4927 /* SynopsisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C878C02D47C35E00CD4927 /* SynopsisView.swift */; };
@@ -100,6 +101,7 @@
 		55B799062D4DAE5B00A74541 /* DateFormatterManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatterManger.swift; sourceTree = "<group>"; };
 		55B799092D4DC3DA00A74541 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		55B7990C2D4DF0BC00A74541 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
+		55B7990E2D4E050400A74541 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 		55C878BB2D47A9AB00CD4927 /* BackDropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackDropView.swift; sourceTree = "<group>"; };
 		55C878BD2D47AD0B00CD4927 /* BackDropImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackDropImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		55C878C02D47C35E00CD4927 /* SynopsisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SynopsisView.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 				55C879072D48E45200CD4927 /* UIViewController+Extension.swift */,
 				55B799022D4D223B00A74541 /* Array+Extension.swift */,
 				55B799042D4D2AB200A74541 /* NSNotification+Extension.swift */,
+				55B7990E2D4E050400A74541 /* UIImage+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -484,6 +487,7 @@
 				554101622D45406300DCA584 /* ProfileButton.swift in Sources */,
 				554101682D460F3700DCA584 /* RecentSearchTermsView.swift in Sources */,
 				55C878C12D47C35E00CD4927 /* SynopsisView.swift in Sources */,
+				55B7990F2D4E050400A74541 /* UIImage+Extension.swift in Sources */,
 				55C879D22D4B6A1200CD4927 /* MovieNetworkClient.swift in Sources */,
 				554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */,
 				554101642D45409D00DCA584 /* BaseButton.swift in Sources */,

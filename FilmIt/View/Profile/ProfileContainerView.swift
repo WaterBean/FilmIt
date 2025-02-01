@@ -37,7 +37,7 @@ final class ProfileContainerView: BaseView {
 
     private let movieBoxArchiveButton = {
         var config = UIButton.Configuration.filled()
-        config.background.backgroundColor = .point
+        config.background.backgroundColor = .movieBoxButton
         config.cornerStyle = .small
         config.attributedTitle = AttributedString(
             NSAttributedString(string: "\(UserStatusManager.likeMovies.count)개의 무비박스 보관중",attributes: [

@@ -73,17 +73,16 @@ final class ProfileNicknameSettingViewController: UIViewController {
         UserStatusManager.status.replaceScene()
     }
     
-    
-    @objc func saveButtonTapped() {
-        saveUserData()
-        dismissButtonTapped()
-    }
-    
     @objc private func profileButtonTapped() {
         let vc = ProfileImageSettingViewController()
         vc.profileImageName = profileImageName
         vc.delegate = self
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+    }
+    
+    @objc func saveButtonTapped() {
+        saveUserData()
+        dismissButtonTapped()
     }
     
     @objc func dismissButtonTapped() {

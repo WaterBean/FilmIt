@@ -9,8 +9,8 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    let mainView = MainView()
-    var trendingMovieList = [Movie]() {
+    private let mainView = MainView()
+    private var trendingMovieList = [Movie]() {
         didSet {
             mainView.collectionView.reloadData()
         }

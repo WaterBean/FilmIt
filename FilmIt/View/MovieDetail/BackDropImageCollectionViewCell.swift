@@ -11,7 +11,7 @@ import SnapKit
 
 final class BackDropImageCollectionViewCell: BaseCollectionViewCell {
     
-    let backDropImageView = UIImageView()
+    private let backDropImageView = UIImageView()
     
     override func configureHierarchy() {
         contentView.addSubview(backDropImageView)
