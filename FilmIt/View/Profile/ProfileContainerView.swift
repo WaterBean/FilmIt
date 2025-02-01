@@ -24,7 +24,7 @@ final class ProfileContainerView: BaseView {
         let label = UILabel()
         label.text = "25.01.23 가입"
         label.font = .systemFont(ofSize: 12, weight: .light)
-        label.textColor = .gray1
+        label.textColor = .gray2
         return label
     }()
     
@@ -40,7 +40,7 @@ final class ProfileContainerView: BaseView {
         config.background.backgroundColor = .movieBoxButton
         config.cornerStyle = .small
         config.attributedTitle = AttributedString(
-            NSAttributedString(string: "\(UserStatusManager.likeMovies.count)개의 무비박스 보관중",attributes: [
+            NSAttributedString(string: "\(UserStatusManager.likeMovies.count) 개의 무비박스 보관중",attributes: [
                                 .foregroundColor : UIColor.white,
                                 .font: UIFont.systemFont(ofSize: 14, weight: .bold)
                                 ]))
@@ -109,7 +109,7 @@ final class ProfileContainerView: BaseView {
             nicknameLabel.text = nickname
             var config = movieBoxArchiveButton.configuration
             config?.attributedTitle = AttributedString(
-                NSAttributedString(string: "\(likeCount)개의 무비박스 보관중",attributes: [
+                NSAttributedString(string: "\(likeCount) 개의 무비박스 보관중",attributes: [
                                     .foregroundColor : UIColor.white,
                                     .font: UIFont.systemFont(ofSize: 14, weight: .bold)
                                     ]))

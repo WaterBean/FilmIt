@@ -17,6 +17,7 @@ final class SettingView: BaseView {
         tableView.backgroundColor = .black
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = .gray2
+        tableView.rowHeight = 50
         return tableView
     }()
     
@@ -33,7 +34,7 @@ final class SettingView: BaseView {
         
         tableView.snp.makeConstraints {
             $0.top.equalTo(profileContainerView.snp.bottom).offset(16)
-            $0.leading.bottom.equalTo(safeAreaLayoutGuide)
+            $0.leading.bottom.equalTo(safeAreaLayoutGuide).inset(4)
             $0.trailing.equalTo(safeAreaLayoutGuide).inset(16)
         }
     }
