@@ -21,7 +21,8 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     private let actorNameLabel = {
         let label = UILabel()
         label.text = "현빈"
-        label.font = .largeTitle
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 14, weight: .bold)
         return label
     }()
     
@@ -42,14 +43,15 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     override func configureLayout() {
         castImageView.snp.makeConstraints {
             $0.leading.verticalEdges.equalTo(contentView.safeAreaLayoutGuide)
-            $0.size.equalTo(60)
+            $0.size.equalTo(50)
         }
         
         actorNameLabel.snp.makeConstraints {
             $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
-            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(12)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide).offset(8)
         }
+        
         characterNameLabel.snp.makeConstraints {
             $0.leading.equalTo(castImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(contentView.safeAreaLayoutGuide)
@@ -68,8 +70,12 @@ final class CastCollectionViewCell: BaseCollectionViewCell {
     func configureCell(image: String?, actorName: String, characterName: String) {
         actorNameLabel.text = actorName
         characterNameLabel.text = characterName
-        guard let image else { return }
-        castImageView.kf.setImage(with: URL(string: image.toImageURL()))
+        guard let image else {
+            castImageView.image = UIImage(systemName: "person.circle")?.withTintColor(.point)
+            return
+        }
+        castImageView.kf.setImage(with: URL(string: image.toImageURL()),
+                                  placeholder: UIImage(systemName: "person.circle")?.withTintColor(.point))
     }
     
     

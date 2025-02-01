@@ -13,7 +13,8 @@ final class CastView: BaseView {
     private let headerLabel = {
         let label = UILabel()
         label.text = "Cast"
-        label.font = .monospacedSystemFont(ofSize: 12, weight: .semibold)
+        label.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
@@ -22,7 +23,7 @@ final class CastView: BaseView {
         let inset = 16.0
         layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
         layout.minimumLineSpacing = 16
-        layout.minimumInteritemSpacing = 16
+        layout.minimumInteritemSpacing = 8
         layout.scrollDirection = .horizontal
         return layout
     }())
@@ -40,9 +41,8 @@ final class CastView: BaseView {
         
         collectionView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom)
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide)
-            $0.height.equalTo(170)
-            $0.bottom.equalTo(safeAreaLayoutGuide)
+            $0.horizontalEdges.bottom.equalTo(safeAreaLayoutGuide)
+            $0.height.equalTo(150)
         }
     }
     

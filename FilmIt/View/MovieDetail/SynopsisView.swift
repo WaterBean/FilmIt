@@ -13,7 +13,8 @@ final class SynopsisView: BaseView {
     private let headerLabel = {
         let label = UILabel()
         label.text = "Synopsis"
-        label.font = .monospacedSystemFont(ofSize: 12, weight: .semibold)
+        label.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     
@@ -67,12 +68,13 @@ final class SynopsisView: BaseView {
         }
         
         foldingButton.snp.makeConstraints {
-            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(12)
+            $0.top.trailing.equalTo(safeAreaLayoutGuide).inset(4)
         }
         
         textView.snp.makeConstraints {
             $0.top.equalTo(headerLabel.snp.bottom).offset(8)
-            $0.horizontalEdges.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.leading.equalTo(safeAreaLayoutGuide).inset(16)
+            $0.trailing.equalTo(safeAreaLayoutGuide).inset(12)
             $0.bottom.equalTo(safeAreaLayoutGuide)
             $0.height.equalTo(60)
         }

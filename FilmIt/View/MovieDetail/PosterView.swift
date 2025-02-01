@@ -13,7 +13,8 @@ final class PosterView: BaseView {
     private let headerLabel = {
         let label = UILabel()
         label.text = "Poster"
-        label.font = .monospacedSystemFont(ofSize: 12, weight: .semibold)
+        label.font = .monospacedSystemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .white
         return label
     }()
     

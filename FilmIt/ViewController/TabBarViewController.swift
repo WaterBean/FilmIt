@@ -13,6 +13,7 @@ final class TabBarViewController: UITabBarController {
         let vc = MainViewController()
         vc.tabBarItem.image = UIImage(systemName: "popcorn")
         vc.tabBarItem.title = "CINEMA"
+        vc.tabBarItem.badgeColor = .red
         let nav = UINavigationController(rootViewController: vc)
         return nav
     }()
@@ -38,6 +39,7 @@ final class TabBarViewController: UITabBarController {
         view.tintColor = .point
         view.backgroundColor = .black
         setViewControllers([mainViewController, upcomingViewController, settingViewController], animated: true)
+        tabBar.barTintColor = .white
     }
     
     

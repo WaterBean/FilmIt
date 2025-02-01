@@ -22,6 +22,7 @@ final class TodayMoviesCollectionViewCell: BaseCollectionViewCell {
     private let titleLabel = {
         let label = UILabel()
         label.font = .largeTitle
+        label.textColor = .white
         return label
     }()
     

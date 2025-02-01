@@ -22,13 +22,14 @@ final class SearchTableViewCell: BaseTableViewCell {
     private let titleLabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.textColor = .white
         label.numberOfLines = 2
         return label
     }()
     
     private let dateLabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.font = .systemFont(ofSize: 13, weight: .light)
         label.textColor = .gray1
         return label
     }()
@@ -37,6 +38,7 @@ final class SearchTableViewCell: BaseTableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.backgroundColor = .gray2
+        label.textColor = .white
         label.layer.cornerRadius = 4
         label.clipsToBounds = true
         return label
@@ -46,6 +48,7 @@ final class SearchTableViewCell: BaseTableViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12)
         label.backgroundColor = .gray2
+        label.textColor = .white
         label.layer.cornerRadius = 4
         label.clipsToBounds = true
         return label
@@ -78,7 +81,7 @@ final class SearchTableViewCell: BaseTableViewCell {
         }
         
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(posterImageView.snp.top)
+            $0.top.equalTo(posterImageView.snp.top).offset(4)
             $0.leading.equalTo(posterImageView.snp.trailing).offset(16)
             $0.trailing.equalTo(safeAreaLayoutGuide)
         }

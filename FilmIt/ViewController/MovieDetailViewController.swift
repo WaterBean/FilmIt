@@ -133,9 +133,9 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
             let height = width * (2.0/3.0)
             return CGSize(width: width, height: height)
         } else if collectionView == castCollectionView {
-            return CGSize(width: (collectionView.frame.width - 48.0) / 2.0, height: (collectionView.frame.height - 48.0) / 2)
+            return CGSize(width: (collectionView.frame.width - 48.0) / 2.16, height: (collectionView.frame.height - 40.0) / 2.0)
         } else if collectionView == posterCollectionView {
-            return CGSize(width: (collectionView.frame.width - 72.0) / 3.0, height: collectionView.frame.height - 36.0)
+            return CGSize(width: (collectionView.frame.width - 72.0) / 3.3, height: collectionView.frame.height - 36.0)
         } else {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
         }

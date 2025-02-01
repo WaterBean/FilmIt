@@ -31,7 +31,7 @@ final class SearchViewController: UIViewController {
     
     private let tableView = {
         let view = UITableView()
-        view.rowHeight = 120
+        view.rowHeight = 130
         view.backgroundColor = .black
         view.separatorStyle = .singleLine
         view.showsVerticalScrollIndicator = true
