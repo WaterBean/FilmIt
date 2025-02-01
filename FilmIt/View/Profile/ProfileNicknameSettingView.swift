@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 final class ProfileNicknameSettingView: BaseView {
-    // TODO: - 리터럴 상수화, 미세 스타일 조정
+
     let profileButton = ProfileButton(image: nil, isPoint: true)
     
     private let containerView = {

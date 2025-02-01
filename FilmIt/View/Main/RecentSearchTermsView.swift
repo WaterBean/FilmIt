@@ -101,8 +101,10 @@ final class RecentSearchTermsView: BaseView {
         }
         if UserStatusManager.searchTerms.count == 0 {
             noRecentsLabel.isHidden = false
+            deleteRecentsButton.isHidden = true
         } else {
             noRecentsLabel.isHidden = true
+            deleteRecentsButton.isHidden = false
             let sortedByDate = UserStatusManager.searchTerms.sorted { $0.value > $1.value }
             for terms in sortedByDate {
                 let button = RecentSearchTermsButton(title: terms.key)

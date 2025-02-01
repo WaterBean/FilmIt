@@ -40,7 +40,7 @@ final class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         mainView.recentSearchTermsView.updateSearchTerms()
-        
+        mainView.collectionView.reloadData()
     }
     
     @objc private func searchButtonTapped() {

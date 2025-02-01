@@ -39,7 +39,11 @@ final class ProfileContainerView: BaseView {
         var config = UIButton.Configuration.filled()
         config.background.backgroundColor = .point
         config.cornerStyle = .small
-        config.attributedTitle = AttributedString(NSAttributedString(string: "0개의 무비박스 보관중", attributes: [.foregroundColor : UIColor.white, .font: UIFont.systemFont(ofSize: 14, weight: .bold)]))
+        config.attributedTitle = AttributedString(
+            NSAttributedString(string: "\(UserStatusManager.likeMovies.count)개의 무비박스 보관중",attributes: [
+                                .foregroundColor : UIColor.white,
+                                .font: UIFont.systemFont(ofSize: 14, weight: .bold)
+                                ]))
         let button = UIButton()
         button.configuration = config
         return button
@@ -104,7 +108,11 @@ final class ProfileContainerView: BaseView {
             profileButton.setImage(UIImage(named: profile), for: .normal)
             nicknameLabel.text = nickname
             var config = movieBoxArchiveButton.configuration
-            config?.title = "\(likeCount)개의 무비박스 보관중"
+            config?.attributedTitle = AttributedString(
+                NSAttributedString(string: "\(likeCount)개의 무비박스 보관중",attributes: [
+                                    .foregroundColor : UIColor.white,
+                                    .font: UIFont.systemFont(ofSize: 14, weight: .bold)
+                                    ]))
             movieBoxArchiveButton.configuration = config
         } else {
             print("제대로 값을 받지 못함")

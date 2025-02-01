@@ -76,7 +76,12 @@ final class SearchViewController: UIViewController {
             $0.centerY.equalTo(view.safeAreaLayoutGuide).offset(-100)
         }
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         searchBar.becomeFirstResponder()

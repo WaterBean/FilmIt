@@ -10,6 +10,7 @@ import Foundation
 extension NSNotification.Name {
     
     static let userStatus = NSNotification.Name("userStatus")
+    static let like = NSNotification.Name("like")
     
     
 }
