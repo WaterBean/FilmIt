@@ -27,8 +27,11 @@ extension String {
 }
 
 extension NSMutableAttributedString {
+    
     func toAttribute(_ target: String) -> NSMutableAttributedString {
         self.addAttribute(.foregroundColor, value: UIColor.systemOrange, range: (string as NSString).range(of: target))
         return self
     }
+    
+    
 }

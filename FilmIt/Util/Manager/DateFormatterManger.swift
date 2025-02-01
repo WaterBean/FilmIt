@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 final class DateFormatterManager {
     
     static let shared = DateFormatterManager()

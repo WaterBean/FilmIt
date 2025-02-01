@@ -38,5 +38,6 @@ final class SettingView: BaseView {
             $0.trailing.equalTo(safeAreaLayoutGuide).inset(16)
         }
     }
+
     
 }
