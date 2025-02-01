@@ -102,7 +102,13 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 extension MainViewController: RecentSearchTermsButtonDelegate {
     
-    func searchTerm(term: String) {
+    func deleteTerm(_ term: String) {
+        UserStatusManager.removeSearchTerm(keyword: term)
+        mainView.recentSearchTermsView.updateSearchTerms()
+    }
+    
+    
+    func searchTerm(_ term: String) {
         let vc = SearchViewController()
         vc.searchWithInitialTerm(term: term)
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)

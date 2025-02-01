@@ -35,8 +35,17 @@ final class RecentSearchTermsButton: BaseButton {
         addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
     }
     
-    @objc func buttonTapped(sender: UIButton) {
-        delegate?.searchTerm(term: term)
+    @objc func buttonTapped(sender: UIButton, event: UIEvent?) {
+        if let touch = event?.allTouches?.first{
+            let location = touch.location(in: self)
+            let deleteArea = bounds.width - 30
+            print(location.x, deleteArea)
+            if location.x > deleteArea {
+                delegate?.deleteTerm(term)
+            } else {
+                delegate?.searchTerm(term)
+            }
+        }
     }
     
     
@@ -44,7 +53,7 @@ final class RecentSearchTermsButton: BaseButton {
 
 protocol RecentSearchTermsButtonDelegate: AnyObject {
     
-    func searchTerm(term: String)
-    
+    func searchTerm(_ term: String)
+    func deleteTerm(_ term: String)
     
 }
