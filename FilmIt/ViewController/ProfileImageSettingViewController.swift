@@ -26,11 +26,6 @@ final class ProfileImageSettingViewController: UIViewController {
         mainView.collectionView.dataSource = self
     }
 
-    // FIXME: - 들어오자마자 프로필 이미지가 선택되어있도록 구현해야함
-    override func viewWillAppear(_ animated: Bool) {
-        mainView.collectionView.selectItem(at: IndexPath(item: 3, section: 0), animated: true, scrollPosition: .top)
-    }
-    
     private func setButtonImage(_ button: UIButton) {
         guard let profileImageName else {
             button.setImage(UIImage(named: "profile_0"), for: .normal)
@@ -52,7 +47,12 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as? ProfileImageCollectionViewCell else { return ProfileImageCollectionViewCell() }
-        cell.configureCell(imageName: "profile_\(indexPath.item)")
+        if "profile_\(indexPath.item)" == profileImageName {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+            cell.configureCell(imageName: "profile_\(indexPath.item)", isSelected: true)
+        } else {
+            cell.configureCell(imageName: "profile_\(indexPath.item)", isSelected: false)
+        }
         return cell
     }
     
