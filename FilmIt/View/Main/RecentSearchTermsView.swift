@@ -10,6 +10,8 @@ import SnapKit
 
 final class RecentSearchTermsView: BaseView {
     
+    weak var delegate: RecentSearchTermsButtonDelegate?
+    
     private let scrollView = {
         let view = UIScrollView()
         view.showsHorizontalScrollIndicator = false
@@ -45,7 +47,7 @@ final class RecentSearchTermsView: BaseView {
     let deleteRecentsButton = {
         var config = UIButton.Configuration.plain()
         config.baseForegroundColor = .point
-        config.attributedTitle = AttributedString(NSAttributedString(string: "전체 삭제", attributes: [.font: UIFont.systemFont(ofSize: 14, weight: .bold)]))
+        config.attributedTitle = AttributedString(NSAttributedString(string: "전체 삭제", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)]))
         let button = UIButton()
         button.configuration = config
         return button
@@ -107,7 +109,8 @@ final class RecentSearchTermsView: BaseView {
             deleteRecentsButton.isHidden = false
             let sortedByDate = UserStatusManager.searchTerms.sorted { $0.value > $1.value }
             for terms in sortedByDate {
-                let button = RecentSearchTermsButton(title: terms.key)
+                let button = RecentSearchTermsButton(term: terms.key)
+                button.delegate = delegate
                 stackView.addArrangedSubview(button)
             }
         }

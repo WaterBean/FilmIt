@@ -18,6 +18,7 @@ final class SearchViewController: UIViewController {
     var page = 1
     var totalPages = 1
     var lastUserInput = ""
+    private var becomeResponder = true
     
     private let searchBar = {
         let bar = UISearchBar()
@@ -51,7 +52,6 @@ final class SearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .black
         navigationItem.title = "영화 검색"
-        
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
@@ -84,7 +84,9 @@ final class SearchViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        searchBar.becomeFirstResponder()
+        if becomeResponder {
+            searchBar.becomeFirstResponder()
+        }
     }
     
     private func searchMoviesBySearchButton(text: String) {
@@ -100,11 +102,12 @@ final class SearchViewController: UIViewController {
             } else {
                 self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
             }
-
+            
         } failure: { error in
             print(error)
         }
         UserStatusManager.addSearchTerm(keyword: text)
+        becomeResponder = false
         view.endEditing(true)
     }
     
@@ -115,6 +118,12 @@ final class SearchViewController: UIViewController {
         } failure: { error in
             print(error)
         }
+    }
+    
+    func searchWithInitialTerm(term: String) {
+        searchBar.text = term
+        lastUserInput = term
+        searchMoviesBySearchButton(text: term)
     }
     
     

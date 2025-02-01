@@ -28,6 +28,7 @@ final class MainViewController: UIViewController {
         mainView.collectionView.register(TodayMoviesCollectionViewCell.self, forCellWithReuseIdentifier: TodayMoviesCollectionViewCell.identifier)
         mainView.collectionView.delegate = self
         mainView.collectionView.dataSource = self
+        mainView.recentSearchTermsView.delegate = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
         MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
@@ -96,5 +97,16 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }
 
+    
+}
+
+extension MainViewController: RecentSearchTermsButtonDelegate {
+    
+    func searchTerm(term: String) {
+        let vc = SearchViewController()
+        vc.searchWithInitialTerm(term: term)
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+    }
+    
     
 }
