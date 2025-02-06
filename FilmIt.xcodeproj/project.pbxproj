@@ -282,6 +282,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		55D564932D5433B00065E248 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		55EA5B9E2D43BF0000DF7DF0 = {
 			isa = PBXGroup;
 			children = (
@@ -309,7 +316,7 @@
 				55C879D32D4B6A8700CD4927 /* Model */,
 				55C879CE2D4B695400CD4927 /* Network */,
 				55EA5BDB2D43C71300DF7DF0 /* View */,
-				55EA5BDD2D43C72B00DF7DF0 /* ViewController */,
+				55D564932D5433B00065E248 /* ViewModel */,
 			);
 			path = FilmIt;
 			sourceTree = "<group>";
@@ -344,6 +351,7 @@
 		55EA5BDB2D43C71300DF7DF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				55EA5BDD2D43C72B00DF7DF0 /* ViewController */,
 				55EA5BDC2D43C71C00DF7DF0 /* Storyboard */,
 				5541015A2D4528CE00DCA584 /* Base */,
 				5541016D2D461B7400DCA584 /* LikeButton.swift */,
