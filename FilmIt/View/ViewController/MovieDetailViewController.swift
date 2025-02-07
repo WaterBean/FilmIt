@@ -54,20 +54,24 @@ final class MovieDetailViewController: UIViewController {
         
         let group = DispatchGroup()
         group.enter()
-        MovieNetworkClient.request(ImageResponse.self, router: .image(id: movie.id)) {
-            self.image = $0
-            group.leave()
-        } failure: { error in
-            print(error)
+        MovieNetworkClient.request(ImageResponse.self, router: MovieNetworkRouter.image(id: movie.id)) { result in
+            switch result {
+            case .success(let success):
+                self.image = success
+            case .failure(let failure):
+                print(failure)
+            }
             group.leave()
         }
         group.enter()
         
-        MovieNetworkClient.request(CreditResponse.self, router: .credit(id: movie.id)) {
-            self.credit = $0
-            group.leave()
-        } failure: { error in
-            print(error)
+        MovieNetworkClient.request(CreditResponse.self, router: MovieNetworkRouter.credit(id: movie.id)) { result in
+            switch result {
+            case .success(let success):
+                self.credit = success
+            case .failure(let failure):
+                print(failure)
+            }
             group.leave()
         }
         

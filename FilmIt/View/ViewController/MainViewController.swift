@@ -31,10 +31,13 @@ final class MainViewController: UIViewController {
         mainView.recentSearchTermsView.delegate = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
-        MovieNetworkClient.request(TrendingResponse.self, router: .trending) {
-            self.trendingMovieList = $0.results
-        } failure: { error in
-            print(error)
+        MovieNetworkClient.request(TrendingResponse.self, router: MovieNetworkRouter.trending) { result in
+            switch result {
+            case .success(let success):
+                self.trendingMovieList = success.results
+            case .failure(let failure):
+                print(failure)
+            }
         }
     }
     

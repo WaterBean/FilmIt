@@ -92,19 +92,22 @@ final class SearchViewController: UIViewController {
     private func searchMoviesBySearchButton(text: String) {
         movieList = []
         page = 1
-        MovieNetworkClient.request(SearchResponse.self, router: .search(query: text, page: 1)) {
-            self.movieList = $0.results
-            self.page = $0.page
-            self.totalPages = $0.totalPages
-            self.tableView.reloadData()
-            if self.movieList.count > 0 {
-                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                self.noResultLabel.text = " "
-            } else {
-                self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
+        MovieNetworkClient.request(SearchResponse.self, router: MovieNetworkRouter.search(query: text, page: 1)) { result in
+            switch result {
+            case .success(let success):
+                self.movieList = success.results
+                self.page = success.page
+                self.totalPages = success.totalPages
+                self.tableView.reloadData()
+                if self.movieList.count > 0 {
+                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                    self.noResultLabel.text = " "
+                } else {
+                    self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
+                }
+            case .failure(let failure):
+                print(failure)
             }
-        } failure: { error in
-            print(error)
         }
         UserStatusManager.addSearchTerm(keyword: text)
         becomeResponder = false
@@ -113,11 +116,15 @@ final class SearchViewController: UIViewController {
     
     private func searchMoreMovies() {
         page += 1
-        MovieNetworkClient.request(SearchResponse.self, router: .search(query: lastUserInput, page: page)) {
-            self.movieList.append(contentsOf: $0.results)
-            self.tableView.reloadData()
-        } failure: { error in
-            print(error)
+        MovieNetworkClient.request(SearchResponse.self, router: MovieNetworkRouter.search(query: lastUserInput, page: page)) { result in
+            switch result {
+            case .success(let success):
+                self.movieList.append(contentsOf: success.results)
+                self.tableView.reloadData()
+            case .failure(let failure):
+                print(failure.localizedDescription)
+                
+            }
         }
     }
     
