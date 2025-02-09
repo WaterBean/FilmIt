@@ -12,14 +12,18 @@ final class ProfileNicknameSettingViewModel {
     let inputViewDidLoad: Observable<Bool> = Observable(false)
     let inputProfileButtonTapped: Observable<Void> = Observable(())
     let inputNicknameText: Observable<String?> = Observable(nil)
+    let inputMBTIButtonTapped: Observable<String?> = Observable(nil)
     let inputCompleteButtonTapped: Observable<Void> = Observable(())
     
     let outputStatusLabelText: Observable<String?> = Observable(nil)
     let outputStatusLabelStatus = Observable(false)
     let outputProfile: Observable<String> = Observable(UserStatusManager.profile)
     let outputProfileButtonTapped: Observable<String> = Observable("")
+    let outputMBTIButtonTapped: Observable<(String, Bool, Bool)> = Observable(("", false, false))
     let outputCompleteButtonTapped: Observable<Void> = Observable(())
 
+    var mbti: [Int: String] = [1: "", 2: "", 3: "", 4: ""]
+    
     init() {
         
         inputViewDidLoad.bind { [weak self] inNickname in
@@ -40,6 +44,10 @@ final class ProfileNicknameSettingViewModel {
         inputProfileButtonTapped.lazyBind { [weak self] in
             guard let self else { return }
             self.outputProfileButtonTapped.value = self.outputProfile.value
+        }
+        
+        inputMBTIButtonTapped.lazyBind { [weak self] string in
+            self?.mbtiButtonTapped(selected: string)
         }
         
         inputCompleteButtonTapped.lazyBind { [weak self] in
@@ -95,7 +103,51 @@ final class ProfileNicknameSettingViewModel {
         
     }
     
-    
+    private func mbtiButtonTapped(selected: String?) {
+        guard let selected else { return }
+        switch selected {
+        case "E", "I":
+            mbti[1] = mbti[1] == selected ? "" : selected
+            if mbti[1] == "E" {
+                outputMBTIButtonTapped.value = (selected, true, false)
+            } else if mbti[1] == "I" {
+                outputMBTIButtonTapped.value = (selected, false, true)
+            } else {
+                outputMBTIButtonTapped.value = (selected, false, false)
+            }
+        case "S", "N":
+            mbti[2] = mbti[2] == selected ? "" : selected
+            if mbti[2] == "S" {
+                outputMBTIButtonTapped.value = (selected, true, false)
+            } else if mbti[2] == "N" {
+                outputMBTIButtonTapped.value = (selected, false, true)
+            } else {
+                outputMBTIButtonTapped.value = (selected, false, false)
+            }
+        case "T", "F":
+            mbti[3] = mbti[3] == selected ? "" : selected
+            if mbti[3] == "T" {
+                outputMBTIButtonTapped.value = (selected, true, false)
+            } else if mbti[3] == "F" {
+                outputMBTIButtonTapped.value = (selected, false, true)
+            } else {
+                outputMBTIButtonTapped.value = (selected, false, false)
+            }
+        case "J", "P":
+            mbti[4] = mbti[4] == selected ? "" : selected
+            if mbti[4] == "J" {
+                outputMBTIButtonTapped.value = (selected, true, false)
+            } else if mbti[4] == "P" {
+                outputMBTIButtonTapped.value = (selected, false, true)
+            } else {
+                outputMBTIButtonTapped.value = (selected, false, false)
+            }
+        default:
+            return
+        }
+    }
+
+
 }
 
 extension ProfileNicknameSettingViewModel: ProfileImageDelegate {

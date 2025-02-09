@@ -27,6 +27,8 @@ final class MBTISelectView: BaseView {
     let f = MBTIButton(title: "F")
     let p = MBTIButton(title: "P")
     
+    lazy var mbtiButtons = [e, s, t, j, i, n, f, p]
+    
     override func configureHierarchy() {
         [mbtiLabel, e, s, t, j, i, n, f, p].forEach {
             addSubview($0)

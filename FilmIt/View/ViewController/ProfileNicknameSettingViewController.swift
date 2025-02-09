@@ -13,7 +13,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
     
     let viewModel = ProfileNicknameSettingViewModel()
     
-    func bind() {
+    private func bind() {
         viewModel.outputProfile.bind { [weak self] string in
             self?.mainView.profileButton.setImage(UIImage(named: string), for: .normal)
         }
@@ -35,6 +35,27 @@ final class ProfileNicknameSettingViewController: UIViewController {
         }
         
         viewModel.outputCompleteButtonTapped.lazyBind {     UserStatusManager.status.replaceScene()
+        }
+        
+        viewModel.outputMBTIButtonTapped.lazyBind { [weak self] buttonStatus in
+            guard let self else { return }
+
+            let (selected, isButton1Selected, isButton2Selected) = buttonStatus
+            switch selected {
+            case "E", "I":
+                mainView.mbtiView.e.isSelected = isButton1Selected
+                mainView.mbtiView.i.isSelected = isButton2Selected
+            case "S", "N":
+                mainView.mbtiView.s.isSelected = isButton1Selected
+                mainView.mbtiView.n.isSelected = isButton2Selected
+            case "T", "F":
+                mainView.mbtiView.t.isSelected = isButton1Selected
+                mainView.mbtiView.f.isSelected = isButton2Selected
+            case "J", "P":
+                mainView.mbtiView.j.isSelected = isButton1Selected
+                mainView.mbtiView.p.isSelected = isButton2Selected
+            default: break
+            }
         }
         
         
@@ -76,7 +97,11 @@ final class ProfileNicknameSettingViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    @objc func mbtiButtonTapped(_ sender: UIButton) {
+        viewModel.inputMBTIButtonTapped.value = sender.titleLabel?.text
+    }
     
+
 }
 
 
@@ -105,6 +130,10 @@ extension ProfileNicknameSettingViewController {
         mainView.isUserInteractionEnabled = true
         mainView.completeButton.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
         mainView.profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
+        
+        mainView.mbtiView.mbtiButtons.forEach {
+            $0.addTarget(self, action: #selector(mbtiButtonTapped), for: .touchUpInside)
+        }
     }
     
     
