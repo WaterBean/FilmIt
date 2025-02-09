@@ -97,3 +97,20 @@ final class ProfileNicknameSettingViewModel {
     
     
 }
+
+extension ProfileNicknameSettingViewModel: ProfileImageDelegate {
+    
+    func setImage(string: String) {
+        outputProfile.value = string
+    }
+    
+    
+}
+
+
+protocol ProfileImageDelegate: AnyObject {
+    
+    func setImage(string: String)
+    
+    
+}

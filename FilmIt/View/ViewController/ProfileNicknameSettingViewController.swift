@@ -28,8 +28,8 @@ final class ProfileNicknameSettingViewController: UIViewController {
         
         viewModel.outputProfileButtonTapped.lazyBind { [weak self] string in
             let vc = ProfileImageSettingViewController()
-            vc.delegate = self
-            vc.profileImageName = string
+            vc.viewModel.delegate = self?.viewModel
+            vc.viewModel.inputProfileSelected.value = string
             self?.pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
             
         }
@@ -85,23 +85,6 @@ extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         viewModel.inputNicknameText.value = textField.text
     }
-    
-    
-}
-
-extension ProfileNicknameSettingViewController: ProfileImageDelegate {
-    
-    func setImage(string: String) {
-        viewModel.outputProfile.value = string
-    }
-    
-    
-}
-
-
-protocol ProfileImageDelegate: AnyObject {
-    
-    func setImage(string: String)
     
     
 }
