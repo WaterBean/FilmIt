@@ -14,14 +14,14 @@ final class ProfileButton: BaseButton {
         setImage(image, for: .normal)
         contentMode = .scaleAspectFill
         clipsToBounds = true
-        layer.borderColor = UIColor.point.cgColor
+        layer.borderColor = UIColor.activeButton.cgColor
         layer.borderWidth = isPoint ? 3 : 1
         alpha = isPoint ? 1 : 0.5
     }
     
     func configurePointBorder() {
         layer.borderWidth = 3
-        layer.borderColor = UIColor.point.cgColor
+        layer.borderColor = UIColor.activeButton.cgColor
         alpha = 1
     }
     

@@ -14,7 +14,7 @@ final class ProfileImageSettingView: BaseView {
     
     private let containerView = {
         let view = UIView()
-        view.backgroundColor = .point
+        view.backgroundColor = .activeButton
         view.clipsToBounds = true
         view.layer.cornerRadius = 16
         return view
@@ -69,11 +69,13 @@ final class ProfileImageSettingView: BaseView {
     }
     
     override func configureView() {
+        backgroundColor = .white
+        profileButton.configurePointBorder()
+        profileButton.layer.borderWidth = 5
         collectionView.showsVerticalScrollIndicator = false
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.isMultipleTouchEnabled = false
-        collectionView.backgroundColor = .black
-        profileButton.configurePointBorder()
+        collectionView.backgroundColor = .white
     }
     
     

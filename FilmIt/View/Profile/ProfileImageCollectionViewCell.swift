@@ -25,6 +25,7 @@ final class ProfileImageCollectionViewCell: BaseCollectionViewCell {
     }
     
     override func configureView() {
+        backgroundColor = .white
         profileButton.isUserInteractionEnabled = false
     }
 

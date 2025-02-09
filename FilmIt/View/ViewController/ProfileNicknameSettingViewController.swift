@@ -19,7 +19,13 @@ final class ProfileNicknameSettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "프로필 설정"
+        navigationItem.title = "PROFILE SETTING"
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.black,
+            .font: UIFont.largeTitle
+        ]
+        navigationController?.navigationBar.tintColor = .black
+        
         mainView.nicknameTextField.delegate = self
         mainView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(whenEndEditing)))
         mainView.isUserInteractionEnabled = true
