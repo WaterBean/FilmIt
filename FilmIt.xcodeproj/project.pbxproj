@@ -64,6 +64,9 @@
 		55D565392D575FBB0065E248 /* MBTIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D565382D575FBB0065E248 /* MBTIButton.swift */; };
 		55D5653D2D5862AC0065E248 /* ConfirmButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D5653C2D5862AC0065E248 /* ConfirmButton.swift */; };
 		55D5653F2D5891720065E248 /* MBTISelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D5653E2D5891720065E248 /* MBTISelectView.swift */; };
+		55D565412D58A2590065E248 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D565402D58A2590065E248 /* Observable.swift */; };
+		55D565432D58A29B0065E248 /* ProfileImageSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D565422D58A29B0065E248 /* ProfileImageSettingViewModel.swift */; };
+		55D565452D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D565442D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift */; };
 		55EA5BC02D43BF3500DF7DF0 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BBF2D43BF3500DF7DF0 /* .gitignore */; };
 		55EA5BCD2D43C2A900DF7DF0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC42D43C2A900DF7DF0 /* Assets.xcassets */; };
 		55EA5BCF2D43C2A900DF7DF0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55EA5BC72D43C2A900DF7DF0 /* LaunchScreen.storyboard */; };
@@ -129,6 +132,9 @@
 		55D565382D575FBB0065E248 /* MBTIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTIButton.swift; sourceTree = "<group>"; };
 		55D5653C2D5862AC0065E248 /* ConfirmButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmButton.swift; sourceTree = "<group>"; };
 		55D5653E2D5891720065E248 /* MBTISelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBTISelectView.swift; sourceTree = "<group>"; };
+		55D565402D58A2590065E248 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		55D565422D58A29B0065E248 /* ProfileImageSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageSettingViewModel.swift; sourceTree = "<group>"; };
+		55D565442D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileNicknameSettingViewModel.swift; sourceTree = "<group>"; };
 		55EA5BA72D43BF0000DF7DF0 /* FilmIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FilmIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55EA5BBF2D43BF3500DF7DF0 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		55EA5BC32D43C2A900DF7DF0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +300,9 @@
 		55D564932D5433B00065E248 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				55D565402D58A2590065E248 /* Observable.swift */,
+				55D565442D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift */,
+				55D565422D58A29B0065E248 /* ProfileImageSettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -360,7 +369,6 @@
 		55EA5BDB2D43C71300DF7DF0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				55EA5BDD2D43C72B00DF7DF0 /* ViewController */,
 				55EA5BDC2D43C71C00DF7DF0 /* Storyboard */,
 				5541015A2D4528CE00DCA584 /* Base */,
 				5541016D2D461B7400DCA584 /* LikeButton.swift */,
@@ -370,6 +378,7 @@
 				55C8790A2D48E61300CD4927 /* Search */,
 				55C878BF2D47B5DA00CD4927 /* MovieDetail */,
 				55C879922D4A325300CD4927 /* Setting */,
+				55EA5BDD2D43C72B00DF7DF0 /* ViewController */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -507,8 +516,10 @@
 				55C878C12D47C35E00CD4927 /* SynopsisView.swift in Sources */,
 				55B7990F2D4E050400A74541 /* UIImage+Extension.swift in Sources */,
 				55C879D22D4B6A1200CD4927 /* MovieNetworkClient.swift in Sources */,
+				55D565412D58A2590065E248 /* Observable.swift in Sources */,
 				55D5653D2D5862AC0065E248 /* ConfirmButton.swift in Sources */,
 				554101532D451AE800DCA584 /* TabBarViewController.swift in Sources */,
+				55D565432D58A29B0065E248 /* ProfileImageSettingViewModel.swift in Sources */,
 				554101642D45409D00DCA584 /* BaseButton.swift in Sources */,
 				554101512D44AD7C00DCA584 /* CapsuleBorderButton.swift in Sources */,
 				554101702D466B6500DCA584 /* SearchViewController.swift in Sources */,
@@ -526,6 +537,7 @@
 				554101232D447A3400DCA584 /* OnboardingView.swift in Sources */,
 				55C87A2F2D4D0F9500CD4927 /* MovieGenre.swift in Sources */,
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
+				55D565452D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift in Sources */,
 				55D5653F2D5891720065E248 /* MBTISelectView.swift in Sources */,
 				554101272D44875400DCA584 /* ProfileNicknameSettingViewController.swift in Sources */,
 				554101722D466D8900DCA584 /* SearchTableViewCell.swift in Sources */,
