@@ -29,7 +29,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
         viewModel.output.profileTapped.lazyBind { [weak self] string in
             let vc = ProfileImageSettingViewController()
             vc.viewModel.delegate = self?.viewModel
-            vc.viewModel.inputProfileSelected.value = string
+            vc.viewModel.input.profileSelected.value = string
             self?.pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
             
         }

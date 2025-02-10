@@ -18,7 +18,7 @@ final class ProfileImageSettingViewController: UIViewController {
     }
     
     func bind() {
-        viewModel.outputProfileSelected.bind { [weak self] profileImageName in
+        viewModel.output.profileSelected.bind { [weak self] profileImageName in
             guard let profileImageName else {
                 self?.mainView.profileButton.setImage(UIImage(named: "profile_0"), for: .normal)
                 return
@@ -46,7 +46,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProfileImageCollectionViewCell.identifier, for: indexPath) as? ProfileImageCollectionViewCell else { return ProfileImageCollectionViewCell() }
-        if "profile_\(indexPath.item)" == viewModel.outputProfileSelected.value {
+        if "profile_\(indexPath.item)" == viewModel.output.profileSelected.value {
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
             cell.configureCell(imageName: "profile_\(indexPath.item)", isSelected: true)
         } else {
@@ -59,7 +59,7 @@ extension ProfileImageSettingViewController: UICollectionViewDelegate, UICollect
         guard let cell = collectionView.cellForItem(at: indexPath) as? ProfileImageCollectionViewCell else { return }
         let imageName = "profile_\(indexPath.item)"
         cell.configureCell(imageName: imageName, isSelected: true)
-        viewModel.inputProfileSelected.value = imageName
+        viewModel.input.profileSelected.value = imageName
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {

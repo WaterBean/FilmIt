@@ -7,27 +7,37 @@
 
 import Foundation
 
-final class ProfileImageSettingViewModel {
+final class ProfileImageSettingViewModel: BaseViewModel {
     
-
+    struct Input {
+        let profileSelected: Observable<String?> = Observable(nil)
+    }
+    
+    struct Output {
+        let profileSelected: Observable<String?> = Observable(nil)
+    }
+    
     weak var delegate: ProfileImageDelegate?
 
-    let inputProfileSelected: Observable<String?> = Observable(nil)
-    
-    let outputProfileSelected: Observable<String?> = Observable(nil)
+    private(set) var input = Input()
+    private(set) var output = Output()
     
     init() {
-        inputProfileSelected.lazyBind { [weak self] profileImageName in
+        transform()
+    }
+
+    func transform() {
+        input.profileSelected.lazyBind { [weak self] profileImageName in
             self?.setImage(profileImageName)
         }
     }
     
     private func setImage(_ string: String?) {
         guard let string else {
-            self.outputProfileSelected.value = "profile_0"
+            self.output.profileSelected.value = "profile_0"
             return
         }
-        self.outputProfileSelected.value = string
+        self.output.profileSelected.value = string
         self.delegate?.setImage(string: string)
 
     }

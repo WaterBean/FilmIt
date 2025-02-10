@@ -27,7 +27,7 @@ final class ProfileNicknameSettingViewModel: BaseViewModel {
         let isValid: Observable<Bool> = Observable(false)
     }
     
-    func bind() {
+    func transform() {
         input.whenViewDidLoad.bind { [weak self] inNickname in
             switch UserStatusManager.status {
             case .logout:
@@ -58,15 +58,12 @@ final class ProfileNicknameSettingViewModel: BaseViewModel {
 
     }
 
-    var input: Input
-    var output: Output
+    private(set) var input = Input()
+    private(set) var output = Output()
     private var isMbtiFilled = false
     
-    init() {
-        input = Input()
-        output = Output()
-        
-        bind()
+    init() {        
+        transform()
     }
     
     private func saveUserData() {

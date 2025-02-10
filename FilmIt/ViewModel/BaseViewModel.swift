@@ -11,5 +11,5 @@ protocol BaseViewModel {
     associatedtype Input
     associatedtype Output
     
-    func bind()
+    func transform()
 }
