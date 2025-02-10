@@ -7,73 +7,85 @@
 
 import Foundation
 
-final class ProfileNicknameSettingViewModel {
+final class ProfileNicknameSettingViewModel: BaseViewModel {
     
-    let inputViewDidLoad: Observable<Bool> = Observable(false)
-    let inputProfileButtonTapped: Observable<Void> = Observable(())
-    let inputNicknameText: Observable<String?> = Observable(nil)
-    let inputMBTIButtonTapped: Observable<String?> = Observable(nil)
-    let inputCompleteButtonTapped: Observable<Void> = Observable(())
+    struct Input {
+        let whenViewDidLoad: Observable<Bool> = Observable(false)
+        let profileTapped: Observable<Void> = Observable(())
+        let nicknameText: Observable<String?> = Observable(nil)
+        let mbtiTapped: Observable<String?> = Observable(nil)
+        let completeTapped: Observable<Void> = Observable(())
+    }
     
-    let outputStatusLabelText: Observable<String?> = Observable(nil)
-    let outputStatusLabelStatus = Observable(false)
-    let outputProfile: Observable<String> = Observable(UserStatusManager.profile)
-    let outputProfileButtonTapped: Observable<String> = Observable("")
-    let outputMBTI: Observable<[String]> = Observable(["","","",""])
-    let outputCompleteButtonTapped: Observable<Void> = Observable(())
-    let outputIsValid: Observable<Bool> = Observable(false)
-    private var isMbtiFilled = false
-
-    init() {
-        
-        inputViewDidLoad.bind { [weak self] inNickname in
+    struct Output {
+        let statusLabelText: Observable<String?> = Observable(nil)
+        let statusLabelStatus = Observable(false)
+        let profile: Observable<String> = Observable(UserStatusManager.profile)
+        let profileTapped: Observable<String> = Observable("")
+        let mbti: Observable<[String]> = Observable(["","","",""])
+        let completeTapped: Observable<Void> = Observable(())
+        let isValid: Observable<Bool> = Observable(false)
+    }
+    
+    func bind() {
+        input.whenViewDidLoad.bind { [weak self] inNickname in
             switch UserStatusManager.status {
             case .logout:
                 self?.setRandomImage()
             case .login:
-                self?.inputNicknameText.value = UserStatusManager.profile
-                self?.inputNicknameText.value = UserStatusManager.nickname
+                self?.input.nicknameText.value = UserStatusManager.profile
+                self?.input.nicknameText.value = UserStatusManager.nickname
                 self?.validateUserInput(text: UserStatusManager.nickname)
             }
         }
         
-        inputNicknameText.bind { [weak self] text in
+        input.nicknameText.bind { [weak self] text in
             self?.validateUserInput(text: text)
         }
         
-        inputProfileButtonTapped.lazyBind { [weak self] in
+        input.profileTapped.lazyBind { [weak self] in
             guard let self else { return }
-            self.outputProfileButtonTapped.value = self.outputProfile.value
+            self.output.profileTapped.value = self.output.profile.value
         }
         
-        inputMBTIButtonTapped.lazyBind { [weak self] string in
+        input.mbtiTapped.lazyBind { [weak self] string in
             self?.mbtiButtonTapped(selected: string)
         }
         
-        inputCompleteButtonTapped.lazyBind { [weak self] in
+        input.completeTapped.lazyBind { [weak self] in
             self?.saveUserData()
         }
+
+    }
+
+    var input: Input
+    var output: Output
+    private var isMbtiFilled = false
+    
+    init() {
+        input = Input()
+        output = Output()
         
+        bind()
     }
     
-    
     private func saveUserData() {
-        guard let nickname = inputNicknameText.value else { return }
+        guard let nickname = input.nicknameText.value else { return }
         UserStatusManager.status = .login(date: Date.now)
         UserStatusManager.nickname = nickname
-        UserStatusManager.profile = outputProfile.value
-        outputCompleteButtonTapped.value = ()
+        UserStatusManager.profile = output.profile.value
+        output.completeTapped.value = ()
     }
     
     private func setRandomImage() {
         let randomNumber = Int.random(in: 0...11)
-        outputProfile.value = "profile_\(randomNumber)"
+        output.profile.value = "profile_\(randomNumber)"
     }
     
     private func validateUserInput(text: String?) {
         guard let text = text?.trimmingCharacters(in: .whitespacesAndNewlines) else {
-            outputStatusLabelText.value = " "
-            outputStatusLabelStatus.value = false
+            output.statusLabelText.value = " "
+            output.statusLabelStatus.value = false
             return
         }
         let isContainsNumber = !(text.allSatisfy{ !$0.isNumber })
@@ -85,49 +97,50 @@ final class ProfileNicknameSettingViewModel {
         }
         
         if !(2..<10 ~= text.count) {
-            outputStatusLabelText.value = "2글자 이상 10글자 미만으로 설정해주세요"
-            outputStatusLabelStatus.value = false
+            output.statusLabelText.value = "2글자 이상 10글자 미만으로 설정해주세요"
+            output.statusLabelStatus.value = false
 
         } else if isContainsSymbol {
-            outputStatusLabelText.value = "닉네임에 @, #, $, %는 포함할 수 없어요"
-            outputStatusLabelStatus.value = false
+            output.statusLabelText.value = "닉네임에 @, #, $, %는 포함할 수 없어요"
+            output.statusLabelStatus.value = false
 
         } else if isContainsNumber {
-            outputStatusLabelText.value = "닉네임에 숫자는 포함할 수 없어요"
-            outputStatusLabelStatus.value = false
+            output.statusLabelText.value = "닉네임에 숫자는 포함할 수 없어요"
+            output.statusLabelStatus.value = false
 
         } else {
-            outputStatusLabelText.value = "사용할 수 있는 닉네임이에요"
-            outputStatusLabelStatus.value = true
+            output.statusLabelText.value = "사용할 수 있는 닉네임이에요"
+            output.statusLabelStatus.value = true
         }
-        outputIsValid.value = outputStatusLabelStatus.value && isMbtiFilled
+        output.isValid.value = output.statusLabelStatus.value && isMbtiFilled
     }
     
     private func mbtiButtonTapped(selected: String?) {
         guard let selected else { return }
         switch selected {
         case "E", "I":
-            outputMBTI.value[0] = outputMBTI.value[0] == selected ? "" : selected
+            output.mbti.value[0] = output.mbti.value[0] == selected ? "" : selected
         case "S", "N":
-            outputMBTI.value[1] = outputMBTI.value[1] == selected ? "" : selected
+            output.mbti.value[1] = output.mbti.value[1] == selected ? "" : selected
         case "T", "F":
-            outputMBTI.value[2] = outputMBTI.value[2] == selected ? "" : selected
+            output.mbti.value[2] = output.mbti.value[2] == selected ? "" : selected
         case "J", "P":
-            outputMBTI.value[3] = outputMBTI.value[3] == selected ? "" : selected
+            output.mbti.value[3] = output.mbti.value[3] == selected ? "" : selected
         default:
             return
         }
-        isMbtiFilled = outputMBTI.value.allSatisfy({ !$0.isEmpty })
-        outputIsValid.value = outputStatusLabelStatus.value && isMbtiFilled
+        isMbtiFilled = output.mbti.value.allSatisfy({ !$0.isEmpty })
+        output.isValid.value = output.statusLabelStatus.value && isMbtiFilled
     }
 
 
 }
 
+
 extension ProfileNicknameSettingViewModel: ProfileImageDelegate {
     
     func setImage(string: String) {
-        outputProfile.value = string
+        output.profile.value = string
     }
     
     

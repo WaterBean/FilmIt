@@ -9,6 +9,7 @@ import Foundation
 
 final class ProfileImageSettingViewModel {
     
+
     weak var delegate: ProfileImageDelegate?
 
     let inputProfileSelected: Observable<String?> = Observable(nil)

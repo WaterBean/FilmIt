@@ -14,19 +14,19 @@ final class ProfileNicknameSettingViewController: UIViewController {
     let viewModel = ProfileNicknameSettingViewModel()
     
     private func bind() {
-        viewModel.outputProfile.bind { [weak self] string in
+        viewModel.output.profile.bind { [weak self] string in
             self?.mainView.profileButton.setImage(UIImage(named: string), for: .normal)
         }
         
-        viewModel.outputStatusLabelText.bind {[weak self] string in
+        viewModel.output.statusLabelText.bind {[weak self] string in
             self?.mainView.nicknameStatusLabel.text = string
         }
         
-        viewModel.outputStatusLabelStatus.bind { [weak self] isValid in
+        viewModel.output.statusLabelStatus.bind { [weak self] isValid in
             self?.mainView.nicknameStatusLabel.textColor = isValid ? .activeButton : .rejectRed
         }
         
-        viewModel.outputProfileButtonTapped.lazyBind { [weak self] string in
+        viewModel.output.profileTapped.lazyBind { [weak self] string in
             let vc = ProfileImageSettingViewController()
             vc.viewModel.delegate = self?.viewModel
             vc.viewModel.inputProfileSelected.value = string
@@ -34,10 +34,11 @@ final class ProfileNicknameSettingViewController: UIViewController {
             
         }
         
-        viewModel.outputCompleteButtonTapped.lazyBind {     UserStatusManager.status.replaceScene()
+        viewModel.output.completeTapped.lazyBind {
+            UserStatusManager.status.replaceScene()
         }
         
-        viewModel.outputMBTI.bind { [weak self] buttonStatus in
+        viewModel.output.mbti.bind { [weak self] buttonStatus in
             guard let self else { return }
             updateMBTIButtonStatus(buttonStatus[0], button1: mainView.mbtiView.e, button2:  mainView.mbtiView.i)
             updateMBTIButtonStatus(buttonStatus[1], button1: mainView.mbtiView.s, button2:  mainView.mbtiView.n)
@@ -45,7 +46,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
             updateMBTIButtonStatus(buttonStatus[3], button1: mainView.mbtiView.j, button2:  mainView.mbtiView.p)
         }
         
-        viewModel.outputIsValid.bind { [weak self] in
+        viewModel.output.isValid.bind { [weak self] in
             self?.mainView.completeButton.isEnabled = $0
         }
     }
@@ -85,11 +86,11 @@ final class ProfileNicknameSettingViewController: UIViewController {
     }
     
     @objc func completeButtonTapped() {
-        viewModel.inputCompleteButtonTapped.value = ()
+        viewModel.input.completeTapped.value = ()
     }
     
     @objc private func profileButtonTapped() {
-        viewModel.inputProfileButtonTapped.value = ()
+        viewModel.input.profileTapped.value = ()
     }
     
     @objc func saveButtonTapped() {
@@ -102,7 +103,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
     }
     
     @objc func mbtiButtonTapped(_ sender: UIButton) {
-        viewModel.inputMBTIButtonTapped.value = sender.titleLabel?.text
+        viewModel.input.mbtiTapped.value = sender.titleLabel?.text
     }
     
     
@@ -112,7 +113,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
 extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        viewModel.inputNicknameText.value = textField.text
+        viewModel.input.nicknameText.value = textField.text
     }
         
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
