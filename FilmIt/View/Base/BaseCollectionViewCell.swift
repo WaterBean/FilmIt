@@ -9,7 +9,7 @@ import UIKit
 
 class BaseCollectionViewCell: UICollectionViewCell {
     
-    class var identifier: String {
+    static var identifier: String {
         String(describing: self)
     }
     
