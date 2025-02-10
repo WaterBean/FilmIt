@@ -37,27 +37,31 @@ final class ProfileNicknameSettingViewController: UIViewController {
         viewModel.outputCompleteButtonTapped.lazyBind {     UserStatusManager.status.replaceScene()
         }
         
-        viewModel.outputMBTIButtonTapped.lazyBind { [weak self] buttonStatus in
+        viewModel.outputMBTI.bind { [weak self] buttonStatus in
             guard let self else { return }
-
-            let (selected, isButton1Selected, isButton2Selected) = buttonStatus
-            switch selected {
-            case "E", "I":
-                mainView.mbtiView.e.isSelected = isButton1Selected
-                mainView.mbtiView.i.isSelected = isButton2Selected
-            case "S", "N":
-                mainView.mbtiView.s.isSelected = isButton1Selected
-                mainView.mbtiView.n.isSelected = isButton2Selected
-            case "T", "F":
-                mainView.mbtiView.t.isSelected = isButton1Selected
-                mainView.mbtiView.f.isSelected = isButton2Selected
-            case "J", "P":
-                mainView.mbtiView.j.isSelected = isButton1Selected
-                mainView.mbtiView.p.isSelected = isButton2Selected
-            default: break
-            }
+            updateMBTIButtonStatus(buttonStatus[0], button1: mainView.mbtiView.e, button2:  mainView.mbtiView.i)
+            updateMBTIButtonStatus(buttonStatus[1], button1: mainView.mbtiView.s, button2:  mainView.mbtiView.n)
+            updateMBTIButtonStatus(buttonStatus[2], button1: mainView.mbtiView.t, button2:  mainView.mbtiView.f)
+            updateMBTIButtonStatus(buttonStatus[3], button1: mainView.mbtiView.j, button2:  mainView.mbtiView.p)
         }
         
+        viewModel.outputIsValid.bind { [weak self] in
+            self?.mainView.completeButton.isEnabled = $0
+        }
+    }
+    
+    func updateMBTIButtonStatus(_ statusString: String, button1: UIButton, button2: UIButton) {
+        switch statusString {
+        case button1.titleLabel?.text:
+            button1.isSelected = true
+            button2.isSelected = false
+        case button2.titleLabel?.text:
+            button1.isSelected = false
+            button2.isSelected = true
+        default:
+            button1.isSelected = false
+            button2.isSelected = false
+        }
         
     }
     
@@ -101,7 +105,7 @@ final class ProfileNicknameSettingViewController: UIViewController {
         viewModel.inputMBTIButtonTapped.value = sender.titleLabel?.text
     }
     
-
+    
 }
 
 
@@ -109,6 +113,11 @@ extension ProfileNicknameSettingViewController: UITextFieldDelegate {
     
     func textFieldDidChangeSelection(_ textField: UITextField) {
         viewModel.inputNicknameText.value = textField.text
+    }
+        
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return true
     }
     
     

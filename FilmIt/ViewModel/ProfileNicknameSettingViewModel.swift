@@ -19,11 +19,11 @@ final class ProfileNicknameSettingViewModel {
     let outputStatusLabelStatus = Observable(false)
     let outputProfile: Observable<String> = Observable(UserStatusManager.profile)
     let outputProfileButtonTapped: Observable<String> = Observable("")
-    let outputMBTIButtonTapped: Observable<(String, Bool, Bool)> = Observable(("", false, false))
+    let outputMBTI: Observable<[String]> = Observable(["","","",""])
     let outputCompleteButtonTapped: Observable<Void> = Observable(())
+    let outputIsValid: Observable<Bool> = Observable(false)
+    private var isMbtiFilled = false
 
-    var mbti: [Int: String] = [1: "", 2: "", 3: "", 4: ""]
-    
     init() {
         
         inputViewDidLoad.bind { [weak self] inNickname in
@@ -56,13 +56,13 @@ final class ProfileNicknameSettingViewModel {
         
     }
     
-    private var isValid = false
     
     private func saveUserData() {
-        guard isValid, let nickname = inputNicknameText.value else { return }
+        guard let nickname = inputNicknameText.value else { return }
         UserStatusManager.status = .login(date: Date.now)
         UserStatusManager.nickname = nickname
         UserStatusManager.profile = outputProfile.value
+        outputCompleteButtonTapped.value = ()
     }
     
     private func setRandomImage() {
@@ -100,51 +100,25 @@ final class ProfileNicknameSettingViewModel {
             outputStatusLabelText.value = "사용할 수 있는 닉네임이에요"
             outputStatusLabelStatus.value = true
         }
-        
+        outputIsValid.value = outputStatusLabelStatus.value && isMbtiFilled
     }
     
     private func mbtiButtonTapped(selected: String?) {
         guard let selected else { return }
         switch selected {
         case "E", "I":
-            mbti[1] = mbti[1] == selected ? "" : selected
-            if mbti[1] == "E" {
-                outputMBTIButtonTapped.value = (selected, true, false)
-            } else if mbti[1] == "I" {
-                outputMBTIButtonTapped.value = (selected, false, true)
-            } else {
-                outputMBTIButtonTapped.value = (selected, false, false)
-            }
+            outputMBTI.value[0] = outputMBTI.value[0] == selected ? "" : selected
         case "S", "N":
-            mbti[2] = mbti[2] == selected ? "" : selected
-            if mbti[2] == "S" {
-                outputMBTIButtonTapped.value = (selected, true, false)
-            } else if mbti[2] == "N" {
-                outputMBTIButtonTapped.value = (selected, false, true)
-            } else {
-                outputMBTIButtonTapped.value = (selected, false, false)
-            }
+            outputMBTI.value[1] = outputMBTI.value[1] == selected ? "" : selected
         case "T", "F":
-            mbti[3] = mbti[3] == selected ? "" : selected
-            if mbti[3] == "T" {
-                outputMBTIButtonTapped.value = (selected, true, false)
-            } else if mbti[3] == "F" {
-                outputMBTIButtonTapped.value = (selected, false, true)
-            } else {
-                outputMBTIButtonTapped.value = (selected, false, false)
-            }
+            outputMBTI.value[2] = outputMBTI.value[2] == selected ? "" : selected
         case "J", "P":
-            mbti[4] = mbti[4] == selected ? "" : selected
-            if mbti[4] == "J" {
-                outputMBTIButtonTapped.value = (selected, true, false)
-            } else if mbti[4] == "P" {
-                outputMBTIButtonTapped.value = (selected, false, true)
-            } else {
-                outputMBTIButtonTapped.value = (selected, false, false)
-            }
+            outputMBTI.value[3] = outputMBTI.value[3] == selected ? "" : selected
         default:
             return
         }
+        isMbtiFilled = outputMBTI.value.allSatisfy({ !$0.isEmpty })
+        outputIsValid.value = outputStatusLabelStatus.value && isMbtiFilled
     }
 
 
