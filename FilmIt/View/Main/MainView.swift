@@ -11,8 +11,8 @@ import SnapKit
 final class MainView: BaseView {
     
     let profileContainerView = ProfileContainerView()
-    let recentSearchTermsView = RecentSearchTermsView()
-
+    let recentSearchTermsView: RecentSearchTermsView
+    
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
@@ -27,6 +27,11 @@ final class MainView: BaseView {
         label.textColor = .white
         return label
     }()
+    
+    init(recentSearchTermsView: RecentSearchTermsView) {
+        self.recentSearchTermsView = recentSearchTermsView
+        super.init(frame: .zero)
+    }
     
     override func configureHierarchy() {
         [profileContainerView, recentSearchTermsView, todayMoviesLabel, collectionView].forEach {

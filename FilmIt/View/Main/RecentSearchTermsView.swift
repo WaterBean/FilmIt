@@ -11,6 +11,7 @@ import SnapKit
 final class RecentSearchTermsView: BaseView {
     
     weak var delegate: RecentSearchTermsButtonDelegate?
+    let viewModel: RecentSearchTermsViewModel
     
     private let scrollView = {
         let view = UIScrollView()
@@ -52,6 +53,12 @@ final class RecentSearchTermsView: BaseView {
         button.configuration = config
         return button
     }()
+        
+    init(viewModel: RecentSearchTermsViewModel) {
+        self.viewModel = viewModel
+        super.init(frame: .zero)
+        bind()
+    }
     
     override func configureHierarchy() {
         [recentsLabel, deleteRecentsButton, scrollView, noRecentsLabel].forEach {
@@ -96,25 +103,27 @@ final class RecentSearchTermsView: BaseView {
         stackView.backgroundColor = .black
     }
     
-    func updateSearchTerms() {
-        stackView.arrangedSubviews.forEach {
-            stackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
+    private func bind() {
+        viewModel.output.isNoRecent.bind { [weak self] isNoRecent in
+            self?.noRecentsLabel.isHidden = !isNoRecent
+            self?.deleteRecentsButton.isHidden = isNoRecent
         }
-        if UserStatusManager.searchTerms.count == 0 {
-            noRecentsLabel.isHidden = false
-            deleteRecentsButton.isHidden = true
-        } else {
-            noRecentsLabel.isHidden = true
-            deleteRecentsButton.isHidden = false
-            let sortedByDate = UserStatusManager.searchTerms.sorted { $0.value > $1.value }
-            for terms in sortedByDate {
+        
+        viewModel.output.terms.bind { [weak self] termsSortedByDate in
+            guard let self else { return }
+            self.stackView.arrangedSubviews.forEach {
+                self.stackView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
+            
+            for terms in termsSortedByDate {
                 let button = RecentSearchTermsButton(term: terms.key)
                 button.delegate = delegate
                 stackView.addArrangedSubview(button)
             }
         }
     }
+
     
     
 }

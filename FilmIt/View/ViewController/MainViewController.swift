@@ -9,11 +9,29 @@ import UIKit
 
 final class MainViewController: UIViewController {
     
-    private let mainView = MainView()
+    private lazy var mainView = MainView(recentSearchTermsView: RecentSearchTermsView(viewModel: recentSearchTermsViewModel))
     
     let todayMovieViewModel = TodayMovieViewModel()
-    
+    let recentSearchTermsViewModel = RecentSearchTermsViewModel()
+
     private func bind() {
+        
+        mainView.profileContainerView.viewModel.output.presentProfileSetting.lazyBind { [weak self] _ in
+            self?.presentProfileSetting()
+        }
+        
+        recentSearchTermsViewModel.output.searchWithTerm.lazyBind { [weak self] string in
+            guard let self else { return }
+            let vc = SearchViewController()
+            vc.searchWithInitialTerm(term: string)
+            pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+        }
+        
+        recentSearchTermsViewModel.output.search.lazyBind { [weak self] _ in
+            guard let self else { return }
+            pushNavigationWithBarButtonItem(vc: SearchViewController(), rightBarButtonItem: nil)
+        }
+        
         todayMovieViewModel.output.trendingMovieList.bind { [weak self] todayMovieList in
             self?.mainView.collectionView.reloadData()
         }
@@ -44,21 +62,19 @@ final class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        mainView.recentSearchTermsView.updateSearchTerms()
-        mainView.collectionView.reloadData()
+        recentSearchTermsViewModel.input.update.value = ()
     }
     
     @objc private func searchButtonTapped() {
-        pushNavigationWithBarButtonItem(vc: SearchViewController(), rightBarButtonItem: nil)
+        recentSearchTermsViewModel.input.search.value = ()
     }
     
     @objc private func deleteButtonTapped() {
-        UserStatusManager.removeAllSearchTerms()
-        mainView.recentSearchTermsView.updateSearchTerms()
+        recentSearchTermsViewModel.input.removeAllTerms.value = ()
     }
     
     @objc private func profileViewTapped() {
-        presentProfileSetting()
+        mainView.profileContainerView.viewModel.input.tapped.value = (())
     }
     
     
@@ -100,15 +116,12 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
 extension MainViewController: RecentSearchTermsButtonDelegate {
     
     func deleteTerm(_ term: String) {
-        UserStatusManager.removeSearchTerm(keyword: term)
-        mainView.recentSearchTermsView.updateSearchTerms()
+        recentSearchTermsViewModel.input.deleteTerm.value = term
     }
     
     
     func searchTerm(_ term: String) {
-        let vc = SearchViewController()
-        vc.searchWithInitialTerm(term: term)
-        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: nil)
+        recentSearchTermsViewModel.input.searchWithTerm.value = term
     }
     
     

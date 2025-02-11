@@ -11,6 +11,7 @@ final class ProfileContainerViewModel: BaseViewModel {
     
     struct Input {
         let initialLoad: Observable<Void> = Observable(())
+        let tapped: Observable<Void> = Observable(())
     }
     
     struct Output {
@@ -18,6 +19,7 @@ final class ProfileContainerViewModel: BaseViewModel {
         let joinDate: Observable<String?> = Observable(nil)
         let nickname: Observable<String?> = Observable(nil)
         let likeMovieCountText: Observable<AttributedString?> = Observable(nil)
+        let presentProfileSetting: Observable<Void> = Observable(())
         
     }
     private(set) var input = Input()
@@ -31,6 +33,10 @@ final class ProfileContainerViewModel: BaseViewModel {
     func transform() {
         input.initialLoad.bind { [weak self] _ in
             self?.initialLoad()
+        }
+        
+        input.tapped.lazyBind { [weak self] _ in
+            self?.output.presentProfileSetting.value = ()
         }
         
         NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: .userStatus , object: nil)
