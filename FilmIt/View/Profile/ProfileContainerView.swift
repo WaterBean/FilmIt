@@ -10,11 +10,12 @@ import SnapKit
 
 final class ProfileContainerView: BaseView {
     
-    private let profileButton = ProfileButton(image: UIImage(named: UserStatusManager.profile), isPoint: true)
+    let viewModel = ProfileContainerViewModel()
+    
+    private let profileButton = ProfileButton(isPoint: true)
     
     private let nicknameLabel = {
         let label = UILabel()
-        label.text = UserStatusManager.nickname
         label.font = .largeTitle
         label.textColor = .white
         return label
@@ -22,7 +23,6 @@ final class ProfileContainerView: BaseView {
     
     private let joinDateLabel = {
         let label = UILabel()
-        label.text = "25.01.23 가입"
         label.font = .systemFont(ofSize: 12, weight: .light)
         label.textColor = .gray2
         return label
@@ -39,11 +39,6 @@ final class ProfileContainerView: BaseView {
         var config = UIButton.Configuration.filled()
         config.background.backgroundColor = .movieBoxButton
         config.cornerStyle = .small
-        config.attributedTitle = AttributedString(
-            NSAttributedString(string: "\(UserStatusManager.likeMovies.count) 개의 무비박스 보관중",attributes: [
-                                .foregroundColor : UIColor.white,
-                                .font: UIFont.systemFont(ofSize: 14, weight: .bold)
-                                ]))
         let button = UIButton()
         button.configuration = config
         return button
@@ -55,6 +50,7 @@ final class ProfileContainerView: BaseView {
         clipsToBounds = true
         layer.cornerRadius = 12
         isUserInteractionEnabled = true
+        bind()
     }
     
     override func configureHierarchy() {
@@ -92,32 +88,22 @@ final class ProfileContainerView: BaseView {
         }
     }
     
-    override func configureView() {
-        profileButton.configurePointBorder()
-        if case .login(let date) = UserStatusManager.status {
-            joinDateLabel.text = DateFormatterManager.shared.yyMMdd(date) + " 가입"
+    private func bind() {
+        viewModel.output.profile.bind { [weak self] string in
+            self?.profileButton.setImage(UIImage(named: string), for: .normal)
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(receiveNotification), name: .userStatus , object: nil)
-    }
-    
-    @objc private func receiveNotification(value: NSNotification) {
-        print("신호 수신")
-        if let profile = value.userInfo?["profile"] as? String,
-           let nickname = value.userInfo?["nickname"] as? String,
-           let likeCount = value.userInfo?["likeCount"] as? Int {
-            profileButton.setImage(UIImage(named: profile), for: .normal)
-            nicknameLabel.text = nickname
-            var config = movieBoxArchiveButton.configuration
-            config?.attributedTitle = AttributedString(
-                NSAttributedString(string: "\(likeCount) 개의 무비박스 보관중",attributes: [
-                                    .foregroundColor : UIColor.white,
-                                    .font: UIFont.systemFont(ofSize: 14, weight: .bold)
-                                    ]))
-            movieBoxArchiveButton.configuration = config
-        } else {
-            print("제대로 값을 받지 못함")
+        
+        viewModel.output.joinDate.bind { [weak self] joinDate in
+            self?.joinDateLabel.text = joinDate
+        }
+        
+        viewModel.output.nickname.bind { [weak self]  nickname in
+            self?.nicknameLabel.text = nickname
+        }
+        
+        viewModel.output.likeMovieCountText.bind { [weak self] text in
+            self?.movieBoxArchiveButton.configuration?.attributedTitle = text
         }
     }
-    
     
 }
