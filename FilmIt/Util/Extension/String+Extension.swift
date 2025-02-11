@@ -23,6 +23,13 @@ extension String {
         return attributeString
     }
     
+    func toWhiteBoldAttributedString() -> AttributedString {
+        AttributedString(
+            NSAttributedString(string: self, attributes: [
+                            .foregroundColor : UIColor.white,
+                            .font: UIFont.systemFont(ofSize: 14, weight: .bold)]))
+    }
+    
     
 }
 
