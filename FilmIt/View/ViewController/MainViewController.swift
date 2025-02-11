@@ -10,18 +10,16 @@ import UIKit
 final class MainViewController: UIViewController {
     
     private let mainView = MainView()
-    private var trendingMovieList = [Movie]() {
-        didSet {
-            mainView.collectionView.reloadData()
+    
+    let todayMovieViewModel = TodayMovieViewModel()
+    
+    private func bind() {
+        todayMovieViewModel.output.trendingMovieList.bind { [weak self] todayMovieList in
+            self?.mainView.collectionView.reloadData()
         }
     }
     
-    override func loadView() {
-        view = mainView
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private func configureView() {
         navigationItem.title = "오늘의 영화"
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "magnifyingglass"), style: .plain, target: self, action: #selector(searchButtonTapped))
         
@@ -31,14 +29,17 @@ final class MainViewController: UIViewController {
         mainView.recentSearchTermsView.delegate = self
         mainView.recentSearchTermsView.deleteRecentsButton.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         mainView.profileContainerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileViewTapped)))
-        MovieNetworkClient.request(TrendingResponse.self, router: MovieNetworkRouter.trending) { result in
-            switch result {
-            case .success(let success):
-                self.trendingMovieList = success.results
-            case .failure(let failure):
-                print(failure)
-            }
-        }
+    }
+    
+    override func loadView() {
+        view = mainView
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureView()
+        bind()
+        todayMovieViewModel.input.initialFetch.value = ()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,11 +68,11 @@ final class MainViewController: UIViewController {
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        trendingMovieList.count
+        todayMovieViewModel.output.trendingMovieList.value.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let item = trendingMovieList[indexPath.item]
+        let item = todayMovieViewModel.output.trendingMovieList.value[indexPath.item]
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TodayMoviesCollectionViewCell.identifier, for: indexPath) as? TodayMoviesCollectionViewCell else {
             return TodayMoviesCollectionViewCell()
         }
@@ -86,7 +87,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = trendingMovieList[indexPath.item]
+        let item = todayMovieViewModel.output.trendingMovieList.value[indexPath.item]
         let vc = MovieDetailViewController()
         vc.movie = item
         let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: item.id))
