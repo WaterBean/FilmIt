@@ -10,15 +10,6 @@ import SnapKit
 
 final class SearchViewController: UIViewController {
     
-    private var movieList = [Movie]() {
-        didSet {
-        }
-    }
-    private var page = 1
-    private var totalPages = 1
-    private var lastUserInput = ""
-    private var becomeResponder = true
-    
     private let searchBar = {
         let bar = UISearchBar()
         bar.keyboardAppearance = .dark
@@ -47,8 +38,101 @@ final class SearchViewController: UIViewController {
         return label
     }()
     
+    let viewModel = SearchViewModel()
+    
+    private func bind() {
+        viewModel.output.movieList.lazyBind { _ in
+            self.tableView.reloadData()
+        }
+        
+        viewModel.output.initialTerm.lazyBind { text in
+            print(text, #function)
+            self.searchBar.text = text
+        }
+        
+        viewModel.output.isMovieListEmpty.lazyBind { isMovieListEmpty in
+            if isMovieListEmpty {
+                self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
+            } else {
+                self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
+                self.noResultLabel.text = " "
+            }
+        }
+        
+        viewModel.output.becomeResponder.bind { becomeResponder in
+            if becomeResponder {
+                self.searchBar.becomeFirstResponder()
+            }
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureView()
+        bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
+    private func searchMoviesBySearchButton(text: String?) {
+        viewModel.input.searchMovies.value = text
+    }
+    
+    func searchWithInitialTerm(term: String) {
+        viewModel.input.searchWithInitialTerm.value = term
+    }
+    
+    
+}
+
+
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.output.movieList.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let row = viewModel.output.movieList.value[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
+        // FIXME: - 하이라이팅 수정 필요
+        cell.configureCell(keyword: "", id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = viewModel.output.movieList.value[indexPath.row]
+        let vc = MovieDetailViewController()
+        vc.movie = row
+        let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: row.id))
+        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        viewModel.input.searchMoreMovies.value = scrollView.contentOffset.y
+    }
+    
+    
+}
+
+
+extension SearchViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchMoviesBySearchButton(text: searchBar.text)
+    }
+    
+    
+}
+
+
+extension SearchViewController {
+    
+    private func configureView() {
         view.backgroundColor = .black
         navigationItem.title = "영화 검색"
         tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: SearchTableViewCell.identifier)
@@ -75,110 +159,6 @@ final class SearchViewController: UIViewController {
             $0.centerX.equalTo(view.safeAreaLayoutGuide)
             $0.centerY.equalTo(view.safeAreaLayoutGuide).offset(-100)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        tableView.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if becomeResponder {
-            searchBar.becomeFirstResponder()
-        }
-    }
-    
-    private func searchMoviesBySearchButton(text: String) {
-        movieList = []
-        page = 1
-        MovieNetworkClient.request(SearchResponse.self, router: MovieNetworkRouter.search(query: text, page: 1)) { result in
-            switch result {
-            case .success(let success):
-                self.movieList = success.results
-                self.page = success.page
-                self.totalPages = success.totalPages
-                self.tableView.reloadData()
-                if self.movieList.count > 0 {
-                    self.tableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
-                    self.noResultLabel.text = " "
-                } else {
-                    self.noResultLabel.text = "원하는 검색결과를 찾지 못했습니다."
-                }
-            case .failure(let failure):
-                print(failure)
-            }
-        }
-        UserStatusManager.addSearchTerm(keyword: text)
-        becomeResponder = false
-        view.endEditing(true)
-    }
-    
-    private func searchMoreMovies() {
-        page += 1
-        MovieNetworkClient.request(SearchResponse.self, router: MovieNetworkRouter.search(query: lastUserInput, page: page)) { result in
-            switch result {
-            case .success(let success):
-                self.movieList.append(contentsOf: success.results)
-                self.tableView.reloadData()
-            case .failure(let failure):
-                print(failure.localizedDescription)
-                
-            }
-        }
-    }
-    
-    func searchWithInitialTerm(term: String) {
-        searchBar.text = term
-        lastUserInput = term
-        searchMoviesBySearchButton(text: term)
-    }
-    
-    
-}
-
-
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return movieList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let row = movieList[indexPath.row]
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
-        cell.configureCell(keyword: lastUserInput, id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = movieList[indexPath.row]
-        let vc = MovieDetailViewController()
-        vc.movie = row
-        let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: row.id))
-        pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y >= (CGFloat(movieList.count) * 90.0) * (3.0 / 5.0) {
-            if 1...totalPages ~= page{
-                print(scrollView.contentOffset.y, (CGFloat(movieList.count) * 90.0) * (3.0 / 5.0))
-                searchMoreMovies()
-            }
-        }
-    }
-    
-    
-}
-
-
-extension SearchViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let text = searchBar.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-              lastUserInput != text else { return }
-        lastUserInput = text
-        searchMoviesBySearchButton(text: text)
     }
     
     
