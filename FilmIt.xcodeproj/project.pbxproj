@@ -39,6 +39,7 @@
 		55640EB42D5B4F51007488ED /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55640EB32D5B4F51007488ED /* SearchViewModel.swift */; };
 		55640EB62D5B670E007488ED /* ProfileContainerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55640EB52D5B670E007488ED /* ProfileContainerViewModel.swift */; };
 		55640EB82D5B6738007488ED /* RecentSearchTermsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55640EB72D5B6738007488ED /* RecentSearchTermsViewModel.swift */; };
+		55640EBC2D5C94C8007488ED /* MovieDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55640EBB2D5C94C8007488ED /* MovieDetailViewModel.swift */; };
 		55AB41582D59D516007211E3 /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55AB41572D59D516007211E3 /* BaseViewModel.swift */; };
 		55B799032D4D223B00A74541 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B799022D4D223B00A74541 /* Array+Extension.swift */; };
 		55B799052D4D2AB200A74541 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B799042D4D2AB200A74541 /* NSNotification+Extension.swift */; };
@@ -111,6 +112,7 @@
 		55640EB32D5B4F51007488ED /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		55640EB52D5B670E007488ED /* ProfileContainerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileContainerViewModel.swift; sourceTree = "<group>"; };
 		55640EB72D5B6738007488ED /* RecentSearchTermsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchTermsViewModel.swift; sourceTree = "<group>"; };
+		55640EBB2D5C94C8007488ED /* MovieDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewModel.swift; sourceTree = "<group>"; };
 		55AB41572D59D516007211E3 /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		55B799022D4D223B00A74541 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		55B799042D4D2AB200A74541 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				55640EB52D5B670E007488ED /* ProfileContainerViewModel.swift */,
 				55640EB72D5B6738007488ED /* RecentSearchTermsViewModel.swift */,
 				55D565422D58A29B0065E248 /* ProfileImageSettingViewModel.swift */,
+				55640EBB2D5C94C8007488ED /* MovieDetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				55EA5BD82D43C3D200DF7DF0 /* SecretManager.swift in Sources */,
 				55D565452D58A2AF0065E248 /* ProfileNicknameSettingViewModel.swift in Sources */,
 				55D5653F2D5891720065E248 /* MBTISelectView.swift in Sources */,
+				55640EBC2D5C94C8007488ED /* MovieDetailViewModel.swift in Sources */,
 				554101272D44875400DCA584 /* ProfileNicknameSettingViewController.swift in Sources */,
 				554101722D466D8900DCA584 /* SearchTableViewCell.swift in Sources */,
 				55C879122D49098900CD4927 /* ProfileImageCollectionViewCell.swift in Sources */,

@@ -104,8 +104,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let item = todayMovieViewModel.output.trendingMovieList.value[indexPath.item]
-        let vc = MovieDetailViewController()
-        vc.movie = item
+        let vc = MovieDetailViewController(viewModel: MovieDetailViewModel(movie: item))
         let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: item.id))
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }

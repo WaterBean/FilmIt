@@ -67,19 +67,19 @@ final class BackDropView: BaseView {
         return view
     }()
     
-    private let dateLabel = {
+    let dateLabel = {
         let label = UILabel()
         label.text = "2025-01-01"
         return label
     }()
     
-    private let voteAverageLabel = {
+    let voteAverageLabel = {
         let label = UILabel()
         label.text = "0.0"
         return label
     }()
     
-    private let genreIdsLabel = {
+    let genreIdsLabel = {
         let label = UILabel()
         label.text = " 없음 "
         return label
@@ -126,15 +126,6 @@ final class BackDropView: BaseView {
         [dateImageView, voteAverageImageView, genreIdsImageView].forEach {
             $0.tintColor = .gray2
         }
-    }
-    
-    func updateView(releaseDate: String?, voteAverage: Double?, genreIds: [Int]?) {
-        let date = releaseDate ?? "2025-01-01"
-        let average = voteAverage != nil ? "\(String(format: "%.2f", voteAverage!))" : "0.0"
-        let ids = MovieGenre.getGenreNames(genreIds ?? [])
-        dateLabel.text = "\(date)   |    "
-        voteAverageLabel.text = "\(average)   |    "
-        genreIdsLabel.text = ids.isEmpty ? "장르 정보 없음" : ids.joined(separator: ", ")
     }
     
     

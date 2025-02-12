@@ -100,14 +100,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let row = viewModel.output.movieList.value[indexPath.row]
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.identifier, for: indexPath) as? SearchTableViewCell else { return SearchTableViewCell() }
         // FIXME: - 하이라이팅 수정 필요
-        cell.configureCell(keyword: "", id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate, tag: row.genreIds)
+        cell.configureCell(keyword: "", id: row.id, image: row.posterPath, title: row.title, date: row.releaseDate ?? "", tag: row.genreIds ?? [])
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = viewModel.output.movieList.value[indexPath.row]
-        let vc = MovieDetailViewController()
-        vc.movie = row
+        let vc = MovieDetailViewController(viewModel: MovieDetailViewModel(movie: row))
         let rightBarButtonItem = UIBarButtonItem(customView: LikeButton(id: row.id))
         pushNavigationWithBarButtonItem(vc: vc, rightBarButtonItem: rightBarButtonItem)
     }

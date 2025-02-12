@@ -10,30 +10,89 @@ import SnapKit
 
 final class MovieDetailViewController: UIViewController {
     
-    var movie: Movie?
-    private var image: ImageResponse? {
-        didSet {
-            backdropCollectionView.reloadData()
-            posterCollectionView.reloadData()
-        }
-    }
-    private var credit: CreditResponse? {
-        didSet {
-            castCollectionView.reloadData()
-        }
-    }
-    
     private let mainView = MovieDetailView()
     private lazy var backdropCollectionView = mainView.backDropView.collectionView
     private lazy var castCollectionView = mainView.castView.collectionView
     private lazy var posterCollectionView = mainView.posterView.collectionView
+    private let viewModel: MovieDetailViewModel
+    
+    init(viewModel: MovieDetailViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         view = mainView
+        
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureUI()
+        bind()
+        viewModel.input.initialLoad.value = ()
+    }
+    
+    func bind() {
+        viewModel.output.movieTitle.bind { [weak self] title in
+            self?.navigationItem.title = title
+        }
+        
+        viewModel.output.backdrop.bind { [weak self] backdrops in
+            self?.backdropCollectionView.reloadData()
+        }
+        
+        viewModel.output.pageControlStatus.bind { [weak self] (count, isHidden) in
+            self?.mainView.backDropView.pageControl.numberOfPages = count
+            self?.mainView.backDropView.pageControl.isHidden = isHidden
+        }
+        
+        viewModel.output.releaseDate.bind { [weak self] date in
+            self?.mainView.backDropView.dateLabel.text = date
+        }
+       
+        viewModel.output.voteAverage.bind { [weak self] average in
+            self?.mainView.backDropView.voteAverageLabel.text = average
+        }
+        
+        viewModel.output.genreText.bind { [weak self] text in
+            self?.mainView.backDropView.genreIdsLabel.text = text
+        }
+        
+        viewModel.output.overview.bind { [weak self] text in
+            self?.mainView.synopsisView.updateView(string: text)
+        }
+        
+        viewModel.output.cast.bind { [weak self] cast in
+            self?.castCollectionView.reloadData()
+        }
+
+        viewModel.output.poster.bind { [weak self] poster in
+            self?.posterCollectionView.reloadData()
+        }
+        
+        
+    }
+    
+    @objc private func pageControlValueChanged(_ sender: UIPageControl) {
+        self.backdropCollectionView.scrollToItem(at: IndexPath(item: sender.currentPage, section: 0),at: .centeredHorizontally, animated: true)
+    }
+    
+    @objc private func toggleSynopsisStatus() {
+        mainView.synopsisView.foldingButton.isSelected.toggle()
+        mainView.synopsisView.updateView(string: viewModel.output.overview.value)
+    }
+    
+    
+}
+
+extension MovieDetailViewController {
+    
     private func configureUI() {
-        navigationItem.title = movie?.title
         navigationController?.navigationBar.barStyle = .black
         backdropCollectionView.register(BackDropImageCollectionViewCell.self, forCellWithReuseIdentifier: BackDropImageCollectionViewCell.identifier)
         castCollectionView.register(CastCollectionViewCell.self, forCellWithReuseIdentifier: CastCollectionViewCell.identifier)
@@ -47,50 +106,6 @@ final class MovieDetailViewController: UIViewController {
         mainView.backDropView.pageControl.addTarget(self, action: #selector(pageControlValueChanged), for: .valueChanged)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        configureUI()
-        guard let movie else { return }
-        
-        let group = DispatchGroup()
-        group.enter()
-        MovieNetworkClient.request(ImageResponse.self, router: MovieNetworkRouter.image(id: movie.id)) { result in
-            switch result {
-            case .success(let success):
-                self.image = success
-            case .failure(let failure):
-                print(failure)
-            }
-            group.leave()
-        }
-        group.enter()
-        
-        MovieNetworkClient.request(CreditResponse.self, router: MovieNetworkRouter.credit(id: movie.id)) { result in
-            switch result {
-            case .success(let success):
-                self.credit = success
-            case .failure(let failure):
-                print(failure)
-            }
-            group.leave()
-        }
-        
-        group.notify(queue: .main) {
-            self.mainView.synopsisView.updateView(string: movie.overview)
-            self.mainView.backDropView.updateView(releaseDate: movie.releaseDate, voteAverage: movie.voteAverage, genreIds: movie.genreIds)
-        }
-    }
-    
-    @objc private func pageControlValueChanged(_ sender: UIPageControl) {
-        self.backdropCollectionView.scrollToItem(at: IndexPath(item: sender.currentPage, section: 0),at: .centeredHorizontally, animated: true)
-    }
-    
-    @objc private func toggleSynopsisStatus() {
-        mainView.synopsisView.foldingButton.isSelected.toggle()
-        mainView.synopsisView.updateView(string: movie?.overview)
-    }
-    
-    
 }
 
 
@@ -98,25 +113,11 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == backdropCollectionView {
-            guard let count = image?.backdrops.count else {
-                mainView.backDropView.pageControl.numberOfPages = 0
-                return 0
-            }
-            mainView.backDropView.pageControl.isHidden = (count < 2)
-            if count >= 5 {
-                mainView.backDropView.pageControl.numberOfPages = 5
-                return 5
-            } else if 1...5 ~= count {
-                mainView.backDropView.pageControl.numberOfPages = count
-                return count
-            } else {
-                mainView.backDropView.pageControl.numberOfPages = 1
-                return 1
-            }
+            return viewModel.output.backdrop.value.count
         } else if collectionView == castCollectionView {
-            return credit?.cast.count ?? 0
+            return viewModel.output.cast.value.count
         } else if collectionView == posterCollectionView {
-            return image?.posters.count ?? 0
+            return viewModel.output.poster.value.count
         } else {
             return 0
         }
@@ -125,18 +126,18 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == mainView.backDropView.collectionView {
            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BackDropImageCollectionViewCell.identifier, for: indexPath) as! BackDropImageCollectionViewCell
-            if let item = image?.backdrops[safe: indexPath.item]?.filePath {
+            if let item = viewModel.output.backdrop.value[indexPath.item].filePath {
                 cell.configureCell(image: item)
             }
             return cell
         } else if collectionView == mainView.castView.collectionView,
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as? CastCollectionViewCell,
-                  let item = credit?.cast[indexPath.item] {
+                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CastCollectionViewCell.identifier, for: indexPath) as? CastCollectionViewCell {
+            let item = viewModel.output.cast.value[indexPath.item]
             cell.configureCell(image: item.profilePath, actorName: item.name, characterName: item.character)
             return cell
         } else if collectionView == mainView.posterView.collectionView,
                   let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PosterCollectionViewCell.identifier, for: indexPath) as? PosterCollectionViewCell,
-                  let item = image?.posters[indexPath.item].filePath {
+                  let item = viewModel.output.poster.value[indexPath.item].filePath {
             cell.configureCell(image: item)
             return cell
         } else {
